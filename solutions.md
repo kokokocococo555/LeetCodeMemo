@@ -1,13 +1,13 @@
 # LeetCode別解勉強
 
 - LeetCodeの別解の勉強記録
-- Solutionに投稿されている内容等を参照し、自分でも実装してみている
+- Solutionに投稿されている内容等を参照し、自分でも実装してみる
 
 ## easy
 ### [1. Two Sum](https://leetcode.com/problems/two-sum/solution/)
 
-- 2重ループで解けるが、遅い
-- Hash Tableという辞書を使った解法が速い
+- 2重ループで解けるが遅い
+- 模範解答のHash Tableという辞書を使った解法が速い
   - 2重ループ不要
   - 1度計算した結果を順次保存し、保存済みの結果と新しい計算結果を比較していく、という考え方？
 
@@ -28,6 +28,9 @@ class Solution:
   - 負か否か、結果がoverflowするか否かをcheck
 - 模範解答はpop&push
   - 負か否か、overflowするか否かをcheck
+  - abs(x)をとらないと -123 -> 789 にしてしまう
+  - 速さはあまり変わらなかった
+  
 ```python
 class Solution:
     def reverse(self, x: int) -> int:
@@ -41,7 +44,7 @@ class Solution:
         # check
         if x<0:
             ans *= -1
-        if ans>=-2**31 and ans<= 2**31-1:
+        if ans>=-2**31 and ans<=2**31-1:
             return ans
         else:
             return 0
