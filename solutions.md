@@ -3,6 +3,7 @@
 - LeetCodeの別解の勉強記録
 - Solutionに投稿されている内容等を参照し、自分でも実装してみる
 - 使用言語は`Python`
+- 復習が必要な問題には▲をつけている
 
 ## Easy
 ### [1. Two Sum](https://leetcode.com/problems/two-sum/)
@@ -17,6 +18,7 @@ class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         seen = {}
         for i in range(len(nums)):
+            # 保存済みの結果と新しい計算結果を比較
             if target-nums[i] in seen:
                 return [seen[target-nums[i]], i]
             else:
@@ -146,7 +148,7 @@ class Solution:
             "D": 500,
             "M": 1000
         }
-        
+        # 特殊バージョンも辞書化
         roman_ex_dict = {
             "IV": 4,
             "IX": 9,
@@ -155,28 +157,30 @@ class Solution:
             "CD": 400,
             "CM": 900
         }
-        
+
         ans = 0
         cnt = 0
+        # 特殊バージョンだと2文字分進める必要があるためforではなくwhile
         while cnt<len(s)-1:
+            # 特殊バージョンに合致するかcheck
             if s[cnt:cnt+2] in roman_ex_dict:
                 ans += roman_ex_dict[s[cnt:cnt+2]]
-                cnt += 2
+                cnt += 2  # 特殊バージョン2文字分進める
             else:
                 ans += roman_dict[s[cnt]]
                 cnt += 1
-            
+        # 最後の文字は2文字分checkしようとするとIndexErrorになるため別途check
         if cnt==len(s)-1:
             ans += roman_dict[s[cnt]]
 
         return ans
 ```
 
-### [14. Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
+### ▲[14. Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
 
 - 愚直に比較していく
     - 遅め（全solutionの50%くらいの速さ）
-- 公式の別解アルゴリズムはまだ理解が追いついていない
+- ▲公式の別解アルゴリズムはまだ理解が追いついていない
 - Solutionへの投稿では以下のような解法もあった
     - strsリストをソートして最初と最後の要素だけをzipで比較している解法
     - strsリストの全要素の頭から1文字ずつzipで抜き出してsetでまとめ、setの長さが1の間はprefixに追加していく解法
@@ -195,9 +199,11 @@ class Solution:
             for i in range(len(strs)):
                 while True:
                     if cnt<=len(ans)-1 and cnt<=len(strs[i])-1:
+                        # 暫定解答と対象文字列が先頭から一致している限り、文字をtmpに追加していく
                         if strs[i][cnt]==ans[cnt]:
                             tmp += strs[i][cnt]
                             cnt += 1
+                        # 一致しなくなったら暫定解答を更新
                         else:
                             ans = tmp
                             tmp = ""
@@ -210,4 +216,93 @@ class Solution:
                         break
 
         return ans
+```
+
+### [20. Valid Parentheses]()
+
+- 先入れ後出し(FILO)のstack方式を採用
+    - 処理速度はかなり速い
+    - 模範解答もstack方式
+- 再帰的構造と捉えて(), {}, []のペアを削除していく方法もある
+    - コード数が少ないが、stack方式よりも遅い
+    - Solutionに投稿されていたものも参考に
+
+```python
+# FILOのstack方式
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = 'x'  # IndexErrorを防ぐためxを入れておく
+        b_dict = {
+            ')': '(',
+            ']': '[',
+            '}': '{',
+        }
+        for x in s:
+            # 閉じカッコの場合はstackの最後とペアかどうかをcheck
+            if x in b_dict:
+                if b_dict[x]==stack[-1]:
+                    stack = stack[:-1]
+                else:
+                    return False
+            # 閉じカッコ以外の場合はstackに積む
+            else:
+                stack += x
+        # stackがきれいになっていればうまくカッコペアがなされていたと判断
+        if stack=='x':
+            return True
+        else:
+            return False
+
+```
+
+```python
+# 再帰的構造方式
+class Solution:
+    def isValid(self, s: str) -> bool:
+        # カッコペアを削除し続けるループで文字列の長さの半分を得るときに面倒なので
+        if len(s)%2==1:
+            return False
+        # 文字列の長さの半分の回数、カッコペアを削除し続ける
+        # 再帰的構造なので内側のカッコペアから順に消えていく
+        for _ in range(int(len(s)/2)):
+            s = s.replace("()", "").replace("{}", "").replace("[]", "")
+        # カッコペアを削除し続けて何も残らなければOK
+        return s==""
+
+```
+
+### [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+
+- リストであれば
+    - 両方のリストから先頭から順に数をpop
+    - 数同士を比較し、小さい方を新しいリストに追加
+    - 大きい方は残したまま小さかった方のリストから次の数をpop
+    - どちらかのリストが空になるまで繰り返す
+    - 残ったリストの要素を新しいリストに結合
+    - この機能を2つのcntを使用することで実現
+- しかしリストではなくListNodeというClassを使用しているため、len()やスライシングが使えない
+
+```python
+# リストならうまく動きそうなバージョン
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        cnt1=0
+        cnt2=0
+        l = []
+        while cnt1<len(l1) and cnt2<len(l2):
+            # 数を比較
+            if l1[cnt1]<=l2[cnt2]:
+                l.append(l1[cnt1])
+                cnt1 += 1
+            else:
+                l.append(l2[cnt2])
+                cnt2 += 1
+        # 残った要素を結合
+        if cnt1==len(l1):
+            l.extend(l2[cnt2:])
+        else:
+            l.extend(l1[cnt1:])
+
+        return l
+
 ```
