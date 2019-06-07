@@ -20,6 +20,7 @@
   - 1度計算した結果を順次保存し、保存済みの結果と新しい計算結果を比較していく、という考え方？
 
 ```python
+# 模範解答を参考に実装
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         seen = {}
@@ -41,6 +42,7 @@ class Solution:
   - 速さはあまり変わらなかった
   
 ```python
+# 模範解答を参考に実装
 class Solution:
     def reverse(self, x: int) -> int:
         # pop&push
@@ -137,9 +139,9 @@ class Solution:
 - IV, IXなどの特殊バージョンについての対応表も別途作成
 - 入力を前から調べ、2文字見たときに特殊バージョンか否かで場合分け
     - 特殊バージョンの場合はカウンタを2つ進める
-- [discussionにあった解法](https://leetcode.com/problems/roman-to-integer/discuss/6537/My-Straightforward-Python-Solution)には、次の数字よりも現在の数字の方が小さい場合に現在の値をansから引いておく、という解法があった
+- [Discussionにあった解法](https://leetcode.com/problems/roman-to-integer/discuss/6537/My-Straightforward-Python-Solution)には、次の数字よりも現在の数字の方が小さい場合に現在の値をansから引いておく、という解法があった
     - 場合分けが減ってスムーズ
-- [discussionにあった解法](https://leetcode.com/problems/roman-to-integer/discuss/264743/Clean-Python-beats-99.78.)には他にも、特殊バージョンを前もって通常バージョンに置換しておく、という解法も
+- [Discussionにあった解法](https://leetcode.com/problems/roman-to-integer/discuss/264743/Clean-Python-beats-99.78.)には他にも、特殊バージョンを前もって通常バージョンに置換しておく、という解法も
 
 ```python
 # 自力実装
@@ -192,7 +194,7 @@ class Solution:
     - strsリストの全要素の頭から1文字ずつzipで抜き出してsetでまとめ、setの長さが1の間はprefixに追加していく解法
 
 ```python
-# 自力実装（ゴリ押し）
+# ゴリ押し（自力実装）
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
         # 空リスト対策
@@ -234,7 +236,7 @@ class Solution:
     - Solutionに投稿されていたものも参考に
 
 ```python
-# FILOのstack方式
+# FILOのstack方式（自力実装）
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = 'x'  # IndexErrorを防ぐためxを入れておく
@@ -262,7 +264,7 @@ class Solution:
 ```
 
 ```python
-# 再帰的構造方式
+# 再帰的構造方式（Solutionを参考に実装）
 class Solution:
     def isValid(self, s: str) -> bool:
         # カッコペアを削除し続けるループで文字列の長さの半分を得るときに面倒なので
@@ -287,13 +289,13 @@ class Solution:
     - 残ったリストの要素を新しいリストに結合
     - この機能を2つのcntを使用することで実現
 - しかしリストではなくListNodeというClassを使用しているため、len()やスライシングが使えない
-- ▲discussionを見ると再帰的なコードが書けるっぽい（要復習）
+- ▲Discussionを見ると再帰的なコードが書けるっぽい（要復習）
 - 再帰ではなく、上述の元アイデアをListNodeに落とし込んだ解法が上がっていたため、ListNodeの挙動を参考にして実装
   - [python3 24ms beats 100%
   ](https://leetcode.com/problems/merge-two-sorted-lists/discuss/200801/python3-24ms-beats-100)
 
 ```python
-# リストならうまく動きそうなバージョン
+# リストならうまく動きそうなバージョン（自力実装）
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
         cnt1=0
@@ -318,7 +320,7 @@ class Solution:
 ```
 
 ```python
-# ListNodeで動いたバージョン
+# ListNodeで動いたバージョン（Discussionを参考に実装）
 
 # Definition for singly-linked list.
 # class ListNode:
@@ -370,7 +372,7 @@ class Solution:
     - 速い
 
 ```python
-# カウンタを2つ使用してpopする
+# カウンタを2つ使用してpopする（自力実装）
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
         # 空リストのケースに対処
@@ -395,7 +397,7 @@ class Solution:
 ```
 
 ```python
-# 模範解答を参照してリストの前半だけ変更し、最後に変更部分の長さだけを返す
+# リストの前半だけ変更し、最後に変更部分の長さだけを返す（模範解答を参考に実装）
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
         # 空リストのケースに対処
@@ -422,7 +424,7 @@ class Solution:
     - valの要素が少ない場合、要素の代入回数が減る
 
 ```python
-# Two pointers
+# Two pointers（自力実装）
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
         pnt = 0
@@ -436,7 +438,7 @@ class Solution:
 ```
 
 ```python
-# val要素が少ない場合
+# val要素が少ない場合（模範解答を参考に実装）
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
         n = len(nums)
@@ -457,6 +459,7 @@ class Solution:
     - 少し遅め
 
 ```python
+# 自力実装
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
         if needle=='':
@@ -475,12 +478,12 @@ class Solution:
 
 - 普通に前から順に比較
     - O(n)
-- discussionではbinary searchによってO(log n)でいけるとの話が
+- Discussionではbinary searchによってO(log n)でいけるとの話が
     - binary searchの復習を
     - 実行してみても実はそんなに速くない？
 
 ```python
-# O(n)
+# O(n)（自力実装）
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
         for i in range(len(nums)):
@@ -491,7 +494,7 @@ class Solution:
 ```
 
 ```python
-# binary search
+# binary search（Discussionを参考に実装）
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
         left = 0
@@ -505,4 +508,116 @@ class Solution:
             else:
                 right = middle-1
         return left
+```
+
+### [38. Count and Say](https://leetcode.com/problems/count-and-say/)
+
+- ポインタを2つ、カウンタを1つ使って実装
+    - ノートに動きを書いてコードに起こした
+    - while内のelseを通過せずにwhileループが終了した場合、tmp_ansが更新されずにansが更新される問題があったため、対処
+- Discussionでは上述の方法に加え、再帰的な方法やリスト・joinを使った方法もあった
+    - リスト・joinの方が速いらしい（最初に思いついた方法だが、遅いのかなと思って避けてしまった）
+    - 再帰的な方法は以前の問題でも見かけたが、よく分かっていない
+        - 身につけなければ…
+
+```python
+# 自力実装
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        if n==1:
+            return "1"
+        ans = "1"
+        for _ in range(1, n):
+            i = 0
+            j = 0
+            c = 0
+            tmp_ans = ""
+            while i<=len(ans)-1:
+                if ans[i]==ans[j]:
+                    c += 1
+                    i += 1
+                else:
+                    tmp_ans = tmp_ans + str(c) + ans[j]
+                    j = i
+                    c = 0
+            if c!=0:  # elseを通過せずにwhileループが終了した場合にtmp_ansを更新するため
+                tmp_ans = tmp_ans + str(c) + ans[j]
+            ans = tmp_ans
+        return ans
+```
+
+### ▲[53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
+
+- ブルートフォース -> O(n^2)でTLE
+- 解法が分からなかった
+- DiscussionではDP（動的計画法）での実装があった
+    - 足し算継続 or リセットして今の値からスタート
+    - これまで見てきた中で一番大きい値を保持
+    - 以下のコード読んでからこの[Youtubeムービー](https://www.youtube.com/watch?v=2MmGzdiKR9Y)観ると分かりやすかった
+        - Discussionに貼られていた。7:30くらいから観ると動的計画法で解く様子が観られる
+- ▲DPを勉強する必要あり
+
+```python
+# O(n^2)でTLEだった（自力実装）
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        # O(n^2) -> TLE
+        ans = nums[0]
+        l = len(nums)
+        for i in range(l):
+            for j in range(i, l):
+                tmp = sum(nums[i:j+1])
+                if ans<tmp:
+                    ans = tmp
+        return ans
+```
+
+```python
+# Discussionを参考に実装
+# 参考：https://leetcode.com/problems/maximum-subarray/discuss/20194/A-Python-solution
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        max_sum = current_sum = -float("inf")
+        for n in nums:           
+            current_sum = max(current_sum+n, n)  # 足し算継続 or リセットして今の値からスタート
+            max_sum = max(max_sum, current_sum)  # これまで見てきた中で一番大きい値を保持
+        return max_sum
+```
+
+### [58. Length of Last Word](https://leetcode.com/problems/length-of-last-word/)
+
+- 前から順にアルファベットをカウントしていき、スペースに当たったらリセットする
+    - スペースが連続で続く場合、特に最後に連続スペースがある場合が面倒だった
+    - スペースでのリセット前にカウント数を別の変数に退避させておくことで対処
+    - そこそこ速い
+- Discussionでは逆順にしてから最初の文字塊の数を数えている方法（cntが非0かつスペースでbreak）や、.split()してリストの最終要素の長さを返す方法が取られている
+    - Pythonの関数やメソッドはどこまで使ってよいのだろうか
+
+```python
+# 自力実装
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        if s=="":
+            return 0
+        if len(s)==1:
+            if s==" ":
+                return 0
+            else:
+                return 1
+        if s[0]==" ":
+            cnt = pre_cnt = 0        
+        else:
+            cnt = pre_cnt = 1
+        for i in range(1, len(s)):
+            if s[i]==" " and s[i-1]!=" ":
+                pre_cnt = cnt
+                cnt = 0
+            elif s[i]==" ":
+                continue
+            else:
+                cnt += 1
+        if s[-1]==" ":
+            return pre_cnt
+        else:
+            return cnt
 ```
