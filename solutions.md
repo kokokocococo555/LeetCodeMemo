@@ -621,3 +621,146 @@ class Solution:
         else:
             return cnt
 ```
+
+### [66. Plus One](https://leetcode.com/problems/plus-one/)
+
+- 型変換に頼った方法で解いた
+    - list -> str -> intに型変換して1を足す
+    - int -> strに型変換してfor文に入れる
+    - str -> intに型変換してlistに加えていく
+- Discussionには1-lineで似たような処理をしている解法や、再帰的な解法があった
+    - リスト内包表記でreturnのリストを作ればよかった
+
+```python
+# 自力実装
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        s = ""
+        for x in digits:
+            s += str(x)
+        n = int(s)
+        n += 1
+        digits_pls_1 = []
+        for i in str(n):
+            digits_pls_1.append(int(i))
+        return digits_pls_1
+```
+
+```python
+# リスト内包表記バージョン（Discussionを参考に実装）
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        s = ""
+        for x in digits:
+            s += str(x)
+        n = int(s) + 1
+        return [int(i) for i in str(n)]
+```
+
+### ▲[67. Add Binary](https://leetcode.com/problems/add-binary/)
+
+- 次こそ再帰的な方法を使おうと試行錯誤したが、できず
+- 下の桁から順に足し算を進める方法でゴリ押し実装した
+    - 繰り上がりが厄介
+- Discussionでも[再帰的な方法で解かれていた](https://leetcode.com/problems/add-binary/discuss/24500/An-accepted-concise-Python-recursive-solution-10-lines)ので、参考にして実装してみた
+    - コードを読むだけでは分からなかった
+    - ノートに書いて処理の流れを追っていくと、確かに再帰的に解けている
+    - ▲現段階では同様の問題でも再帰的な実装ができる気はしない
+
+```python
+# 自力実装
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        # 1桁同士の2進数の足し算関数を定義
+        def add_binary(ae, be):
+            if ae=="0" and be=="0":
+                return "0"
+            elif ae=="1" and be=="1":
+                return "10"
+            else:
+                return "1"
+
+        ans = ""
+        cnt = 0
+        # a, bの長さを揃えるために短い方の頭を0でpadding
+        if len(a)>len(b):
+            for _ in range((len(a)-len(b))):
+                b = "0" + b
+        elif len(a)<len(b):
+            for _ in range((len(b)-len(a))):
+                a = "0" + a
+        # 下の桁から順に足し算
+        for ae, be in zip(a[::-1], b[::-1]):
+            tmp_ans = add_binary(ae, be)
+            if len(ans)==cnt:
+                ans = tmp_ans + ans
+            else: ## 繰り上がりが発生している場合、桁数とループ回数が一致しない
+                if tmp_ans=="10":  # 現在の足し算も繰り上がりがある場合
+                    ans = "11" + ans[1:]
+                else:
+                    ans = add_binary(tmp_ans, ans[0]) + ans[1:]
+            cnt += 1
+        return ans
+```
+
+```python
+# 再帰的な方法（Discussionの写し）
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        if len(a)==0: return b
+        if len(b)==0: return a
+        if a[-1]=="1" and b[-1]=="1":
+            return self.addBinary(self.addBinary(a[:-1], b[:-1]), "1") + "0"
+        if a[-1]=="0" and b[-1]=="0":
+            return self.addBinary(a[:-1], b[:-1]) + "0"
+        else:
+            return self.addBinary(a[:-1], b[:-1]) + "1"
+```
+
+### [69. Sqrt(x)](https://leetcode.com/problems/sqrtx/)
+
+- 二分探索で解いた
+    - 二分探索なのでO(log n)のはずだが、比較的遅い解法になっている
+- Discussionでも二分探索で解かれている
+    - もう少しきれいなコードで書かれている
+    - こちらの方が速い
+
+
+```python
+# 自力実装
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        leftx = 1
+        rightx = x
+        halfx = int((leftx+rightx)/2)
+        while True:
+            if halfx**2<=x and (halfx+1)**2>x:
+                return halfx
+            if halfx**2<x:
+                leftx = halfx
+                halfx = int((halfx+rightx)/2)
+            else:
+                rightx = halfx
+                halfx = int((halfx+leftx)/2)
+```
+
+```python
+# リファクタリング版（Discussionを参考に実装）
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        if x==0:
+            return 0
+        leftx = 1
+        rightx = x
+        while leftx<=rightx:
+            halfx = int((leftx+rightx)/2)
+            if halfx*halfx<=x<(halfx+1)*(halfx+1):
+                return halfx
+            if halfx*halfx<x:
+                leftx = halfx
+            else:
+                rightx = halfx
+```
+
+### [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
+
