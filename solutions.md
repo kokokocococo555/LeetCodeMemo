@@ -762,5 +762,204 @@ class Solution:
                 rightx = halfx
 ```
 
-### [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
+### ▲[70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
+
+- 紙の上でも解き方が分からなかった問題
+- Solutionでは再帰的な解法、動的計画法による解法
+    - ▲動的計画法で考えると、iの段に行く方法はi-1の段から・i-2の段からの2通りで、これを順次足し合わせていけばOK
+        - 完全にフィボナッチ数列なのでリストを使わなくても解ける。フィボナッチ数列の公式を使うなど
+
+```python
+# 動的計画法（Solutionを参考に実装）
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n==1:
+            return 1
+        dp = [0 for _ in range(n+1)]
+        dp[1] = 1
+        dp[2] = 2
+        for i in range(3, n+1):
+            dp[i] = dp[i-1] + dp[i-2]
+        return dp[n]
+```
+
+### ▲[83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)
+
+- リストノードの扱いに納得がいっていないため、うまく実装できない
+- ▲リストノードの扱い能力を測る基本的な問題とのこと
+    - Solutionを見ると、最初に考えた方針はよかった
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        ans = head
+        while ans!=None and ans.next!=None:
+            if ans.val==ans.next.val:
+                ans.next = ans.next.next
+            else:
+                ans = ans.next
+        return head
+```
+
+### ▲[88. Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
+
+- アルゴリズムとしての解き方は分からなかったので、list.sort()を使用した
+- ▲Discussionでは後ろから埋めていく解法
+    - nums1の後ろにせっかくスペースを取っているのだから、そこから埋めるという方針
+
+```python
+# 自力実装
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        if n==0:
+            pass
+        else:
+            nums1[m:] = nums2
+            nums1.sort()
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        while m>0 and n>0:
+            if nums1[m-1]<=nums2[n-1]:
+                nums1[m+n-1] = nums2[n-1]
+                n -= 1
+            else:
+                nums1[m+n-1] = nums1[m-1]
+                m -= 1
+        if n>0:
+            nums1[:n] = nums2[:n]
+```
+
+### [100. Same Tree](https://leetcode.com/problems/same-tree/)
+
+- 再帰的な方法で解こうとしたが、正解と異なる結果が出るケースがあり、うまくいかず
+- Solutionその1も再帰的な方法
+    - 最初に考えていたよりもっとシンプルな方法
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        if not p and not q:
+            return True
+        if not p or not q:
+            return False
+        if p.val!=q.val:
+            return False
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+```
+
+### [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/)
+
+- rootの次で木を2つに分けて、rightを反転させた部分木がleftと同一か否かを判定すればOK
+    - 100.の2つの木が同一か否かを判定する関数を利用（一部改変）
+    - 再帰的な方法で解いた
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        if not root.left and not root.right:
+            return True
+        
+        def isMirrorSame(p, q):
+            if not p and not q:
+                return True
+            if not p or not q:
+                return False
+            if p.val!=q.val:
+                return False
+            return isMirrorSame(p.left, q.right) and isMirrorSame(p.right, q.left)
+        
+        return isMirrorSame(root.left, root.right)
+```
+
+### ▲[104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+
+- 再帰的な方法で解いた
+    - Discussionを見ると、自分の実装は無駄なif文が多いみたい
+    - ただし、自分の最初の実装の方がかなり速い（無駄な計算をif文で省けている）
+- ▲Discussionにはwhile文での解法もある（max()が不要）
+    - 順番に降りていってカウントしている。分かりやすく、美しい解法
+    - 速い
+    - https://leetcode.com/problems/maximum-depth-of-binary-tree/discuss/34198/Python-multiple-solutions-recursion-level-order-using-stack-and-level-order-using-queue
+
+```python
+# 自力実装
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        if not root.left and not root.right:
+            return 1
+        if not root.left and root.right:
+            return 1+self.maxDepth(root.right)
+        if root.left and not root.right:
+            return 1+self.maxDepth(root.left)
+        if root.left and root.right:
+            return 1+max(self.maxDepth(root.left), self.maxDepth(root.right))
+```
+
+```python
+# もっとシンプル、しかし遅い（Discussionを参考に実装）
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        return 1+max(self.maxDepth(root.left), self.maxDepth(root.right))
+```
+
+```python
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+
+        stack = [root]
+        h = 0
+        
+        while stack:
+            next_level = []
+            while stack:
+                top = stack[-1]
+                stack = stack[:-1]
+                if top.left:
+                    next_level.append(top.left)
+                if top.right:
+                    next_level.append(top.right)
+            stack = next_level
+            h += 1
+        return h
+```
 
