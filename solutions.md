@@ -963,3 +963,121 @@ class Solution:
         return h
 ```
 
+### ▲[107. Binary Tree Level Order Traversal II](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)
+
+- 104.で学んだwhile文での解法を援用
+    - TreeNodeそのものを追加してしまうと木全体の値が保存されてしまうため、一部修正して使用
+- ▲Discussionでは深さ優先探索(DFS)+stack/+再帰、幅優先探索(BFS)+queueの解法があった
+    - 今処理している階層を記録しておく解法もあった
+        - https://leetcode.com/problems/binary-tree-level-order-traversal-ii/discuss/34978/Python-solutions-(dfs-recursively-dfs%2Bstack-bfs%2Bqueue).
+    - 自力実装したのはDFS+stackの一種
+
+```python
+# DFS+stack（自力実装）
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def levelOrderBottom(self, root: TreeNode) -> List[List[int]]:
+        layer = [root]
+        if not root:
+            return []
+        anser = [[root.val]]
+        while layer:
+            new_layer = []
+            tmp_ans = []  # TreeNodeそのものを追加してしまうと木全体の値が保存されてしまうため
+            while layer:
+                new_root = layer[-1]
+                layer = layer[:-1]
+                if new_root.left:
+                    new_layer.append(new_root.left)
+                    tmp_ans.append(new_root.left.val)
+                if new_root.right:
+                    new_layer.append(new_root.right)
+                    tmp_ans.append(new_root.right.val)
+            layer = new_layer[::-1]
+            if tmp_ans:
+                anser.append(tmp_ans)
+        return anser[::-1]
+```
+
+### ▲[108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
+
+- ▲試行錯誤したものの、分からなかった
+- TreeNodeの作り方は分かった
+- Discussionを見たところ、numsを真ん中で割って処理していく、という元々の方針は良かった
+    - あとは実装力
+    - シンプルなコード例では再帰的に処理していた
+
+```python
+# TreeNodeのつなげ方
+tn = TreeNode(0)
+tn.left = TreeNode(1)
+tn = tn.left
+tn.left = TreeNode(2)
+tn = tn.left
+......
+```
+
+```python
+# Discussionを参考に実装
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+        if not nums:
+            return None
+        mid = (len(nums)-1)//2
+        root = TreeNode(nums[mid])
+        root.left = self.sortedArrayToBST(nums[:mid])
+        root.right = self.sortedArrayToBST(nums[mid+1:])
+        return root
+```
+
+### [110. Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
+
+- ▲試行錯誤したものの、分からなかった
+- Discussionを見たところ、左右の子から親に上がる際に1を足していき、左右の子での差が1を超えてからは常に-1を返し続ける関数を定義して再帰している
+
+```python
+# Discussionを参考に実装
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isBalanced(self, root: TreeNode) -> bool:
+        def check(root):
+            if not root:
+                return 0
+            
+            left = check(root.left)
+            if left==-1:
+                return -1
+            
+            right = check(root.right)
+            if right==-1:
+                return -1
+            
+            if abs(left-right)>1:
+                return -1
+            
+            return 1+max(left, right)
+            
+        return check(root)!=-1
+```
