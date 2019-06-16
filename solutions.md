@@ -1197,3 +1197,175 @@ class Solution:
             ans.append(lis)
         return ans
 ```
+
+### [119. Pascal's Triangle II](https://leetcode.com/problems/pascals-triangle-ii/)
+
+- 試行錯誤したものの、リスト内でやりくりするのは無理だった
+    - リスト内でやりくり、ではなく解答の他に余分なスペースは`O(k)`まで、ということだった？
+- Discussionにシンプルな解法あり
+    - https://leetcode.com/problems/pascals-triangle-ii/discuss/38467/Very-simple-Python-solution
+    - これが問題の条件を満たしているのか…？
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        ans = [1]
+        for _ in range(rowIndex):
+            ans = [x+y for x, y in zip([0]+ans, ans+[0])]
+        return ans
+```
+
+### [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+
+- 処理の流れをそのまま実装
+
+```python
+# 自力実装
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        if len(prices)<=1:
+            return 0
+        min_buy = prices[0]
+        profit = 0
+        for buy in prices[1:]:
+            if min_buy>buy:
+                min_buy = buy
+            else:
+                profit = max(profit, buy-min_buy)
+        return profit
+```
+### ▲[122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
+
+- 処理の流れをそのまま実装
+    - 前から順に値段を見ていき、極小（次の日に値段が上がる日）で購入して極大（次の日に値段が下がる日）で売る、を繰り返す
+    - 「次の日に株価が上がるか下がるか」を精度高く予測できれば、このアルゴリズムを使ってうまくお金儲けが出来そう
+- Solutionにはさらにシンプルな実装あり
+    - ▲考え方は似ているが、より単純化されていて美しい
+    - 自力実装の方が速い（無駄な計算をif文で除けているから？）
+
+```python
+# 自力実装
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        if len(prices)<=1:
+            return 0
+        buy = prices[0]
+        profit = 0
+        ans = 0
+        for i in range(len(prices)):
+            if buy>prices[i]:
+                buy = prices[i]
+            else:
+                profit = max(profit, prices[i]-buy)
+            if prices[i]<prices[i-1]:
+                ans += profit
+                profit = 0
+                buy = prices[i]
+        if buy<prices[i]:
+            ans += profit
+        return ans
+```
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        if len(prices)<=1:
+            return 0
+        sum_profit = 0
+        for i in range(1, len(prices)):
+            if prices[i]>prices[i-1]:
+                sum_profit += prices[i]-prices[i-1]
+        return sum_profit
+```
+
+### ▲[125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
+
+- 文字列を前処理して、前からと後ろからを比較
+    - リストを使用しており、リストのコピーと比較しているため使用メモリは大きい
+- ▲Discussionにはリストを使わず、2つのポインタで比較を回す方法が載せられていた
+    - 速度は遅いが使用メモリは少なくて済む
+
+```python
+# 自力実装
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        if len(s)<=1:
+            return True
+        lis = [x for x in s.lower() if x.isalnum()]
+        return lis==lis[::-1]
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        l, r = 0, len(s)-1
+        while l<r:
+            while l<r and not s[l].isalnum():
+                l += 1
+            while l<r and not s[r].isalnum():
+                r -= 1
+            if s[l].lower()!=s[r].lower():
+                return False
+            l += 1
+            r -= 1
+        return True
+```
+
+### ▲[136. Single Number](https://leetcode.com/problems/single-number/)
+
+- 条件：runtime: O(n), memory: 余計なメモリは使わないこと
+- list.sort()を使って実装
+    - 速さ・メモリともに微妙
+- Solusionには条件を満たす方法・満たさない方法が掲載されていた
+    - 別リストを作成して数値が入っているかどうかをinで確認する方法, O(n^2); O(n).
+    - 辞書を作成して数値が入っているかどうかを.pop()で確認する方法, O(n); O(n).
+        - 辞書型の.popはO(1)なので速い
+    - 計算で解く方法, O(n); O(n).
+        - (a+b+c)*2-(a+a+b+b+c)
+    - ▲各要素のXORを取る方法, O(n); O(1).
+        - a ^ b でXORを取れる
+        - a^0 -> a
+        - a^a -> 0
+        - a^b^a -> a^a^b -> 0^b -> b
+        - Solutionのコメントでの褒め言葉多数
+
+```python
+# 自力実装
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        nums.sort()
+        i = 0
+        while i<len(nums)-1:
+            if nums[i]==nums[i+1]:
+                i += 2
+            else:
+                if nums[i+1]==nums[i+2]:
+                    return nums[i]
+        return nums[i]
+```
+
+```python
+# 辞書使用（Solutionを参考に実装）
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        has = {}
+        for i in nums:
+            try:
+                has.pop(i)
+            except KeyError:
+                has[i] = 1
+        return has.popitem()[0]
+```
+
+```python
+# XOR使用（Solutionを参考に実装）
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        a = 0
+        for i in nums:
+            a ^= i
+        return a
+```
