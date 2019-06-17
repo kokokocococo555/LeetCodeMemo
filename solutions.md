@@ -1369,3 +1369,59 @@ class Solution:
             a ^= i
         return a
 ```
+
+### [141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
+
+- 値の一致を基準にすると、無限ループかたまたま同じ数列が繰り返されているだけなのかの判別ができない
+- 1度通った値を変更しておくことで、次にその値に当たった場合はループしているということが分かる
+    - たまたまリスト内にその値が存在しないように注意しなければならない
+    - 今回は数値がvalに含まれるため、文字列ならたまたま存在することはない、しかも2つ連続では存在しないだろうという判断
+- Solutionではメモリアドレスを保存する方法、2つのポインタを使用する方法が紹介されている
+
+```python
+# 自力実装
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        if not head:
+            return False
+        while True:
+            if head.val=="cycle" and head.next.val=="cycle":
+                return True
+            if head.next:
+                head.val = "cycle"
+                head = head.next
+            else:
+                return False
+```
+
+```python
+# Solutionを参考に実装
+class Solution(object):
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        if not head or not head.next:
+            return False
+        slow = head
+        fast = head.next
+        while True:
+            if slow==fast:
+                return True
+            if not fast.next or not fast.next.next:
+                return False
+            slow = slow.next
+            fast = fast.next.next
+```
