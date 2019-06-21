@@ -1425,3 +1425,294 @@ class Solution(object):
             slow = slow.next
             fast = fast.next.next
 ```
+
+### [155. Min Stack](https://leetcode.com/problems/min-stack/)
+
+- リストを使用したが、そういうことではないのだと思う…これではただのリスト
+    - 処理も遅い
+- Discussionでもリストを使用していた
+    - ただし、min()は使用していなかった
+
+```python
+# 自力実装
+class MinStack:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack = []
+        
+
+    def push(self, x: int) -> None:
+        self.stack.append(x)
+
+    def pop(self) -> None:
+        return self.stack.pop()
+        
+        
+    def top(self) -> int:
+        return self.stack[-1]
+
+
+    def getMin(self) -> int:
+        return min(self.stack)
+
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(x)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
+```
+
+```python
+# Solutionを参考に実装
+class MinStack:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack = []
+
+
+    def push(self, x: int) -> None:
+        current_min = self.getMin()
+        if current_min==None or current_min>x:
+            current_min = x
+        self.stack.append((x, current_min))
+
+
+    def pop(self) -> None:
+        if self.stack:
+            self.stack.pop()
+
+
+    def top(self) -> int:
+        if self.stack:
+            return self.stack[-1][0]
+
+
+    def getMin(self) -> int:
+        if self.stack:
+            return self.stack[-1][1]
+```
+
+### ▲[160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/)
+
+- 元のインプットを破壊しないように、といった指示がある
+- 解法を思いつかなかった
+- Solutionではブルートフォース、メモリアドレス、2つのポインタを使った解法が紹介されていた
+    - ▲2つのポインタでの解法、本当にこれでコーナーケース含めてうまく処理できるのかどうか納得いっていないので復習が必要
+
+```python
+# Two Pointers（Solutionを参考に実装）
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+        pa = headA
+        pb = headB
+        while pa!=pb:
+            pa = headB if pa==None else pa.next
+            pb = headA if pb==None else pb.next
+        return pa
+```
+
+### ▲[167. Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
+
+- ▲ブルートフォースはTLE, 二分探索もどきはうまく結果を得られない, という状況でギブアップ
+- Discussionではtwo pointer, dictionary, binary searchによる解法があった
+    - dictionaryは[1. Two Sum](https://leetcode.com/problems/two-sum/)で見た解法と同じ
+
+```python
+# two pointer（Solutionを参考に実装）
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        l, r = 0, len(numbers)-1
+        while l<r:
+            sum_num = numbers[r]+numbers[l]
+            if sum_num==target:
+                return [l+1, r+1]
+            elif sum_num<target:
+                l += 1
+            else:
+                r -= 1
+```
+
+```python
+# dictionary（Solutionを参考に実装）
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        dic = {}
+        for i, n in enumerate(numbers):
+            if target-n in dic:
+                return [dic[target-n]+1, i+1]
+            dic[n] = i
+```
+```python
+# binary search（Solutionを参考に実装）
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        for i in range(len(numbers)):
+            # 候補の1つ{numbers[i+1]}を昇順で順番に確認していく
+            # ペアの数を残りの数{numbers[i+1], numbers[len(numbers)-1]}から二分探索で探す
+            l, r = i+1, len(numbers)-1
+            dif = target-numbers[i]
+            while l<=r:
+                mid = l + (r-l)//2
+                if dif==numbers[mid]:
+                    return [i+1, mid+1]
+                elif dif>numbers[mid]:
+                    l = mid+1
+                else:
+                    r = mid-1
+```
+
+### [168. Excel Sheet Column Title](https://leetcode.com/problems/excel-sheet-column-title/)
+
+- 26進法として解こうとするも、Zの扱いがうまくいかなかったりしてアウト
+- Discussionでも26進数として解かれていた
+    - 26で割った商でnを更新していくなど、近いところまでは自分でも考えられていたが、あと一歩及ばず…
+    - n%26, n//26ではなく(n-1)%26, (n-1)//26を使うのが要
+    - [このDiscussionの解説](https://leetcode.com/problems/excel-sheet-column-title/discuss/51404/Python-solution-with-explanation)が分かりやすい
+
+```python
+# 一部ケースがうまく通らなかった自力実装
+class Solution:
+    def convertToTitle(self, n: int) -> str:
+        dic = {}
+        # upper-case A-Z
+        for i in range(1, 26):
+            dic[i] = chr(i+64)
+        dic[0] = "Z"
+        ans = dic[n%26]
+        r_sum = 26 if n%26==0 else n%26
+        x = 2
+        while 26**x<n:
+            r = 1 if (n-r_sum)%(26**x)/(26**(x-1))==0 else (n-r_sum)%(26**x)/(26**(x-1))
+            ans = dic[r] + ans
+            r_sum = n%(26**x)
+            x += 1
+        return ans
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def convertToTitle(self, n: int) -> str:
+        dic = {}
+        # upper-case A-Z
+        for i in range(26):
+            dic[i] = chr(i+65)
+        ans = ""
+        while 0<n:
+            ans = dic[(n-1)%26] + ans
+            n = (n-1)//26
+        return ans
+```
+
+### ▲[169. Majority Element](https://leetcode.com/problems/majority-element/)
+
+- 辞書型のオブジェクトに値の出現回数を記録していった
+    - 遅い <- 不要な処理がループ内に入っていたことが原因の一つ
+- ▲Solutionでは6種類もの解法が紹介されていた
+    - ソートして真ん中の値を返す
+        - n/2以上を占めるため、リスト内での大きさが何であれ、真ん中はmajorityの数になる
+    - ランダムに値を選び、その値がリスト内でn/2以上を占めるかどうかを判定
+        - ブルートフォースよりは速くなる可能性もある、といったところか
+    - divide & conquer approach...左右に分割していく再帰的な解法
+        - 再帰ということもあり、分かりにくい
+    - ▲Boyer-Moore Voting Algorithm...候補の値を決め、候補の値ならば+1, それ以外ならば-1, 0になったら次の候補, とする方法
+        - 素敵
+
+```python
+# 自力実装
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        cnt_dic = {}
+        for n in nums:
+            if n in cnt_dic:
+                cnt_dic[n] += 1
+            else:
+                cnt_dic[n] = 1
+        return max(cnt_dic, key=cnt_dic.get)
+```
+
+```python
+# sort（Solutionを参考に実装）
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        nums.sort()
+        return nums[len(nums)//2]
+```
+
+```python
+# Boyer-Moore Voting Algorithm（Solutionを参考に実装）
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        cnt = 0
+        candidate = None
+        for num in nums:
+            if cnt==0:
+                candidate = num
+            cnt += 1 if num==candidate else -1
+        return candidate
+```
+
+### [171. Excel Sheet Column Number](https://leetcode.com/problems/excel-sheet-column-number/)
+
+- 168. の逆. 26進数を実装するだけ
+
+```python
+# 自力実装
+class Solution:
+    def titleToNumber(self, s: str) -> int:
+        dic = {}
+        for i in range(1, 27):
+            dic[chr(i+64)] = i
+        ans = 0
+        for i, a in enumerate(s[::-1]):
+            ans += (dic[a])*(26**i)
+        return ans
+```
+
+### [172. Factorial Trailing Zeroes](https://leetcode.com/problems/factorial-trailing-zeroes/)
+
+- 階乗を計算して末尾の0の数を数えようとするとTLEになる
+    - 因数5の数を数えればよいのでは？と思ってn//5を出すも、答えより小さい
+    - 25, 125などの倍数がたくさんの5を因数として持っているせい
+- Discussionでも因数5の数を数えている
+    - 5で割った商を足して、n=n//5して、5で割って...と繰り返すことで、5a+25b+125c...を求められる
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        cnt = 0
+        while n>0:
+            n = n//5
+            cnt += n
+        return cnt
+```
+
+### [175. Combine Two Tables](https://leetcode.com/problems/combine-two-tables/)
+
+- 2つのテーブルをPersonIdをキーにして左外部結合する
+    - 結合するテーブル名、キーはFROM句に書く
+
+```sql
+select FirstName, LastName, City, State
+from Person LEFT OUTER JOIN Address ON Person.PersonId=Address.PersonId;
+```
