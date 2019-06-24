@@ -1716,3 +1716,65 @@ class Solution:
 select FirstName, LastName, City, State
 from Person LEFT OUTER JOIN Address ON Person.PersonId=Address.PersonId;
 ```
+
+### [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/)
+
+- 普通にMySQLを書いたが、レコードが1つのケースに対応できず
+- Solutionではサブクエリ、または`IFNULL`関数を使用
+    - `IFNULL(x1, x2)`...x1がNULLでない場合はx1を返し、NULLの場合はx2を返す
+    - 似た関数に`IF(x1, x2, x3)`もある
+        - x1がTRUEの場合はx2, FALSEの場合はx3を返す
+    - 重複を削除するには`SELECT DISTINCT ...`を使用
+
+```sql
+-- Solutionを参考に実装
+SELECT
+    (SELECT DISTINCT Salary
+    FROM Employee
+    ORDER BY Salary DESC
+    LIMIT 1
+    OFFSET 1) AS SecondHighestSalary
+;
+```
+
+```sql
+-- IFNULL版（Solutionを参考に実装）
+SELECT
+    IFNULL(
+        (SELECT DISTINCT Salary
+         FROM Employee
+         ORDER BY Salary DESC
+         LIMIT 1 OFFSET 1),
+        NULL) AS SecondHighestSalary
+;
+```
+
+### [181. Employees Earning More Than Their Managers](https://leetcode.com/problems/employees-earning-more-than-their-managers/)
+
+- 自己結合してWHEREで条件付けて抽出した
+
+```sql
+-- 自力実装
+SELECT e.Name AS Employee
+    FROM Employee AS e
+    LEFT OUTER JOIN Employee AS m ON e.ManagerId=m.Id
+    WHERE e.Salary>m.Salary
+;
+```
+
+### [182. Duplicate Emails](https://leetcode.com/problems/duplicate-emails/)
+
+- ググって実装し
+    - [参考にした記事](https://qiita.com/necoyama3/items/4c24defd6f504366aebe)
+
+```sql
+-- 記事を参考に実装
+SELECT DISTINCT
+    Email
+FROM 
+    Person
+GROUP BY
+    Email
+HAVING
+    COUNT(Email) > 1
+```
