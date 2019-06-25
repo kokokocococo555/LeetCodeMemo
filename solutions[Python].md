@@ -1,7 +1,7 @@
-# LeetCode別解勉強
+# LeetCode勉強記録（Python編）
 
-- LeetCodeの別解の勉強記録
-- Solutionに投稿されている内容等を参照し、自分でも実装してみる
+- LeetCodeの勉強記録
+- 自力で実装したコードの他にも、Solution, Discussionに投稿されている内容等を参照し、自分でも実装してみる
 - 復習が必要な問題には▲をつけている
 - 使用言語は`Python`
     - しかし`Python`遅いな…
@@ -1707,74 +1707,23 @@ class Solution:
         return cnt
 ```
 
-### [175. Combine Two Tables](https://leetcode.com/problems/combine-two-tables/)
+### ▲[189. Rotate Array](https://leetcode.com/problems/rotate-array/)
 
-- 2つのテーブルをPersonIdをキーにして左外部結合する
-    - 結合するテーブル名、キーはFROM句に書く
+- 3種類の解法、memory=O(1)の解法が要求されている
+    - スライシングで実装
+    - ポインタを用いた実装にも挑戦したが、一部ケースでうまくいくのみ
+- ▲Solutionでは新しいリストを作成する方法、Cyclicに置き換えていく方法、Reverseをうまく使う方法が紹介されていた
 
-```sql
-select FirstName, LastName, City, State
-from Person LEFT OUTER JOIN Address ON Person.PersonId=Address.PersonId;
+```python
+# スライシングを用いた自力実装
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        # ver.1
+        k = k%len(nums)  # numsのサイズよりも大きいkを与えられた場合
+        if k!=0:
+            nums[:k], nums[k:] = nums[-k:], nums[:-k]
 ```
 
-### [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/)
-
-- 普通にMySQLを書いたが、レコードが1つのケースに対応できず
-- Solutionではサブクエリ、または`IFNULL`関数を使用
-    - `IFNULL(x1, x2)`...x1がNULLでない場合はx1を返し、NULLの場合はx2を返す
-    - 似た関数に`IF(x1, x2, x3)`もある
-        - x1がTRUEの場合はx2, FALSEの場合はx3を返す
-    - 重複を削除するには`SELECT DISTINCT ...`を使用
-
-```sql
--- Solutionを参考に実装
-SELECT
-    (SELECT DISTINCT Salary
-    FROM Employee
-    ORDER BY Salary DESC
-    LIMIT 1
-    OFFSET 1) AS SecondHighestSalary
-;
-```
-
-```sql
--- IFNULL版（Solutionを参考に実装）
-SELECT
-    IFNULL(
-        (SELECT DISTINCT Salary
-         FROM Employee
-         ORDER BY Salary DESC
-         LIMIT 1 OFFSET 1),
-        NULL) AS SecondHighestSalary
-;
-```
-
-### [181. Employees Earning More Than Their Managers](https://leetcode.com/problems/employees-earning-more-than-their-managers/)
-
-- 自己結合してWHEREで条件付けて抽出した
-
-```sql
--- 自力実装
-SELECT e.Name AS Employee
-    FROM Employee AS e
-    LEFT OUTER JOIN Employee AS m ON e.ManagerId=m.Id
-    WHERE e.Salary>m.Salary
-;
-```
-
-### [182. Duplicate Emails](https://leetcode.com/problems/duplicate-emails/)
-
-- ググって実装し
-    - [参考にした記事](https://qiita.com/necoyama3/items/4c24defd6f504366aebe)
-
-```sql
--- 記事を参考に実装
-SELECT DISTINCT
-    Email
-FROM 
-    Person
-GROUP BY
-    Email
-HAVING
-    COUNT(Email) > 1
-```
