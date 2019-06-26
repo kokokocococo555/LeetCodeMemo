@@ -1727,3 +1727,87 @@ class Solution:
             nums[:k], nums[k:] = nums[-k:], nums[:-k]
 ```
 
+### ▲[190. Reverse Bits](https://leetcode.com/problems/reverse-bits/)
+
+- 2\*\*31, 2\*\*30, ...と順に割っていって、割れた場合に2\*\*0, 2\*\*1, ...と順に足していく
+- Discussionでは文字列処理を掛けるone lineの解法が分かりやすかった
+    - ▲bitの処理もあったが、`>>`, `<<`といった知らない記法が使われていた
+        - bit処理も学ばないと
+        - 参考記事: [Python ビット演算 超入門 - Qiita](https://qiita.com/7shi/items/41d262ca11ea16d85abc)
+        - 参考記事: [Pythonのビット演算子（論理積、論理和、排他的論理和、反転、シフト）](https://note.nkmk.me/python-bit-operation/)
+
+```python
+# 自力実装
+class Solution:
+    # @param n, an integer
+    # @return an integer
+    def reverseBits(self, n):
+        ans = 0
+        for i in range(32):
+            j = 31-i
+            if n//(2**(j))==1:
+                ans += 2**i
+                n = n%(2**(j))
+        return ans
+```
+
+```python
+# one line（Discussionを参考に実装）
+class Solution:
+    # @param n, an integer
+    # @return an integer
+    def reverseBits(self, n):
+        return int("{:032b}".format(n)[::-1], 2)
+```
+
+### [191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
+
+- 32bitへの文字列変換(`"{:032b}".format(n)`)を使用した解法(16ms)、10進数数値を2**xで割っていく解法(32ms)を実装した
+- Solutionでは`n&(n-1)`でnを更新し続けることで1を小さい桁から1つずつ減らしていく手法が紹介されていた(20ms)
+
+
+```python
+# 文字列処理での解法（自力実装）(16ms)
+class Solution(object):
+    def hammingWeight(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        ans = 0
+        for s in "{:032b}".format(n):
+            ans += int(s)
+        return ans
+```
+
+```python
+# 10進数数値処理での解法（自力実装）(32ms)
+class Solution(object):
+    def hammingWeight(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        ans = 0
+        for i in range(32):
+            j = 31-i
+            if n//(2**j)==1:
+                ans += 1
+            n = n%(2**j)
+        return ans
+```
+
+```python
+# Solutionを参考に実装(20ms)
+class Solution(object):
+    def hammingWeight(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        ans = 0
+        while n!=0:
+            ans += 1
+            n = n&(n-1)
+        return ans
+```
