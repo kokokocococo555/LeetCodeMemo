@@ -1635,7 +1635,7 @@ class Solution:
     - divide & conquer approach...左右に分割していく再帰的な解法
         - 再帰ということもあり、分かりにくい
     - ▲Boyer-Moore Voting Algorithm...候補の値を決め、候補の値ならば+1, それ以外ならば-1, 0になったら次の候補, とする方法
-        - 素敵
+        - elegant!
 
 ```python
 # 自力実装
@@ -1811,3 +1811,147 @@ class Solution(object):
             n = n&(n-1)
         return ans
 ```
+
+### ▲[198. House Robber](https://leetcode.com/problems/house-robber/)
+
+- 解法思いつかず...
+- ▲Discussionで[DPによる解法](https://leetcode.com/problems/house-robber/discuss/55977/Python-DP-solution-4-line-O(n)-time-O(1)-space-easy-to-understand-with-detailed-explanation)が解説されている
+    - window size = 4 として、ずらしながら計算していく
+    - [1, 2, 3, 4, 5, 6]の場合、
+
+```
+[0, 0, 0, 1, 2, 3, 4, 5, 6] と先頭に3つ0をpaddingして
+|0  0  0  1| |  |  |  |  |   max(0+1, 0+1) = 1
+  | 0  0  1  2| |  |  |  |   max(0+2, 0+2) = 2
+    |  0  1  2  4| |  |  |   max(0+3, 1+3) = 3
+       |  1  2  4  6| |  |   max(1+4, 2+4) = 6
+          |  2  4  6  9| |   max(2+5, 4+5) = 9
+             |  4  6  9  12| max(4+6, 6+6) = 12
+```
+と計算していく。elegant! DPを使いこなせるようになりたい。
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        p3, p2, p1 = 0, 0, 0
+        for i in range(len(nums)):
+            cur = nums[i]
+            p3, p2, p1 = p2, p1, max(p3+cur, p2+cur)
+        return max(p2, p1)
+```
+
+### [202. Happy Number](https://leetcode.com/problems/happy-number/)
+
+- 桁数が不明なので、while文で各桁の2乗を加算していった
+    - 計算結果を保存しておき、一度出た計算結果がもう一度出たらループに入ったと判断してFalseを返す
+- Discussionではnを文字列変換して各文字についてfor文で2乗を取る解法も見られた
+
+```python
+# 自力実装
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        lis = []
+        while True:
+            new_n = 0
+            while n>0:
+                new_n += (n%10)**2
+                n = n//10
+            if new_n==1:
+                return True
+            n = new_n
+            if n in lis:
+                return False
+            lis.append(n)
+```
+
+### [203. Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/)
+
+- 試行錯誤の末、正解にたどり着いた
+    - `head = head.next.next`ではうまくいかないと気づくまで時間がかかった
+    - 条件分岐が多い解法になってしまった
+- Discussionの[記事](https://leetcode.com/problems/remove-linked-list-elements/discuss/158651/Simple-Python-solution-with-explanation-(single-pointer-dummy-head).)では先頭にダミーを作成することでシンプルなコードを実現していた
+    - elegant!
+- その他のDiscussionでは自力で実装したコードと似た発想での解法が紹介されていた
+
+```python
+# 自力実装
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        # リストの長さが0, 1の場合
+        if not head:
+            return head
+        if not head.next:
+            if head.val==val:
+                return None
+            else:
+                return head
+
+        # 先頭からvalが続く場合
+        while head.val==val:
+            head = head.next
+            if not head:
+                return None
+
+        # 解答のために先頭を記録
+        ans = head
+
+        while head:
+            # 次の値がvalの場合、飛ばして次の次に接続する
+            while head.next and head.next.val==val:
+                head.next = head.next.next
+            head = head.next
+
+        return ans
+```
+
+### [204. Count Primes](https://leetcode.com/problems/count-primes/)
+
+- 2からnまでの各数を、2からn-1までの数で割った余りを確認するというゴリ押し実装をしたところ、TLE
+- [エラトステネスの篩](https://ja.wikipedia.org/wiki/%E3%82%A8%E3%83%A9%E3%83%88%E3%82%B9%E3%83%86%E3%83%8D%E3%82%B9%E3%81%AE%E7%AF%A9)をPythonで実装するも、TLE
+    - 最初よりは処理できる桁数が増えた
+- Discussionもエラトステネスの篩を使用している
+    - すべて1のリストを作成しておき、素数以外を0に変更していく
+    - 実装力の問題でTLEになってしまったのか
+
+```python
+# エラトステネスの篩の説明を見て自力実装（TLE）
+import math
+
+
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n<=2:
+            return 0
+        lis = [i for i in range(2, n)]
+        p = lis[0]
+        pn = [p]
+        while p<math.sqrt(n):
+            lis = [i for i in lis if i%p!=0]
+            p = lis[0]
+            pn.append(p)
+        pn.extend(lis[1:])
+        return len(pn)
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n<=2:
+            return 0
+        lis = [1]*n
+        lis[0], lis[1] = 0, 0
+        for i in range(2, int(n**0.5)+1):
+            if lis[i]==1:  # 0になっていないインデックスを見つけたら、その倍数のインデックスを0に更新
+                lis[i*i:n:i] = [0]*len(lis[i*i:n:i])
+        return sum(lis)
+```
+

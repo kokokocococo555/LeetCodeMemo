@@ -114,3 +114,77 @@ WHERE
         Orders)
 ;
 ```
+
+### [196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails/)
+
+- ググって実装
+    - [参考にした記事](https://qiita.com/aosho235/items/d748dcb6386d8ce75604)
+- Solutionでは`WHERE`句で`p1.Email = p2.Email AND p1.Id > p2.Id`として削除していた
+    - Solutionの方が遅い
+
+```sql
+-- 記事を参考にした自力実装
+DELETE
+FROM
+    Person
+WHERE
+    Id NOT IN 
+        (SELECT
+            min_id
+         FROM
+            (SELECT
+                MIN(Id) AS min_id
+            FROM
+                Person
+            GROUP BY
+                Email) tmp
+        )
+;
+```
+
+```sql
+-- Solutionを参考に実装
+DELETE
+    p1
+FROM
+    Person AS p1,
+    Person AS p2
+WHERE
+    p1.Email = p2.Email AND
+    p1.Id > p2.Id
+;
+```
+
+### ▲[197. Rising Temperature](https://leetcode.com/problems/rising-temperature/)
+
+- 分からず
+    - MySQLの詳しい文法や道具をもっと知る必要あり
+- ▲Solutionやそこにあるコメントを見ると、`SUBDATE()`や`DATEDIFF()`を使用している
+
+```sql
+-- SUMDATE()を使用（Solutionのコメントを参考に実装）
+SELECT
+    Weather.Id AS 'Id'
+FROM
+    Weather
+JOIN
+    Weather AS w
+ON w.RecordDate = SUBDATE(Weather.RecordDate, 1)
+WHERE
+    Weather.Temperature > w.Temperature
+;
+```
+
+```sql
+-- DATEDIFF()を使用（Solutionのコメントを参考に実装）
+SELECT
+    t.Id AS 'Id'
+FROM
+    Weather AS t,
+    Weather AS y
+WHERE
+    DATEDIFF(t.RecordDate, y.RecordDate) = 1
+    AND t.Temperature > y.Temperature
+;
+```
+
