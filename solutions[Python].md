@@ -1,4 +1,4 @@
-# LeetCode勉強記録（Python編）
+# 1. LeetCode勉強記録（Python編）
 
 - LeetCodeの勉強記録
 - 自力で実装したコードの他にも、Solution, Discussionに投稿されている内容等を参照し、自分でも実装してみる
@@ -11,8 +11,68 @@
     - テストケースを作る。
     - 頭の中や紙の上で処理してみる。その流れをプログラムに起こすだけ。
 
-## Easy
-### [1. Two Sum](https://leetcode.com/problems/two-sum/)
+<!-- TOC -->
+
+- [1. LeetCode勉強記録（Python編）](#1-leetcode%E5%8B%89%E5%BC%B7%E8%A8%98%E9%8C%B2python%E7%B7%A8)
+  - [1.1. Easy](#11-easy)
+    - [1.1.1. 1. Two Sum](#111-1-two-sum)
+    - [1.1.2. 7. Reverse Integer](#112-7-reverse-integer)
+    - [1.1.3. 9. Palindrome Number](#113-9-palindrome-number)
+    - [1.1.4. 13. Roman to Integer](#114-13-roman-to-integer)
+    - [1.1.5. ▲14. Longest Common Prefix](#115-%E2%96%B214-longest-common-prefix)
+    - [1.1.6. 20. Valid Parentheses](#116-20-valid-parentheses)
+    - [1.1.7. ▲21. Merge Two Sorted Lists](#117-%E2%96%B221-merge-two-sorted-lists)
+    - [1.1.8. 26. Remove Duplicates from Sorted Array](#118-26-remove-duplicates-from-sorted-array)
+    - [1.1.9. 27. Remove Element](#119-27-remove-element)
+    - [1.1.10. 28. Implement strStr()](#1110-28-implement-strstr)
+    - [1.1.11. ▲35. Search Insert Position](#1111-%E2%96%B235-search-insert-position)
+    - [1.1.12. 38. Count and Say](#1112-38-count-and-say)
+    - [1.1.13. ▲53. Maximum Subarray](#1113-%E2%96%B253-maximum-subarray)
+    - [1.1.14. 58. Length of Last Word](#1114-58-length-of-last-word)
+    - [1.1.15. 66. Plus One](#1115-66-plus-one)
+    - [1.1.16. ▲67. Add Binary](#1116-%E2%96%B267-add-binary)
+    - [1.1.17. 69. Sqrt(x)](#1117-69-sqrtx)
+    - [1.1.18. ▲70. Climbing Stairs](#1118-%E2%96%B270-climbing-stairs)
+    - [1.1.19. ▲83. Remove Duplicates from Sorted List](#1119-%E2%96%B283-remove-duplicates-from-sorted-list)
+    - [1.1.20. ▲88. Merge Sorted Array](#1120-%E2%96%B288-merge-sorted-array)
+    - [1.1.21. 100. Same Tree](#1121-100-same-tree)
+    - [1.1.22. 101. Symmetric Tree](#1122-101-symmetric-tree)
+    - [1.1.23. ▲104. Maximum Depth of Binary Tree](#1123-%E2%96%B2104-maximum-depth-of-binary-tree)
+    - [1.1.24. ▲107. Binary Tree Level Order Traversal II](#1124-%E2%96%B2107-binary-tree-level-order-traversal-ii)
+    - [1.1.25. ▲108. Convert Sorted Array to Binary Search Tree](#1125-%E2%96%B2108-convert-sorted-array-to-binary-search-tree)
+    - [1.1.26. ▲110. Balanced Binary Tree](#1126-%E2%96%B2110-balanced-binary-tree)
+    - [1.1.27. 111. Minimum Depth of Binary Tree](#1127-111-minimum-depth-of-binary-tree)
+    - [1.1.28. 112. Path Sum](#1128-112-path-sum)
+    - [1.1.29. 118. Pascal's Triangle](#1129-118-pascals-triangle)
+    - [1.1.30. 119. Pascal's Triangle II](#1130-119-pascals-triangle-ii)
+    - [1.1.31. 121. Best Time to Buy and Sell Stock](#1131-121-best-time-to-buy-and-sell-stock)
+    - [1.1.32. ▲122. Best Time to Buy and Sell Stock II](#1132-%E2%96%B2122-best-time-to-buy-and-sell-stock-ii)
+    - [1.1.33. ▲125. Valid Palindrome](#1133-%E2%96%B2125-valid-palindrome)
+    - [1.1.34. ▲136. Single Number](#1134-%E2%96%B2136-single-number)
+    - [1.1.35. 141. Linked List Cycle](#1135-141-linked-list-cycle)
+    - [1.1.36. 155. Min Stack](#1136-155-min-stack)
+    - [1.1.37. ▲160. Intersection of Two Linked Lists](#1137-%E2%96%B2160-intersection-of-two-linked-lists)
+    - [1.1.38. ▲167. Two Sum II - Input array is sorted](#1138-%E2%96%B2167-two-sum-ii---input-array-is-sorted)
+    - [1.1.39. 168. Excel Sheet Column Title](#1139-168-excel-sheet-column-title)
+    - [1.1.40. ▲169. Majority Element](#1140-%E2%96%B2169-majority-element)
+    - [1.1.41. 171. Excel Sheet Column Number](#1141-171-excel-sheet-column-number)
+    - [1.1.42. 172. Factorial Trailing Zeroes](#1142-172-factorial-trailing-zeroes)
+    - [1.1.43. ▲189. Rotate Array](#1143-%E2%96%B2189-rotate-array)
+    - [1.1.44. ▲190. Reverse Bits](#1144-%E2%96%B2190-reverse-bits)
+    - [1.1.45. 191. Number of 1 Bits](#1145-191-number-of-1-bits)
+    - [1.1.46. ▲198. House Robber](#1146-%E2%96%B2198-house-robber)
+    - [1.1.47. 202. Happy Number](#1147-202-happy-number)
+    - [1.1.48. 203. Remove Linked List Elements](#1148-203-remove-linked-list-elements)
+    - [1.1.49. 204. Count Primes](#1149-204-count-primes)
+    - [1.1.50. ▲205. Isomorphic Strings](#1150-%E2%96%B2205-isomorphic-strings)
+    - [1.1.51. ▲206. Reverse Linked List](#1151-%E2%96%B2206-reverse-linked-list)
+    - [1.1.52. 217. Contains Duplicate](#1152-217-contains-duplicate)
+    - [219. Contains Duplicate II](#219-contains-duplicate-ii)
+
+<!-- /TOC -->
+
+## 1.1. Easy
+### 1.1.1. [1. Two Sum](https://leetcode.com/problems/two-sum/)
 
 - 2重ループで解けるが遅い
 - 模範解答のHash Tableという辞書を使った解法が速い
@@ -32,7 +92,7 @@ class Solution:
                 seen[nums[i]]=i
 ```
 
-### [7. Reverse Integer](https://leetcode.com/problems/reverse-integer/)
+### 1.1.2. [7. Reverse Integer](https://leetcode.com/problems/reverse-integer/)
 
 - strに変換して[::-1]、intに戻せばOK
   - 負か否か、結果がoverflowするか否かをcheck
@@ -61,7 +121,7 @@ class Solution:
             return 0
 ```
 
-### [9. Palindrome Number](https://leetcode.com/problems/palindrome-number/)
+### 1.1.3. [9. Palindrome Number](https://leetcode.com/problems/palindrome-number/)
 
 - 7.のpopの考え方を使って逆順のリストを作成した後、リストとリストの逆順が同一か否かを判定
     - 負の数の場合は何もせずにFalse
@@ -133,7 +193,7 @@ class Solution:
         return False
 ```
 
-### [13. Roman to Integer](https://leetcode.com/problems/roman-to-integer/)
+### 1.1.4. [13. Roman to Integer](https://leetcode.com/problems/roman-to-integer/)
 
 - Romanと数字との対応表をdictで作成
 - IV, IXなどの特殊バージョンについての対応表も別途作成
@@ -184,7 +244,7 @@ class Solution:
         return ans
 ```
 
-### ▲[14. Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
+### 1.1.5. ▲[14. Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
 
 - 愚直に比較していく
     - 遅め（全solutionの50%くらいの速さ）
@@ -226,7 +286,7 @@ class Solution:
         return ans
 ```
 
-### [20. Valid Parentheses]()
+### 1.1.6. [20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses)
 
 - 先入れ後出し(FILO)のstack方式を採用
     - 処理速度はかなり速い
@@ -279,7 +339,7 @@ class Solution:
 
 ```
 
-### ▲[21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+### 1.1.7. ▲[21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
 
 - リストであれば
     - 両方のリストから先頭から順に数をpop
@@ -358,7 +418,7 @@ class Solution:
         return head.next
 ```
 
-### [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+### 1.1.8. [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
 
 - 入力リストを破壊的に重複削除する
     - メモリ節約問題
@@ -413,7 +473,7 @@ class Solution:
         return cnt+1
 ```
 
-### [27. Remove Element](https://leetcode.com/problems/remove-element/)
+### 1.1.9. [27. Remove Element](https://leetcode.com/problems/remove-element/)
 
 - 上の26. と似た問題
     - 与えられた値に合致する要素を削除する変更を入力リストにin-placeで行う
@@ -453,7 +513,7 @@ class Solution:
         return n
 ```
 
-### [28. Implement strStr()](https://leetcode.com/problems/implement-strstr/)
+### 1.1.10. [28. Implement strStr()](https://leetcode.com/problems/implement-strstr/)
 
 - haystackを前から順にneedleの長さ分切り取ってneedleと比較
     - 少し遅め
@@ -474,7 +534,7 @@ class Solution:
         return -1
 ```
 
-### ▲[35. Search Insert Position](https://leetcode.com/problems/search-insert-position/)
+### 1.1.11. ▲[35. Search Insert Position](https://leetcode.com/problems/search-insert-position/)
 
 - 普通に前から順に比較
     - O(n)
@@ -510,7 +570,7 @@ class Solution:
         return left
 ```
 
-### [38. Count and Say](https://leetcode.com/problems/count-and-say/)
+### 1.1.12. [38. Count and Say](https://leetcode.com/problems/count-and-say/)
 
 - ポインタを2つ、カウンタを1つ使って実装
     - ノートに動きを書いてコードに起こした
@@ -546,7 +606,7 @@ class Solution:
         return ans
 ```
 
-### ▲[53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
+### 1.1.13. ▲[53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
 
 - ブルートフォース -> O(n^2)でTLE
 - 解法が分からなかった
@@ -584,7 +644,7 @@ class Solution:
         return max_sum
 ```
 
-### [58. Length of Last Word](https://leetcode.com/problems/length-of-last-word/)
+### 1.1.14. [58. Length of Last Word](https://leetcode.com/problems/length-of-last-word/)
 
 - 前から順にアルファベットをカウントしていき、スペースに当たったらリセットする
     - スペースが連続で続く場合、特に最後に連続スペースがある場合が面倒だった
@@ -622,7 +682,7 @@ class Solution:
             return cnt
 ```
 
-### [66. Plus One](https://leetcode.com/problems/plus-one/)
+### 1.1.15. [66. Plus One](https://leetcode.com/problems/plus-one/)
 
 - 型変換に頼った方法で解いた
     - list -> str -> intに型変換して1を足す
@@ -657,7 +717,7 @@ class Solution:
         return [int(i) for i in str(n)]
 ```
 
-### ▲[67. Add Binary](https://leetcode.com/problems/add-binary/)
+### 1.1.16. ▲[67. Add Binary](https://leetcode.com/problems/add-binary/)
 
 - 次こそ再帰的な方法を使おうと試行錯誤したが、できず
 - 下の桁から順に足し算を進める方法でゴリ押し実装した
@@ -717,7 +777,7 @@ class Solution:
             return self.addBinary(a[:-1], b[:-1]) + "1"
 ```
 
-### [69. Sqrt(x)](https://leetcode.com/problems/sqrtx/)
+### 1.1.17. [69. Sqrt(x)](https://leetcode.com/problems/sqrtx/)
 
 - 二分探索で解いた
     - 二分探索なのでO(log n)のはずだが、比較的遅い解法になっている
@@ -762,7 +822,7 @@ class Solution:
                 rightx = halfx
 ```
 
-### ▲[70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
+### 1.1.18. ▲[70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 
 - 紙の上でも解き方が分からなかった問題
 - Solutionでは再帰的な解法、動的計画法による解法
@@ -783,7 +843,7 @@ class Solution:
         return dp[n]
 ```
 
-### ▲[83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)
+### 1.1.19. ▲[83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)
 
 - リストノードの扱いに納得がいっていないため、うまく実装できない
 - ▲リストノードの扱い能力を測る基本的な問題とのこと
@@ -802,7 +862,7 @@ class Solution:
         return head
 ```
 
-### ▲[88. Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
+### 1.1.20. ▲[88. Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
 
 - アルゴリズムとしての解き方は分からなかったので、list.sort()を使用した
 - ▲Discussionでは後ろから埋めていく解法
@@ -840,7 +900,7 @@ class Solution:
             nums1[:n] = nums2[:n]
 ```
 
-### [100. Same Tree](https://leetcode.com/problems/same-tree/)
+### 1.1.21. [100. Same Tree](https://leetcode.com/problems/same-tree/)
 
 - 再帰的な方法で解こうとしたが、正解と異なる結果が出るケースがあり、うまくいかず
 - Solutionその1も再帰的な方法
@@ -864,7 +924,7 @@ class Solution:
         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
 ```
 
-### [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/)
+### 1.1.22. [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/)
 
 - rootの次で木を2つに分けて、rightを反転させた部分木がleftと同一か否かを判定すればOK
     - 100.の2つの木が同一か否かを判定する関数を利用（一部改変）
@@ -897,7 +957,7 @@ class Solution:
         return isMirrorSame(root.left, root.right)
 ```
 
-### ▲[104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+### 1.1.23. ▲[104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
 
 - 再帰的な方法で解いた
     - Discussionを見ると、自分の実装は無駄なif文が多いみたい
@@ -963,7 +1023,7 @@ class Solution:
         return h
 ```
 
-### ▲[107. Binary Tree Level Order Traversal II](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)
+### 1.1.24. ▲[107. Binary Tree Level Order Traversal II](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)
 
 - 104.で学んだwhile文での解法を援用
     - TreeNodeそのものを追加してしまうと木全体の値が保存されてしまうため、一部修正して使用
@@ -1006,7 +1066,7 @@ class Solution:
         return anser[::-1]
 ```
 
-### ▲[108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
+### 1.1.25. ▲[108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
 
 - ▲試行錯誤したものの、分からなかった
 - TreeNodeの作り方は分かった
@@ -1045,7 +1105,7 @@ class Solution:
         return root
 ```
 
-### ▲[110. Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
+### 1.1.26. ▲[110. Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
 
 - ▲試行錯誤したものの、分からなかった
 - Discussionを見たところ、左右の子から親に上がる際に1を足していき、左右の子での差が1を超えてからは常に-1を返し続ける関数を定義して再帰している
@@ -1082,7 +1142,7 @@ class Solution:
         return check(root)!=-1
 ```
 
-### [111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/)
+### 1.1.27. [111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/)
 
 - 104.で学んだwhile文での解法を援用
     - 遅い…
@@ -1131,7 +1191,7 @@ class Solution:
         return min(self.minDepth(root.right),self.minDepth(root.left))+1  # 左右のうち短い深さを得て自身を足す
 ```
 
-### [112. Path Sum](https://leetcode.com/problems/path-sum/)
+### 1.1.28. [112. Path Sum](https://leetcode.com/problems/path-sum/)
 
 - 再帰的な解法で実装した
     - そこそこ速い
@@ -1175,7 +1235,7 @@ class Solution:
         return self.hasPathSum(root.left, sum) or self.hasPathSum(root.right, sum)
 ```
 
-### [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
+### 1.1.29. [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
 
 - 処理の流れを素直に実装した
 - SolutionはDPで解いていた
@@ -1198,7 +1258,7 @@ class Solution:
         return ans
 ```
 
-### [119. Pascal's Triangle II](https://leetcode.com/problems/pascals-triangle-ii/)
+### 1.1.30. [119. Pascal's Triangle II](https://leetcode.com/problems/pascals-triangle-ii/)
 
 - 試行錯誤したものの、リスト内でやりくりするのは無理だった
     - リスト内でやりくり、ではなく解答の他に余分なスペースは`O(k)`まで、ということだった？
@@ -1216,7 +1276,7 @@ class Solution:
         return ans
 ```
 
-### [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+### 1.1.31. [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 
 - 処理の流れをそのまま実装
 
@@ -1235,7 +1295,7 @@ class Solution:
                 profit = max(profit, buy-min_buy)
         return profit
 ```
-### ▲[122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
+### 1.1.32. ▲[122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
 
 - 処理の流れをそのまま実装
     - 前から順に値段を見ていき、極小（次の日に値段が上がる日）で購入して極大（次の日に値段が下がる日）で売る、を繰り返す
@@ -1280,7 +1340,7 @@ class Solution:
         return sum_profit
 ```
 
-### ▲[125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
+### 1.1.33. ▲[125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
 
 - 文字列を前処理して、前からと後ろからを比較
     - リストを使用しており、リストのコピーと比較しているため使用メモリは大きい
@@ -1314,7 +1374,7 @@ class Solution:
         return True
 ```
 
-### ▲[136. Single Number](https://leetcode.com/problems/single-number/)
+### 1.1.34. ▲[136. Single Number](https://leetcode.com/problems/single-number/)
 
 - 条件：runtime: O(n), memory: 余計なメモリは使わないこと
 - list.sort()を使って実装
@@ -1370,7 +1430,7 @@ class Solution:
         return a
 ```
 
-### [141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
+### 1.1.35. [141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
 
 - 値の一致を基準にすると、無限ループかたまたま同じ数列が繰り返されているだけなのかの判別ができない
 - 1度通った値を変更しておくことで、次にその値に当たった場合はループしているということが分かる
@@ -1426,7 +1486,7 @@ class Solution(object):
             fast = fast.next.next
 ```
 
-### [155. Min Stack](https://leetcode.com/problems/min-stack/)
+### 1.1.36. [155. Min Stack](https://leetcode.com/problems/min-stack/)
 
 - リストを使用したが、そういうことではないのだと思う…これではただのリスト
     - 処理も遅い
@@ -1500,7 +1560,7 @@ class MinStack:
             return self.stack[-1][1]
 ```
 
-### ▲[160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/)
+### 1.1.37. ▲[160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/)
 
 - 元のインプットを破壊しないように、といった指示がある
 - 解法を思いつかなかった
@@ -1530,7 +1590,7 @@ class Solution(object):
         return pa
 ```
 
-### ▲[167. Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
+### 1.1.38. ▲[167. Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
 
 - ▲ブルートフォースはTLE, 二分探索もどきはうまく結果を得られない, という状況でギブアップ
 - Discussionではtwo pointer, dictionary, binary searchによる解法があった
@@ -1580,7 +1640,7 @@ class Solution:
                     r = mid-1
 ```
 
-### [168. Excel Sheet Column Title](https://leetcode.com/problems/excel-sheet-column-title/)
+### 1.1.39. [168. Excel Sheet Column Title](https://leetcode.com/problems/excel-sheet-column-title/)
 
 - 26進法として解こうとするも、Zの扱いがうまくいかなかったりしてアウト
 - Discussionでも26進数として解かれていた
@@ -1623,7 +1683,7 @@ class Solution:
         return ans
 ```
 
-### ▲[169. Majority Element](https://leetcode.com/problems/majority-element/)
+### 1.1.40. ▲[169. Majority Element](https://leetcode.com/problems/majority-element/)
 
 - 辞書型のオブジェクトに値の出現回数を記録していった
     - 遅い <- 不要な処理がループ内に入っていたことが原因の一つ
@@ -1671,7 +1731,7 @@ class Solution:
         return candidate
 ```
 
-### [171. Excel Sheet Column Number](https://leetcode.com/problems/excel-sheet-column-number/)
+### 1.1.41. [171. Excel Sheet Column Number](https://leetcode.com/problems/excel-sheet-column-number/)
 
 - 168. の逆. 26進数を実装するだけ
 
@@ -1688,7 +1748,7 @@ class Solution:
         return ans
 ```
 
-### [172. Factorial Trailing Zeroes](https://leetcode.com/problems/factorial-trailing-zeroes/)
+### 1.1.42. [172. Factorial Trailing Zeroes](https://leetcode.com/problems/factorial-trailing-zeroes/)
 
 - 階乗を計算して末尾の0の数を数えようとするとTLEになる
     - 因数5の数を数えればよいのでは？と思ってn//5を出すも、答えより小さい
@@ -1707,7 +1767,7 @@ class Solution:
         return cnt
 ```
 
-### ▲[189. Rotate Array](https://leetcode.com/problems/rotate-array/)
+### 1.1.43. ▲[189. Rotate Array](https://leetcode.com/problems/rotate-array/)
 
 - 3種類の解法、memory=O(1)の解法が要求されている
     - スライシングで実装
@@ -1727,7 +1787,7 @@ class Solution:
             nums[:k], nums[k:] = nums[-k:], nums[:-k]
 ```
 
-### ▲[190. Reverse Bits](https://leetcode.com/problems/reverse-bits/)
+### 1.1.44. ▲[190. Reverse Bits](https://leetcode.com/problems/reverse-bits/)
 
 - 2\*\*31, 2\*\*30, ...と順に割っていって、割れた場合に2\*\*0, 2\*\*1, ...と順に足していく
 - Discussionでは文字列処理を掛けるone lineの解法が分かりやすかった
@@ -1760,7 +1820,7 @@ class Solution:
         return int("{:032b}".format(n)[::-1], 2)
 ```
 
-### [191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
+### 1.1.45. [191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
 
 - 32bitへの文字列変換(`"{:032b}".format(n)`)を使用した解法(16ms)、10進数数値を2**xで割っていく解法(32ms)を実装した
 - Solutionでは`n&(n-1)`でnを更新し続けることで1を小さい桁から1つずつ減らしていく手法が紹介されていた(20ms)
@@ -1812,7 +1872,7 @@ class Solution(object):
         return ans
 ```
 
-### ▲[198. House Robber](https://leetcode.com/problems/house-robber/)
+### 1.1.46. ▲[198. House Robber](https://leetcode.com/problems/house-robber/)
 
 - 解法思いつかず...
 - ▲Discussionで[DPによる解法](https://leetcode.com/problems/house-robber/discuss/55977/Python-DP-solution-4-line-O(n)-time-O(1)-space-easy-to-understand-with-detailed-explanation)が解説されている
@@ -1841,7 +1901,7 @@ class Solution:
         return max(p2, p1)
 ```
 
-### [202. Happy Number](https://leetcode.com/problems/happy-number/)
+### 1.1.47. [202. Happy Number](https://leetcode.com/problems/happy-number/)
 
 - 桁数が不明なので、while文で各桁の2乗を加算していった
     - 計算結果を保存しておき、一度出た計算結果がもう一度出たらループに入ったと判断してFalseを返す
@@ -1865,7 +1925,7 @@ class Solution:
             lis.append(n)
 ```
 
-### [203. Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/)
+### 1.1.48. [203. Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/)
 
 - 試行錯誤の末、正解にたどり着いた
     - `head = head.next.next`ではうまくいかないと気づくまで時間がかかった
@@ -1912,7 +1972,7 @@ class Solution:
         return ans
 ```
 
-### [204. Count Primes](https://leetcode.com/problems/count-primes/)
+### 1.1.49. [204. Count Primes](https://leetcode.com/problems/count-primes/)
 
 - 2からnまでの各数を、2からn-1までの数で割った余りを確認するというゴリ押し実装をしたところ、TLE
 - [エラトステネスの篩](https://ja.wikipedia.org/wiki/%E3%82%A8%E3%83%A9%E3%83%88%E3%82%B9%E3%83%86%E3%83%8D%E3%82%B9%E3%81%AE%E7%AF%A9)をPythonで実装するも、TLE
@@ -1955,3 +2015,173 @@ class Solution:
         return sum(lis)
 ```
 
+### 1.1.50. ▲[205. Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/)
+
+- まずs->t, t->sの変換辞書を作成。s, tのコピーを作成した後、s, tをそれぞれ変換。変換後のs, tとコピーしておいたt, sを比べて、両方とも一致した場合にTrueを返す
+    - s, t, 両方を処理しないとs="ab", t="aa"といったケースに間違ってTrueを返してしまう
+    - s, tの変換をforループで行った場合、処理が遅い
+    - s, tの変換を`s.translate(str.maketrans(dic_s))`で行った場合、速さは4倍ほど改善
+        - まだ遅い
+- Discussionではone lineの解法あり
+    - set(zip(s, t))のlen()とset(s), set(t)のlen()が全て一致するかどうかで判定
+        - elegant!
+        - 詳細は以下で紹介
+    - `str.find()`を使った解法も
+    - ▲他にも[複数の解法あり](https://leetcode.com/problems/isomorphic-strings/discuss/57941/Python-different-solutions-(dictionary-etc).)
+
+```python
+# 自力実装
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        if len(s)!=len(t):
+            return False
+
+        if len(s)<=1:
+            return s==t
+
+        # s->tの変換辞書を作成
+        dic_s = {}
+        for i in range(len(s)):
+            dic_s[s[i]] = t[i]
+
+        # t->sの変換辞書を作成
+        dic_t = {}
+        for i in range(len(t)):
+            dic_t[t[i]] = s[i]
+
+        # s->tに変換
+        s2 = s
+        for i in range(1, len(s)-1):
+            s = s[:i]+dic_s[s[i]]+s[i+1:]
+        s = dic_s[s[0]]+s[1:]
+        s = s[:-1]+dic_s[s[-1]]
+
+        # t->sに変換
+        t2 = t
+        for i in range(1, len(t)-1):
+            t = t[:i]+dic_t[t[i]]+t[i+1:]
+        t = dic_t[t[0]]+t[1:]
+        t = t[:-1]+dic_t[t[-1]]
+        
+        return s==t2 and s2==t
+```
+
+```python
+# one line解法（Discussionを参考に実装）
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        return len(set(zip(s, t)))==len(set(s))==len(set(t))
+
+# Discussionの解法を解説
+s = "aa"
+t = "ab"
+print(set(zip(s, t)))
+print(set(zip(t, s)))
+print(set(s))
+print(set(t))
+# とすると、stdoutは
+{('a', 'b'), ('a', 'a')}
+{('b', 'a'), ('a', 'a')}
+{'a'}
+{'b', 'a'}
+# len()は不一致
+
+s = "egg"
+t = "add"
+print(set(zip(s, t)))
+print(set(zip(t, s)))
+print(set(s))
+print(set(t))
+# とすると、stdoutは
+{('e', 'a'), ('g', 'd')}
+{('d', 'g'), ('a', 'e')}
+{'g', 'e'}
+{'a', 'd'}
+# len()が一致
+```
+
+```python
+# `str.find()`を使った解法（Discussionを参考に実装）
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        for i in range(len(s)):
+            # 各文字が文字列のどこで最初に出現するかを比較
+            # 構造が同じであれば一致するはず
+            if s.find(s[i])!=t.find(t[i]):
+                return False
+        return True
+```
+
+### 1.1.51. ▲[206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
+
+- ListNodeを前から順にスキャンして値をリストに保存していく
+    - リストの逆順に新しいListNodeを作成していく
+- Solutionではループな方法と再帰的な方法が解説されていた
+    - ▲ループな方法、紙に書いてなんとか理解できるけど、これを思いつくのは今の自分では無理そう...
+
+```python
+# 自力実装
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if not head:
+            return None
+        lis = []
+        while head:
+            lis.append(head.val)
+            head = head.next
+        ans = ListNode(lis[-1])
+        cur = ans
+        for t in lis[::-1][1:]:
+            cur.next = ListNode(t)
+            cur = cur.next
+        return ans
+```
+
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        p = None
+        c = head
+        while c:
+            c.next, p, c = p, c, c.next
+        return p
+```
+
+### 1.1.52. [217. Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
+
+- おそらく実装するべき解法とは異なるが、引数のnumsの長さとnumsのset()の長さを比較するだけ
+- 値と値の出現回数の辞書を作成し、出現回数が2以上の値が存在するかどうかを判定しても解ける
+- Solutionでは、ソートして連続した値があるかどうか判定する方法、ハッシュテーブルを使用する方法が紹介されていた
+
+```python
+# set()を使用した自力実装
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        return len(nums)!=len(set(nums))
+```
+
+```python
+# 辞書型オブジェクトを使用した自力実装
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        dic = {}
+        for i in nums:
+            dic[i] = dic.setdefault(i, 0) + 1
+        for j in dic.values():
+            if j>1:
+                return True
+        return False
+```
+
+### [219. Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii/)
+
+- 
