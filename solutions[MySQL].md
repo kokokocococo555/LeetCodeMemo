@@ -1,12 +1,26 @@
-# LeetCode勉強記録（SQL編）
+# 1. LeetCode勉強記録（SQL編）
 
 - LeetCodeの勉強記録
 - 自力で実装したコードの他にも、Solution, Discussionに投稿されている内容等を参照し、自分でも実装してみる
 - 復習が必要な問題には▲をつけている
 - 使用言語は`MySQL`
 
-## Easy
-### [175. Combine Two Tables](https://leetcode.com/problems/combine-two-tables/)
+<!-- TOC -->
+
+- [1. LeetCode勉強記録（SQL編）](#1-leetcode%E5%8B%89%E5%BC%B7%E8%A8%98%E9%8C%B2sql%E7%B7%A8)
+  - [1.1. Easy](#11-easy)
+    - [1.1.1. 175. Combine Two Tables](#111-175-combine-two-tables)
+    - [1.1.2. 176. Second Highest Salary](#112-176-second-highest-salary)
+    - [1.1.3. 181. Employees Earning More Than Their Managers](#113-181-employees-earning-more-than-their-managers)
+    - [1.1.4. 182. Duplicate Emails](#114-182-duplicate-emails)
+    - [1.1.5. 183. Customers Who Never Order](#115-183-customers-who-never-order)
+    - [1.1.6. 196. Delete Duplicate Emails](#116-196-delete-duplicate-emails)
+    - [1.1.7. ▲197. Rising Temperature](#117-%E2%96%B2197-rising-temperature)
+
+<!-- /TOC -->
+
+## 1.1. Easy
+### 1.1.1. [175. Combine Two Tables](https://leetcode.com/problems/combine-two-tables/)
 
 - 2つのテーブルをPersonIdをキーにして左外部結合する
     - 結合するテーブル名、キーはFROM句に書く
@@ -16,7 +30,7 @@ select FirstName, LastName, City, State
 from Person LEFT OUTER JOIN Address ON Person.PersonId=Address.PersonId;
 ```
 
-### [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/)
+### 1.1.2. [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/)
 
 - 普通にMySQLを書いたが、レコードが1つのケースに対応できず
 - Solutionではサブクエリ、または`IFNULL`関数を使用
@@ -48,7 +62,7 @@ SELECT
 ;
 ```
 
-### [181. Employees Earning More Than Their Managers](https://leetcode.com/problems/employees-earning-more-than-their-managers/)
+### 1.1.3. [181. Employees Earning More Than Their Managers](https://leetcode.com/problems/employees-earning-more-than-their-managers/)
 
 - 自己結合してWHEREで条件付けて抽出した
 
@@ -61,7 +75,7 @@ SELECT e.Name AS Employee
 ;
 ```
 
-### [182. Duplicate Emails](https://leetcode.com/problems/duplicate-emails/)
+### 1.1.4. [182. Duplicate Emails](https://leetcode.com/problems/duplicate-emails/)
 
 - ググって実装
     - [参考にした記事](https://qiita.com/necoyama3/items/4c24defd6f504366aebe)
@@ -78,7 +92,7 @@ HAVING
     COUNT(Email) > 1
 ```
 
-### [183. Customers Who Never Order](https://leetcode.com/problems/customers-who-never-order/)
+### 1.1.5. [183. Customers Who Never Order](https://leetcode.com/problems/customers-who-never-order/)
 
 - 書籍を見ながら、`NOT EXISTS`を用いたサブクエリを使用
 - Solutionでは`NOT IN`を使用していた
@@ -115,7 +129,7 @@ WHERE
 ;
 ```
 
-### [196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails/)
+### 1.1.6. [196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails/)
 
 - ググって実装
     - [参考にした記事](https://qiita.com/aosho235/items/d748dcb6386d8ce75604)
@@ -155,7 +169,7 @@ WHERE
 ;
 ```
 
-### ▲[197. Rising Temperature](https://leetcode.com/problems/rising-temperature/)
+### 1.1.7. ▲[197. Rising Temperature](https://leetcode.com/problems/rising-temperature/)
 
 - 分からず
     - MySQLの詳しい文法や道具をもっと知る必要あり

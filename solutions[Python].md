@@ -21,56 +21,42 @@
     - [1.1.4. 13. Roman to Integer](#114-13-roman-to-integer)
     - [1.1.5. ▲14. Longest Common Prefix](#115-%E2%96%B214-longest-common-prefix)
     - [1.1.6. 20. Valid Parentheses](#116-20-valid-parentheses)
-    - [1.1.7. ▲21. Merge Two Sorted Lists](#117-%E2%96%B221-merge-two-sorted-lists)
-    - [1.1.8. 26. Remove Duplicates from Sorted Array](#118-26-remove-duplicates-from-sorted-array)
-    - [1.1.9. 27. Remove Element](#119-27-remove-element)
-    - [1.1.10. 28. Implement strStr()](#1110-28-implement-strstr)
-    - [1.1.11. ▲35. Search Insert Position](#1111-%E2%96%B235-search-insert-position)
-    - [1.1.12. 38. Count and Say](#1112-38-count-and-say)
-    - [1.1.13. ▲53. Maximum Subarray](#1113-%E2%96%B253-maximum-subarray)
-    - [1.1.14. 58. Length of Last Word](#1114-58-length-of-last-word)
-    - [1.1.15. 66. Plus One](#1115-66-plus-one)
-    - [1.1.16. ▲67. Add Binary](#1116-%E2%96%B267-add-binary)
-    - [1.1.17. 69. Sqrt(x)](#1117-69-sqrtx)
-    - [1.1.18. ▲70. Climbing Stairs](#1118-%E2%96%B270-climbing-stairs)
-    - [1.1.19. ▲83. Remove Duplicates from Sorted List](#1119-%E2%96%B283-remove-duplicates-from-sorted-list)
-    - [1.1.20. ▲88. Merge Sorted Array](#1120-%E2%96%B288-merge-sorted-array)
-    - [1.1.21. 100. Same Tree](#1121-100-same-tree)
-    - [1.1.22. 101. Symmetric Tree](#1122-101-symmetric-tree)
-    - [1.1.23. ▲104. Maximum Depth of Binary Tree](#1123-%E2%96%B2104-maximum-depth-of-binary-tree)
-    - [1.1.24. ▲107. Binary Tree Level Order Traversal II](#1124-%E2%96%B2107-binary-tree-level-order-traversal-ii)
-    - [1.1.25. ▲108. Convert Sorted Array to Binary Search Tree](#1125-%E2%96%B2108-convert-sorted-array-to-binary-search-tree)
-    - [1.1.26. ▲110. Balanced Binary Tree](#1126-%E2%96%B2110-balanced-binary-tree)
-    - [1.1.27. 111. Minimum Depth of Binary Tree](#1127-111-minimum-depth-of-binary-tree)
-    - [1.1.28. 112. Path Sum](#1128-112-path-sum)
-    - [1.1.29. 118. Pascal's Triangle](#1129-118-pascals-triangle)
-    - [1.1.30. 119. Pascal's Triangle II](#1130-119-pascals-triangle-ii)
-    - [1.1.31. 121. Best Time to Buy and Sell Stock](#1131-121-best-time-to-buy-and-sell-stock)
-    - [1.1.32. ▲122. Best Time to Buy and Sell Stock II](#1132-%E2%96%B2122-best-time-to-buy-and-sell-stock-ii)
-    - [1.1.33. ▲125. Valid Palindrome](#1133-%E2%96%B2125-valid-palindrome)
-    - [1.1.34. ▲136. Single Number](#1134-%E2%96%B2136-single-number)
-    - [1.1.35. 141. Linked List Cycle](#1135-141-linked-list-cycle)
-    - [1.1.36. 155. Min Stack](#1136-155-min-stack)
-    - [1.1.37. ▲160. Intersection of Two Linked Lists](#1137-%E2%96%B2160-intersection-of-two-linked-lists)
-    - [1.1.38. ▲167. Two Sum II - Input array is sorted](#1138-%E2%96%B2167-two-sum-ii---input-array-is-sorted)
-    - [1.1.39. 168. Excel Sheet Column Title](#1139-168-excel-sheet-column-title)
-    - [1.1.40. ▲169. Majority Element](#1140-%E2%96%B2169-majority-element)
-    - [1.1.41. 171. Excel Sheet Column Number](#1141-171-excel-sheet-column-number)
-    - [1.1.42. 172. Factorial Trailing Zeroes](#1142-172-factorial-trailing-zeroes)
-    - [1.1.43. ▲189. Rotate Array](#1143-%E2%96%B2189-rotate-array)
-    - [1.1.44. ▲190. Reverse Bits](#1144-%E2%96%B2190-reverse-bits)
-    - [1.1.45. 191. Number of 1 Bits](#1145-191-number-of-1-bits)
-    - [1.1.46. ▲198. House Robber](#1146-%E2%96%B2198-house-robber)
-    - [1.1.47. 202. Happy Number](#1147-202-happy-number)
-    - [1.1.48. 203. Remove Linked List Elements](#1148-203-remove-linked-list-elements)
-    - [1.1.49. 204. Count Primes](#1149-204-count-primes)
-    - [1.1.50. ▲205. Isomorphic Strings](#1150-%E2%96%B2205-isomorphic-strings)
-    - [1.1.51. ▲206. Reverse Linked List](#1151-%E2%96%B2206-reverse-linked-list)
-    - [1.1.52. 217. Contains Duplicate](#1152-217-contains-duplicate)
-    - [219. Contains Duplicate II](#219-contains-duplicate-ii)
-    - [225. Implement Stack using Queues](#225-implement-stack-using-queues)
-    - [▲226. Invert Binary Tree](#%E2%96%B2226-invert-binary-tree)
-    - [▲231. Power of Two](#%E2%96%B2231-power-of-two)
+    - [1.1.7. 26. Remove Duplicates from Sorted Array](#117-26-remove-duplicates-from-sorted-array)
+    - [1.1.8. 27. Remove Element](#118-27-remove-element)
+    - [1.1.9. 28. Implement strStr()](#119-28-implement-strstr)
+    - [1.1.10. ▲35. Search Insert Position](#1110-%E2%96%B235-search-insert-position)
+    - [1.1.11. 38. Count and Say](#1111-38-count-and-say)
+    - [1.1.12. ▲53. Maximum Subarray](#1112-%E2%96%B253-maximum-subarray)
+    - [1.1.13. 58. Length of Last Word](#1113-58-length-of-last-word)
+    - [1.1.14. 66. Plus One](#1114-66-plus-one)
+    - [1.1.15. ▲67. Add Binary](#1115-%E2%96%B267-add-binary)
+    - [1.1.16. 69. Sqrt(x)](#1116-69-sqrtx)
+    - [1.1.17. ▲70. Climbing Stairs](#1117-%E2%96%B270-climbing-stairs)
+    - [1.1.18. ▲88. Merge Sorted Array](#1118-%E2%96%B288-merge-sorted-array)
+    - [1.1.19. 118. Pascal's Triangle](#1119-118-pascals-triangle)
+    - [1.1.20. 119. Pascal's Triangle II](#1120-119-pascals-triangle-ii)
+    - [1.1.21. 121. Best Time to Buy and Sell Stock](#1121-121-best-time-to-buy-and-sell-stock)
+    - [1.1.22. ▲122. Best Time to Buy and Sell Stock II](#1122-%E2%96%B2122-best-time-to-buy-and-sell-stock-ii)
+    - [1.1.23. ▲125. Valid Palindrome](#1123-%E2%96%B2125-valid-palindrome)
+    - [1.1.24. ▲136. Single Number](#1124-%E2%96%B2136-single-number)
+    - [1.1.25. 155. Min Stack](#1125-155-min-stack)
+    - [1.1.26. ▲167. Two Sum II - Input array is sorted](#1126-%E2%96%B2167-two-sum-ii---input-array-is-sorted)
+    - [1.1.27. 168. Excel Sheet Column Title](#1127-168-excel-sheet-column-title)
+    - [1.1.28. ▲169. Majority Element](#1128-%E2%96%B2169-majority-element)
+    - [1.1.29. 171. Excel Sheet Column Number](#1129-171-excel-sheet-column-number)
+    - [1.1.30. 172. Factorial Trailing Zeroes](#1130-172-factorial-trailing-zeroes)
+    - [1.1.31. ▲189. Rotate Array](#1131-%E2%96%B2189-rotate-array)
+    - [1.1.32. ▲190. Reverse Bits](#1132-%E2%96%B2190-reverse-bits)
+    - [1.1.33. 191. Number of 1 Bits](#1133-191-number-of-1-bits)
+    - [1.1.34. ▲198. House Robber](#1134-%E2%96%B2198-house-robber)
+    - [1.1.35. 202. Happy Number](#1135-202-happy-number)
+    - [1.1.36. 204. Count Primes](#1136-204-count-primes)
+    - [1.1.37. ▲205. Isomorphic Strings](#1137-%E2%96%B2205-isomorphic-strings)
+    - [1.1.38. 217. Contains Duplicate](#1138-217-contains-duplicate)
+    - [1.1.39. 219. Contains Duplicate II](#1139-219-contains-duplicate-ii)
+    - [1.1.40. 225. Implement Stack using Queues](#1140-225-implement-stack-using-queues)
+    - [1.1.41. ▲231. Power of Two](#1141-%E2%96%B2231-power-of-two)
+    - [1.1.42. ▲232. Implement Queue using Stacks](#1142-%E2%96%B2232-implement-queue-using-stacks)
 
 <!-- /TOC -->
 
@@ -342,86 +328,7 @@ class Solution:
 
 ```
 
-### 1.1.7. ▲[21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
-
-- リストであれば
-    - 両方のリストから先頭から順に数をpop
-    - 数同士を比較し、小さい方を新しいリストに追加
-    - 大きい方は残したまま小さかった方のリストから次の数をpop
-    - どちらかのリストが空になるまで繰り返す
-    - 残ったリストの要素を新しいリストに結合
-    - この機能を2つのcntを使用することで実現
-- しかしリストではなくListNodeというClassを使用しているため、len()やスライシングが使えない
-- ▲Discussionを見ると再帰的なコードが書けるっぽい（要復習）
-- 再帰ではなく、上述の元アイデアをListNodeに落とし込んだ解法が上がっていたため、ListNodeの挙動を参考にして実装
-  - [python3 24ms beats 100%
-  ](https://leetcode.com/problems/merge-two-sorted-lists/discuss/200801/python3-24ms-beats-100)
-
-```python
-# リストならうまく動きそうなバージョン（自力実装）
-class Solution:
-    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-        cnt1=0
-        cnt2=0
-        l = []
-        while cnt1<len(l1) and cnt2<len(l2):
-            # 数を比較
-            if l1[cnt1]<=l2[cnt2]:
-                l.append(l1[cnt1])
-                cnt1 += 1
-            else:
-                l.append(l2[cnt2])
-                cnt2 += 1
-        # 残った要素を結合
-        if cnt1==len(l1):
-            l.extend(l2[cnt2:])
-        else:
-            l.extend(l1[cnt1:])
-
-        return l
-
-```
-
-```python
-# ListNodeで動いたバージョン（Discussionを参考に実装）
-
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
-class Solution:
-    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-        l = ListNode(0)
-        # 最初のインデックスを覚えておく
-        head = l
-        while l1 and l2:
-            # 小さい値を持つ方のリストを連結する
-            # 連結の後、連結されたリストのインデックスを1つ送る
-            if l1.val<=l2.val:
-                l.next = l1
-                l1 = l1.next
-            else:
-                l.next = l2
-                l2 = l2.next
-                
-            # 作成リストのインデックスを次へ送る
-            # 値を残して次以降が上書きされるように
-            l = l.next
-
-        # 最後に残ったリストを連結する
-        if l1:
-            l.next = l1
-        else:
-            l.next = l2
-
-        # 覚えておいた最初のインデックスの次以降を出力
-        # 最初のインデックスは0を指すため
-        return head.next
-```
-
-### 1.1.8. [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+### 1.1.7. [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
 
 - 入力リストを破壊的に重複削除する
     - メモリ節約問題
@@ -476,7 +383,7 @@ class Solution:
         return cnt+1
 ```
 
-### 1.1.9. [27. Remove Element](https://leetcode.com/problems/remove-element/)
+### 1.1.8. [27. Remove Element](https://leetcode.com/problems/remove-element/)
 
 - 上の26. と似た問題
     - 与えられた値に合致する要素を削除する変更を入力リストにin-placeで行う
@@ -516,7 +423,7 @@ class Solution:
         return n
 ```
 
-### 1.1.10. [28. Implement strStr()](https://leetcode.com/problems/implement-strstr/)
+### 1.1.9. [28. Implement strStr()](https://leetcode.com/problems/implement-strstr/)
 
 - haystackを前から順にneedleの長さ分切り取ってneedleと比較
     - 少し遅め
@@ -537,7 +444,7 @@ class Solution:
         return -1
 ```
 
-### 1.1.11. ▲[35. Search Insert Position](https://leetcode.com/problems/search-insert-position/)
+### 1.1.10. ▲[35. Search Insert Position](https://leetcode.com/problems/search-insert-position/)
 
 - 普通に前から順に比較
     - O(n)
@@ -573,7 +480,7 @@ class Solution:
         return left
 ```
 
-### 1.1.12. [38. Count and Say](https://leetcode.com/problems/count-and-say/)
+### 1.1.11. [38. Count and Say](https://leetcode.com/problems/count-and-say/)
 
 - ポインタを2つ、カウンタを1つ使って実装
     - ノートに動きを書いてコードに起こした
@@ -609,7 +516,7 @@ class Solution:
         return ans
 ```
 
-### 1.1.13. ▲[53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
+### 1.1.12. ▲[53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
 
 - ブルートフォース -> O(n^2)でTLE
 - 解法が分からなかった
@@ -647,7 +554,7 @@ class Solution:
         return max_sum
 ```
 
-### 1.1.14. [58. Length of Last Word](https://leetcode.com/problems/length-of-last-word/)
+### 1.1.13. [58. Length of Last Word](https://leetcode.com/problems/length-of-last-word/)
 
 - 前から順にアルファベットをカウントしていき、スペースに当たったらリセットする
     - スペースが連続で続く場合、特に最後に連続スペースがある場合が面倒だった
@@ -685,7 +592,7 @@ class Solution:
             return cnt
 ```
 
-### 1.1.15. [66. Plus One](https://leetcode.com/problems/plus-one/)
+### 1.1.14. [66. Plus One](https://leetcode.com/problems/plus-one/)
 
 - 型変換に頼った方法で解いた
     - list -> str -> intに型変換して1を足す
@@ -720,7 +627,7 @@ class Solution:
         return [int(i) for i in str(n)]
 ```
 
-### 1.1.16. ▲[67. Add Binary](https://leetcode.com/problems/add-binary/)
+### 1.1.15. ▲[67. Add Binary](https://leetcode.com/problems/add-binary/)
 
 - 次こそ再帰的な方法を使おうと試行錯誤したが、できず
 - 下の桁から順に足し算を進める方法でゴリ押し実装した
@@ -780,7 +687,7 @@ class Solution:
             return self.addBinary(a[:-1], b[:-1]) + "1"
 ```
 
-### 1.1.17. [69. Sqrt(x)](https://leetcode.com/problems/sqrtx/)
+### 1.1.16. [69. Sqrt(x)](https://leetcode.com/problems/sqrtx/)
 
 - 二分探索で解いた
     - 二分探索なのでO(log n)のはずだが、比較的遅い解法になっている
@@ -825,7 +732,7 @@ class Solution:
                 rightx = halfx
 ```
 
-### 1.1.18. ▲[70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
+### 1.1.17. ▲[70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 
 - 紙の上でも解き方が分からなかった問題
 - Solutionでは再帰的な解法、動的計画法による解法
@@ -846,26 +753,7 @@ class Solution:
         return dp[n]
 ```
 
-### 1.1.19. ▲[83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)
-
-- リストノードの扱いに納得がいっていないため、うまく実装できない
-- ▲リストノードの扱い能力を測る基本的な問題とのこと
-    - Solutionを見ると、最初に考えた方針はよかった
-
-```python
-# Solutionを参考に実装
-class Solution:
-    def deleteDuplicates(self, head: ListNode) -> ListNode:
-        ans = head
-        while ans!=None and ans.next!=None:
-            if ans.val==ans.next.val:
-                ans.next = ans.next.next
-            else:
-                ans = ans.next
-        return head
-```
-
-### 1.1.20. ▲[88. Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
+### 1.1.18. ▲[88. Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
 
 - アルゴリズムとしての解き方は分からなかったので、list.sort()を使用した
 - ▲Discussionでは後ろから埋めていく解法
@@ -903,342 +791,7 @@ class Solution:
             nums1[:n] = nums2[:n]
 ```
 
-### 1.1.21. [100. Same Tree](https://leetcode.com/problems/same-tree/)
-
-- 再帰的な方法で解こうとしたが、正解と異なる結果が出るケースがあり、うまくいかず
-- Solutionその1も再帰的な方法
-    - 最初に考えていたよりもっとシンプルな方法
-
-```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-class Solution:
-    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
-        if not p and not q:
-            return True
-        if not p or not q:
-            return False
-        if p.val!=q.val:
-            return False
-        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
-```
-
-### 1.1.22. [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/)
-
-- rootの次で木を2つに分けて、rightを反転させた部分木がleftと同一か否かを判定すればOK
-    - 100.の2つの木が同一か否かを判定する関数を利用（一部改変）
-    - 再帰的な方法で解いた
-
-```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-class Solution:
-    def isSymmetric(self, root: TreeNode) -> bool:
-        if not root:
-            return True
-        if not root.left and not root.right:
-            return True
-        
-        def isMirrorSame(p, q):
-            if not p and not q:
-                return True
-            if not p or not q:
-                return False
-            if p.val!=q.val:
-                return False
-            return isMirrorSame(p.left, q.right) and isMirrorSame(p.right, q.left)
-        
-        return isMirrorSame(root.left, root.right)
-```
-
-### 1.1.23. ▲[104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
-
-- 再帰的な方法で解いた
-    - Discussionを見ると、自分の実装は無駄なif文が多いみたい
-    - ただし、自分の最初の実装の方がかなり速い（無駄な計算をif文で省けている）
-- ▲Discussionにはwhile文での解法もある（max()が不要）
-    - 順番に降りていってカウントしている。分かりやすく、美しい解法。elegant!
-    - 速い
-    - https://leetcode.com/problems/maximum-depth-of-binary-tree/discuss/34198/Python-multiple-solutions-recursion-level-order-using-stack-and-level-order-using-queue
-
-```python
-# 自力実装
-
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
-        if not root:
-            return 0
-        if not root.left and not root.right:
-            return 1
-        if not root.left and root.right:
-            return 1+self.maxDepth(root.right)
-        if root.left and not root.right:
-            return 1+self.maxDepth(root.left)
-        if root.left and root.right:
-            return 1+max(self.maxDepth(root.left), self.maxDepth(root.right))
-```
-
-```python
-# もっとシンプル、しかし遅い（Discussionを参考に実装）
-class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
-        if not root:
-            return 0
-        return 1+max(self.maxDepth(root.left), self.maxDepth(root.right))
-```
-
-```python
-class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
-        if not root:
-            return 0
-
-        stack = [root]
-        h = 0
-        
-        while stack:
-            next_level = []
-            while stack:
-                top = stack[-1]
-                stack = stack[:-1]
-                if top.left:
-                    next_level.append(top.left)
-                if top.right:
-                    next_level.append(top.right)
-            stack = next_level
-            h += 1
-        return h
-```
-
-### 1.1.24. ▲[107. Binary Tree Level Order Traversal II](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)
-
-- 104.で学んだwhile文での解法を援用
-    - TreeNodeそのものを追加してしまうと木全体の値が保存されてしまうため、一部修正して使用
-- ▲Discussionでは深さ優先探索(DFS)+stack/+再帰、幅優先探索(BFS)+queueの解法があった
-    - 今処理している階層を記録しておく解法もあった
-        - https://leetcode.com/problems/binary-tree-level-order-traversal-ii/discuss/34978/Python-solutions-(dfs-recursively-dfs%2Bstack-bfs%2Bqueue).
-    - 自力実装したのはDFS+stackの一種
-
-```python
-# DFS+stack（自力実装）
-
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-class Solution:
-    def levelOrderBottom(self, root: TreeNode) -> List[List[int]]:
-        layer = [root]
-        if not root:
-            return []
-        anser = [[root.val]]
-        while layer:
-            new_layer = []
-            tmp_ans = []  # TreeNodeそのものを追加してしまうと木全体の値が保存されてしまうため
-            while layer:
-                new_root = layer[-1]
-                layer = layer[:-1]
-                if new_root.left:
-                    new_layer.append(new_root.left)
-                    tmp_ans.append(new_root.left.val)
-                if new_root.right:
-                    new_layer.append(new_root.right)
-                    tmp_ans.append(new_root.right.val)
-            layer = new_layer[::-1]
-            if tmp_ans:
-                anser.append(tmp_ans)
-        return anser[::-1]
-```
-
-### 1.1.25. ▲[108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
-
-- ▲試行錯誤したものの、分からなかった
-- TreeNodeの作り方は分かった
-- Discussionを見たところ、numsを真ん中で割って処理していく、という元々の方針は良かった
-    - あとは実装力
-    - シンプルなコード例では再帰的に処理していた
-
-```python
-# TreeNodeのつなげ方
-tn = TreeNode(0)
-tn.left = TreeNode(1)
-tn = tn.left
-tn.left = TreeNode(2)
-tn = tn.left
-......
-```
-
-```python
-# Discussionを参考に実装
-
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-class Solution:
-    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
-        if not nums:
-            return None
-        mid = (len(nums)-1)//2
-        root = TreeNode(nums[mid])
-        root.left = self.sortedArrayToBST(nums[:mid])
-        root.right = self.sortedArrayToBST(nums[mid+1:])
-        return root
-```
-
-### 1.1.26. ▲[110. Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
-
-- ▲試行錯誤したものの、分からなかった
-- Discussionを見たところ、左右の子から親に上がる際に1を足していき、左右の子での差が1を超えてからは常に-1を返し続ける関数を定義して再帰している
-
-```python
-# Discussionを参考に実装
-
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-class Solution:
-    def isBalanced(self, root: TreeNode) -> bool:
-        def check(root):
-            if not root:
-                return 0
-            
-            left = check(root.left)
-            if left==-1:
-                return -1
-            
-            right = check(root.right)
-            if right==-1:
-                return -1
-            
-            if abs(left-right)>1:
-                return -1
-            
-            return 1+max(left, right)
-            
-        return check(root)!=-1
-```
-
-### 1.1.27. [111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/)
-
-- 104.で学んだwhile文での解法を援用
-    - 遅い…
-- Discussionにあった再帰的な方法だともう少し速い
-    - https://leetcode.com/problems/minimum-depth-of-binary-tree/discuss/36094/My-solution-in-python
-
-```python
-# 自力実装
-
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-class Solution:
-    def minDepth(self, root: TreeNode) -> int:
-        if not root:
-            return 0
-        stack = [root]
-        h = 0
-        while stack:
-            next_level = []
-            h += 1
-            while stack:
-                root = stack.pop()
-                if root.left:
-                    next_level.append(root.left)
-                if root.right:
-                    next_level.append(root.right)
-                if not root.left and not root.right:
-                    return h
-            stack = next_level
-```
-
-```python
-# Discussionのコードにコメントを付けただけ
-
-class Solution:
-    def minDepth(self, root: TreeNode) -> int:
-        if root == None:
-            return 0
-        if root.left==None or root.right==None:
-            return self.minDepth(root.left)+self.minDepth(root.right)+1  # 左右どちらかが存在しないため、単純に深さを得ることになっている
-        return min(self.minDepth(root.right),self.minDepth(root.left))+1  # 左右のうち短い深さを得て自身を足す
-```
-
-### 1.1.28. [112. Path Sum](https://leetcode.com/problems/path-sum/)
-
-- 再帰的な解法で実装した
-    - そこそこ速い
-    - メソッド内でもう1つ関数を定義しているが、Discussionにあった解法はもっとシンプルでエレガントだった
-    - https://leetcode.com/problems/path-sum/discuss/36360/Short-Python-recursive-solution-O(n)
-    - 速さは変わらない
-
-```python
-# 自力実装
-
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-class Solution:
-    def hasPathSum(self, root: TreeNode, sum: int) -> bool:
-        def sums(node, sum_ans, sum):
-            if not node:
-                return False
-            sum_ans += node.val
-            if sum_ans==sum and not node.left and not node.right:  # 木の途中でsumと一致してもTrueを返さないようにするため
-                return True
-            return sums(node.left, sum_ans, sum) or sums(node.right, sum_ans, sum)
-        sum_ans = 0
-        return sums(root, sum_ans, sum)
-```
-
-```python
-# エレガントな実装（Discussionを参考に実装）
-class Solution:
-    def hasPathSum(self, root: TreeNode, sum: int) -> bool:
-        if not root:
-            return False
-        if root.val==sum and not root.left and not root.right:
-                return True
-
-        sum -= root.val
-        return self.hasPathSum(root.left, sum) or self.hasPathSum(root.right, sum)
-```
-
-### 1.1.29. [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
+### 1.1.19. [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
 
 - 処理の流れを素直に実装した
 - SolutionはDPで解いていた
@@ -1261,7 +814,7 @@ class Solution:
         return ans
 ```
 
-### 1.1.30. [119. Pascal's Triangle II](https://leetcode.com/problems/pascals-triangle-ii/)
+### 1.1.20. [119. Pascal's Triangle II](https://leetcode.com/problems/pascals-triangle-ii/)
 
 - 試行錯誤したものの、リスト内でやりくりするのは無理だった
     - リスト内でやりくり、ではなく解答の他に余分なスペースは`O(k)`まで、ということだった？
@@ -1279,7 +832,7 @@ class Solution:
         return ans
 ```
 
-### 1.1.31. [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+### 1.1.21. [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 
 - 処理の流れをそのまま実装
 
@@ -1298,7 +851,7 @@ class Solution:
                 profit = max(profit, buy-min_buy)
         return profit
 ```
-### 1.1.32. ▲[122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
+### 1.1.22. ▲[122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
 
 - 処理の流れをそのまま実装
     - 前から順に値段を見ていき、極小（次の日に値段が上がる日）で購入して極大（次の日に値段が下がる日）で売る、を繰り返す
@@ -1343,7 +896,7 @@ class Solution:
         return sum_profit
 ```
 
-### 1.1.33. ▲[125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
+### 1.1.23. ▲[125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
 
 - 文字列を前処理して、前からと後ろからを比較
     - リストを使用しており、リストのコピーと比較しているため使用メモリは大きい
@@ -1377,7 +930,7 @@ class Solution:
         return True
 ```
 
-### 1.1.34. ▲[136. Single Number](https://leetcode.com/problems/single-number/)
+### 1.1.24. ▲[136. Single Number](https://leetcode.com/problems/single-number/)
 
 - 条件：runtime: O(n), memory: 余計なメモリは使わないこと
 - list.sort()を使って実装
@@ -1433,63 +986,7 @@ class Solution:
         return a
 ```
 
-### 1.1.35. [141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
-
-- 値の一致を基準にすると、無限ループかたまたま同じ数列が繰り返されているだけなのかの判別ができない
-- 1度通った値を変更しておくことで、次にその値に当たった場合はループしているということが分かる
-    - たまたまリスト内にその値が存在しないように注意しなければならない
-    - 今回は数値がvalに含まれるため、文字列ならたまたま存在することはない、しかも2つ連続では存在しないだろうという判断
-- Solutionではメモリアドレスを保存する方法、2つのポインタを使用する方法が紹介されている
-
-```python
-# 自力実装
-
-# Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
-class Solution(object):
-    def hasCycle(self, head):
-        """
-        :type head: ListNode
-        :rtype: bool
-        """
-        if not head:
-            return False
-        while True:
-            if head.val=="cycle" and head.next.val=="cycle":
-                return True
-            if head.next:
-                head.val = "cycle"
-                head = head.next
-            else:
-                return False
-```
-
-```python
-# Solutionを参考に実装
-class Solution(object):
-    def hasCycle(self, head):
-        """
-        :type head: ListNode
-        :rtype: bool
-        """
-        if not head or not head.next:
-            return False
-        slow = head
-        fast = head.next
-        while True:
-            if slow==fast:
-                return True
-            if not fast.next or not fast.next.next:
-                return False
-            slow = slow.next
-            fast = fast.next.next
-```
-
-### 1.1.36. [155. Min Stack](https://leetcode.com/problems/min-stack/)
+### 1.1.25. [155. Min Stack](https://leetcode.com/problems/min-stack/)
 
 - リストを使用したが、そういうことではないのだと思う…これではただのリスト
     - 処理も遅い
@@ -1563,37 +1060,7 @@ class MinStack:
             return self.stack[-1][1]
 ```
 
-### 1.1.37. ▲[160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/)
-
-- 元のインプットを破壊しないように、といった指示がある
-- 解法を思いつかなかった
-- Solutionではブルートフォース、メモリアドレス、2つのポインタを使った解法が紹介されていた
-    - ▲2つのポインタでの解法、本当にこれでコーナーケース含めてうまく処理できるのかどうか納得いっていないので復習が必要
-
-```python
-# Two Pointers（Solutionを参考に実装）
-
-# Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
-class Solution(object):
-    def getIntersectionNode(self, headA, headB):
-        """
-        :type head1, head1: ListNode
-        :rtype: ListNode
-        """
-        pa = headA
-        pb = headB
-        while pa!=pb:
-            pa = headB if pa==None else pa.next
-            pb = headA if pb==None else pb.next
-        return pa
-```
-
-### 1.1.38. ▲[167. Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
+### 1.1.26. ▲[167. Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
 
 - ▲ブルートフォースはTLE, 二分探索もどきはうまく結果を得られない, という状況でギブアップ
 - Discussionではtwo pointer, dictionary, binary searchによる解法があった
@@ -1643,7 +1110,7 @@ class Solution:
                     r = mid-1
 ```
 
-### 1.1.39. [168. Excel Sheet Column Title](https://leetcode.com/problems/excel-sheet-column-title/)
+### 1.1.27. [168. Excel Sheet Column Title](https://leetcode.com/problems/excel-sheet-column-title/)
 
 - 26進法として解こうとするも、Zの扱いがうまくいかなかったりしてアウト
 - Discussionでも26進数として解かれていた
@@ -1686,7 +1153,7 @@ class Solution:
         return ans
 ```
 
-### 1.1.40. ▲[169. Majority Element](https://leetcode.com/problems/majority-element/)
+### 1.1.28. ▲[169. Majority Element](https://leetcode.com/problems/majority-element/)
 
 - 辞書型のオブジェクトに値の出現回数を記録していった
     - 遅い <- 不要な処理がループ内に入っていたことが原因の一つ
@@ -1734,7 +1201,7 @@ class Solution:
         return candidate
 ```
 
-### 1.1.41. [171. Excel Sheet Column Number](https://leetcode.com/problems/excel-sheet-column-number/)
+### 1.1.29. [171. Excel Sheet Column Number](https://leetcode.com/problems/excel-sheet-column-number/)
 
 - 168. の逆. 26進数を実装するだけ
 
@@ -1751,7 +1218,7 @@ class Solution:
         return ans
 ```
 
-### 1.1.42. [172. Factorial Trailing Zeroes](https://leetcode.com/problems/factorial-trailing-zeroes/)
+### 1.1.30. [172. Factorial Trailing Zeroes](https://leetcode.com/problems/factorial-trailing-zeroes/)
 
 - 階乗を計算して末尾の0の数を数えようとするとTLEになる
     - 因数5の数を数えればよいのでは？と思ってn//5を出すも、答えより小さい
@@ -1770,7 +1237,7 @@ class Solution:
         return cnt
 ```
 
-### 1.1.43. ▲[189. Rotate Array](https://leetcode.com/problems/rotate-array/)
+### 1.1.31. ▲[189. Rotate Array](https://leetcode.com/problems/rotate-array/)
 
 - 3種類の解法、memory=O(1)の解法が要求されている
     - スライシングで実装
@@ -1790,7 +1257,7 @@ class Solution:
             nums[:k], nums[k:] = nums[-k:], nums[:-k]
 ```
 
-### 1.1.44. ▲[190. Reverse Bits](https://leetcode.com/problems/reverse-bits/)
+### 1.1.32. ▲[190. Reverse Bits](https://leetcode.com/problems/reverse-bits/)
 
 - 2\*\*31, 2\*\*30, ...と順に割っていって、割れた場合に2\*\*0, 2\*\*1, ...と順に足していく
 - Discussionでは文字列処理を掛けるone lineの解法が分かりやすかった
@@ -1823,7 +1290,7 @@ class Solution:
         return int("{:032b}".format(n)[::-1], 2)
 ```
 
-### 1.1.45. [191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
+### 1.1.33. [191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
 
 - 32bitへの文字列変換(`"{:032b}".format(n)`)を使用した解法(16ms)、10進数数値を2**xで割っていく解法(32ms)を実装した
 - Solutionでは`n&(n-1)`でnを更新し続けることで1を小さい桁から1つずつ減らしていく手法が紹介されていた(20ms)
@@ -1875,7 +1342,7 @@ class Solution(object):
         return ans
 ```
 
-### 1.1.46. ▲[198. House Robber](https://leetcode.com/problems/house-robber/)
+### 1.1.34. ▲[198. House Robber](https://leetcode.com/problems/house-robber/)
 
 - 解法思いつかず...
 - ▲Discussionで[DPによる解法](https://leetcode.com/problems/house-robber/discuss/55977/Python-DP-solution-4-line-O(n)-time-O(1)-space-easy-to-understand-with-detailed-explanation)が解説されている
@@ -1904,7 +1371,7 @@ class Solution:
         return max(p2, p1)
 ```
 
-### 1.1.47. [202. Happy Number](https://leetcode.com/problems/happy-number/)
+### 1.1.35. [202. Happy Number](https://leetcode.com/problems/happy-number/)
 
 - 桁数が不明なので、while文で各桁の2乗を加算していった
     - 計算結果を保存しておき、一度出た計算結果がもう一度出たらループに入ったと判断してFalseを返す
@@ -1928,54 +1395,7 @@ class Solution:
             lis.append(n)
 ```
 
-### 1.1.48. [203. Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/)
-
-- 試行錯誤の末、正解にたどり着いた
-    - `head = head.next.next`ではうまくいかないと気づくまで時間がかかった
-    - 条件分岐が多い解法になってしまった
-- Discussionの[記事](https://leetcode.com/problems/remove-linked-list-elements/discuss/158651/Simple-Python-solution-with-explanation-(single-pointer-dummy-head).)では先頭にダミーを作成することでシンプルなコードを実現していた
-    - elegant!
-- その他のDiscussionでは自力で実装したコードと似た発想での解法が紹介されていた
-
-```python
-# 自力実装
-
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
-class Solution:
-    def removeElements(self, head: ListNode, val: int) -> ListNode:
-        # リストの長さが0, 1の場合
-        if not head:
-            return head
-        if not head.next:
-            if head.val==val:
-                return None
-            else:
-                return head
-
-        # 先頭からvalが続く場合
-        while head.val==val:
-            head = head.next
-            if not head:
-                return None
-
-        # 解答のために先頭を記録
-        ans = head
-
-        while head:
-            # 次の値がvalの場合、飛ばして次の次に接続する
-            while head.next and head.next.val==val:
-                head.next = head.next.next
-            head = head.next
-
-        return ans
-```
-
-### 1.1.49. [204. Count Primes](https://leetcode.com/problems/count-primes/)
+### 1.1.36. [204. Count Primes](https://leetcode.com/problems/count-primes/)
 
 - 2からnまでの各数を、2からn-1までの数で割った余りを確認するというゴリ押し実装をしたところ、TLE
 - [エラトステネスの篩](https://ja.wikipedia.org/wiki/%E3%82%A8%E3%83%A9%E3%83%88%E3%82%B9%E3%83%86%E3%83%8D%E3%82%B9%E3%81%AE%E7%AF%A9)をPythonで実装するも、TLE
@@ -2018,7 +1438,7 @@ class Solution:
         return sum(lis)
 ```
 
-### 1.1.50. ▲[205. Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/)
+### 1.1.37. ▲[205. Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/)
 
 - まずs->t, t->sの変換辞書を作成。s, tのコピーを作成した後、s, tをそれぞれ変換。変換後のs, tとコピーしておいたt, sを比べて、両方とも一致した場合にTrueを返す
     - s, t, 両方を処理しないとs="ab", t="aa"といったケースに間違ってTrueを返してしまう
@@ -2115,51 +1535,7 @@ class Solution:
         return True
 ```
 
-### 1.1.51. ▲[206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
-
-- ListNodeを前から順にスキャンして値をリストに保存していく
-    - リストの逆順に新しいListNodeを作成していく
-- Solutionではループな方法と再帰的な方法が解説されていた
-    - ▲ループな方法、紙に書いてなんとか理解できるけど、これを思いつくのは今の自分では無理そう...
-
-```python
-# 自力実装
-
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
-class Solution:
-    def reverseList(self, head: ListNode) -> ListNode:
-        if not head:
-            return None
-        lis = []
-        while head:
-            lis.append(head.val)
-            head = head.next
-        ans = ListNode(lis[-1])
-        cur = ans
-        for t in lis[::-1][1:]:
-            cur.next = ListNode(t)
-            cur = cur.next
-        return ans
-```
-
-
-```python
-# Solutionを参考に実装
-class Solution:
-    def reverseList(self, head: ListNode) -> ListNode:
-        p = None
-        c = head
-        while c:
-            c.next, p, c = p, c, c.next
-        return p
-```
-
-### 1.1.52. [217. Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
+### 1.1.38. [217. Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
 
 - おそらく実装するべき解法とは異なるが、引数のnumsの長さとnumsのset()の長さを比較するだけ
 - 値と値の出現回数の辞書を作成し、出現回数が2以上の値が存在するかどうかを判定しても解ける
@@ -2185,7 +1561,7 @@ class Solution:
         return False
 ```
 
-### [219. Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii/)
+### 1.1.39. [219. Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii/)
 
 - 最初は途方に暮れたが、一晩寝たらできた
 - ブルートフォースで書けるもののTLE
@@ -2221,7 +1597,7 @@ class Solution:
         return False
 ```
 
-### [225. Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/)
+### 1.1.40. [225. Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/)
 
 - リストの機能を使ってstackを実装
     - FIFOのqueueでは実現できない機能（`list[-1]`, `list[:-1]`）を使用しているため、題意には沿っていないと考えられる
@@ -2326,51 +1702,7 @@ class MyStack:
             return True
 ```
 
-### ▲[226. Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
-
-- Binary Treeのかなり基本的な問題
-- 再帰的な方法で解いた
-- ▲Solutionでは再帰的な方法、queueを使った幅優先探索が紹介されていた
-    - 104.や107.のwhile文での解法も参考に
-
-```python
-# 自力実装
-
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-class Solution:
-    def invertTree(self, root: TreeNode) -> TreeNode:
-        if not root:
-            return None
-        if root.left or root.right:
-            root.left, root.right = root.right, root.left
-            if root.left:
-                if root.left.left or root.left.right:
-                    root.left = self.invertTree(root.left)
-            if root.right:
-                if root.right.left or root.right.right:
-                    root.right = self.invertTree(root.right)
-            return root
-        else:
-            return root
-```
-
-```python
-# Solutionのコメントを参考にリファクタリング
-class Solution:
-    def invertTree(self, root: TreeNode) -> TreeNode:
-        if not root:
-            return None
-        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
-        return root
-```
-
-### ▲[231. Power of Two](https://leetcode.com/problems/power-of-two/)
+### 1.1.41. ▲[231. Power of Two](https://leetcode.com/problems/power-of-two/)
 
 - エッジケース(n=1, 0, 負の整数)に注意して2で割り続ける
 - ▲Discussionではbitを利用したone lineの解法あり
@@ -2391,3 +1723,121 @@ class Solution:
         elif n==1:
             return True
 ```
+
+### 1.1.42. ▲[232. Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/)
+
+- `pop`, `peak`時に別のstackに移す
+    - `pop`では値を`return`する前に同じ処理を行い、stackを元に戻しておく
+        - 別の処理時に更に逆順にしてしまうことになるため
+- 225.のようにpush時に逆順にして扱おうとしたものの、queueとは処理が違ったためにうまくいかず
+- Solutionを見ると、225.のようにpush時に逆順にする実装が紹介されていた
+- ▲Solutionには他にも、別のstackをうまく使った処理が行われていた
+    - すべての要素を別stackに移すのではなく、sが空になるたびに移す
+    - sが空かどうか、別のstackが空かどうか、という状態判定をうまく使っている
+    - elegant!
+
+```python
+# 自力実装
+class MyQueue:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.s = []
+        
+
+    def push(self, x: int) -> None:
+        """
+        Push element x to the back of queue.
+        """
+        self.s.append(x)
+        
+
+    def pop(self) -> int:
+        """
+        Removes the element from in front of queue and returns that element.
+        """
+        tmp_s = []
+        while self.s:
+            tmp_s.append(self.s.pop(-1))
+        self.s = tmp_s
+        ans = self.s.pop(-1)
+
+        tmp_s = []
+        while self.s:
+            tmp_s.append(self.s.pop(-1))
+        self.s = tmp_s
+        return ans
+
+
+    def peek(self) -> int:
+        """
+        Get the front element.
+        """
+        tmp_s = []
+        s_copy = self.s.copy()
+        while s_copy:
+            tmp_s.append(s_copy.pop(-1))
+        return tmp_s[-1]
+
+
+    def empty(self) -> bool:
+        """
+        Returns whether the queue is empty.
+        """
+        return len(self.s)==0
+
+
+# Your MyQueue object will be instantiated and called as such:
+# obj = MyQueue()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.peek()
+# param_4 = obj.empty()
+```
+
+```python
+# Solutionを参考に実装
+class MyQueue:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.s = []
+        
+
+    def push(self, x: int) -> None:
+        """
+        Push element x to the back of queue.
+        """
+        tmp_s = []
+        while self.s:
+            tmp_s.append(self.s.pop(-1))
+        self.s.append(x)
+        while tmp_s:
+            self.s.append(tmp_s.pop(-1))
+        
+
+    def pop(self) -> int:
+        """
+        Removes the element from in front of queue and returns that element.
+        """
+        return self.s.pop(-1)
+
+
+    def peek(self) -> int:
+        """
+        Get the front element.
+        """
+        return self.s[-1]
+
+
+    def empty(self) -> bool:
+        """
+        Returns whether the queue is empty.
+        """
+        return len(self.s)==0
+```
+
