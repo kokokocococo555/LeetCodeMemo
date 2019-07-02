@@ -68,6 +68,9 @@
     - [1.1.51. ▲206. Reverse Linked List](#1151-%E2%96%B2206-reverse-linked-list)
     - [1.1.52. 217. Contains Duplicate](#1152-217-contains-duplicate)
     - [219. Contains Duplicate II](#219-contains-duplicate-ii)
+    - [225. Implement Stack using Queues](#225-implement-stack-using-queues)
+    - [▲226. Invert Binary Tree](#%E2%96%B2226-invert-binary-tree)
+    - [▲231. Power of Two](#%E2%96%B2231-power-of-two)
 
 <!-- /TOC -->
 
@@ -963,7 +966,7 @@ class Solution:
     - Discussionを見ると、自分の実装は無駄なif文が多いみたい
     - ただし、自分の最初の実装の方がかなり速い（無駄な計算をif文で省けている）
 - ▲Discussionにはwhile文での解法もある（max()が不要）
-    - 順番に降りていってカウントしている。分かりやすく、美しい解法
+    - 順番に降りていってカウントしている。分かりやすく、美しい解法。elegant!
     - 速い
     - https://leetcode.com/problems/maximum-depth-of-binary-tree/discuss/34198/Python-multiple-solutions-recursion-level-order-using-stack-and-level-order-using-queue
 
@@ -2184,4 +2187,207 @@ class Solution:
 
 ### [219. Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii/)
 
-- 
+- 最初は途方に暮れたが、一晩寝たらできた
+- ブルートフォースで書けるもののTLE
+- 重複する値のインデックス差がk**以下**という条件を見逃していた
+    - k以下でいいなら最も近い値同士の距離を見ればよい
+    - 辞書に各値とインデックスを保存し、インデックスを更新していく
+        - numsのスキャンにn, 辞書のスキャンにn/2, 処理時間はO(n**2)かかると危惧したが、通った
+        - Discussionを見ると、dic.get()を使えば存在しないキーの場合に指定の値を返せる
+            - 普通に辞書をスキャンした方が速い
+
+```python
+# 自力実装（辞書スキャン）
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        dic = {}
+        for i in range(len(nums)):
+            if nums[i] in dic:
+                if i-dic[nums[i]]<=k:
+                    return True
+            dic[nums[i]] = i
+        return False
+```
+
+```python
+# Discussionを参考に実装（dic.get()）
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        dic = {}
+        for i in range(len(nums)):
+            if i-dic.get(nums[i], -k-1)<=k:
+                    return True
+            dic[nums[i]] = i
+        return False
+```
+
+### [225. Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/)
+
+- リストの機能を使ってstackを実装
+    - FIFOのqueueでは実現できない機能（`list[-1]`, `list[:-1]`）を使用しているため、題意には沿っていないと考えられる
+- 2つのqueueを使用して実装したものの、触っていないq2もq1の動きに連動して要素が消えていくという謎の挙動があり、Acceptに至らず
+- Solutionでは2つのqueueを使用した実装、1つのqueueを使用した実装が紹介されていた
+    - queueを1つだけ使用する方法はpush時にLIFOとなるように並び替える
+        - 他のメソッドはqueueと同様の処理をするだけでよくなる
+
+```python
+# 自力実装
+class MyStack:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.stack = []
+
+
+    def push(self, x: int) -> None:
+        """
+        Push element x onto stack.
+        """
+        self.stack.append(x)
+
+
+    def pop(self) -> int:
+        """
+        Removes the element on top of the stack and returns that element.
+        """
+        x = self.top()
+        self.stack = self.stack[:-1]
+        return x
+
+
+    def top(self) -> int:
+        """
+        Get the top element.
+        """
+        return self.stack[-1]
+
+
+    def empty(self) -> bool:
+        """
+        Returns whether the stack is empty.
+        """
+        if self.stack:
+            return False
+        else:
+            return True
+
+
+# Your MyStack object will be instantiated and called as such:
+# obj = MyStack()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.empty()
+```
+
+```python
+# queueを1つだけ使用する方法（Solutionを参考に実装）
+class MyStack:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.q1 = []
+        
+
+    def push(self, x: int) -> None:
+        """
+        Push element x onto stack.
+        """
+        self.q1.append(x)
+        for _ in range(len(self.q1)-1):
+            self.q1.append(self.q1.pop(0))
+
+
+    def pop(self) -> int:
+        """
+        Removes the element on top of the stack and returns that element.
+        """
+        return self.q1.pop(0)
+        
+
+    def top(self) -> int:
+        """
+        Get the top element.
+        """
+        return self.q1[0]
+        
+
+    def empty(self) -> bool:
+        """
+        Returns whether the stack is empty.
+        """
+        if self.q1:
+            return False
+        else:
+            return True
+```
+
+### ▲[226. Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
+
+- Binary Treeのかなり基本的な問題
+- 再帰的な方法で解いた
+- ▲Solutionでは再帰的な方法、queueを使った幅優先探索が紹介されていた
+    - 104.や107.のwhile文での解法も参考に
+
+```python
+# 自力実装
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if not root:
+            return None
+        if root.left or root.right:
+            root.left, root.right = root.right, root.left
+            if root.left:
+                if root.left.left or root.left.right:
+                    root.left = self.invertTree(root.left)
+            if root.right:
+                if root.right.left or root.right.right:
+                    root.right = self.invertTree(root.right)
+            return root
+        else:
+            return root
+```
+
+```python
+# Solutionのコメントを参考にリファクタリング
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if not root:
+            return None
+        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+        return root
+```
+
+### ▲[231. Power of Two](https://leetcode.com/problems/power-of-two/)
+
+- エッジケース(n=1, 0, 負の整数)に注意して2で割り続ける
+- ▲Discussionではbitを利用したone lineの解法あり
+    - `2**x`をビットで表すと`1=1b, 2=10b, 4=100b, 8=1000b, ......`となる
+    - `2**(x-1)`をビットで表すと`0=0b, 1=01b, 3=011b, 7=0111b, ......`となる
+    - `2**(x-1)`では2進数の計算ですべての桁で繰り下がりが発生するため、`2**x`と`2**(x-1)`の`&`をとると`0000b`になる
+
+```python
+# 自力実装
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        while n>1:
+            if n%2!=0:
+                return False
+            n /= 2
+        if n<=0:
+            return False
+        elif n==1:
+            return True
+```
