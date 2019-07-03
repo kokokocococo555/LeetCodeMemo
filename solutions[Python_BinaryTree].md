@@ -17,6 +17,7 @@
     - [1.1.7. 111. Minimum Depth of Binary Tree](#117-111-minimum-depth-of-binary-tree)
     - [1.1.8. 112. Path Sum](#118-112-path-sum)
     - [1.1.9. ▲226. Invert Binary Tree](#119-%E2%96%B2226-invert-binary-tree)
+    - [235. Lowest Common Ancestor of a Binary Search Tree](#235-lowest-common-ancestor-of-a-binary-search-tree)
 
 <!-- /TOC -->
 
@@ -399,4 +400,85 @@ class Solution:
             return None
         root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
         return root
+```
+
+### [235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+
+- binary search tree (BST) をたどってpまで行く
+    - その際に通ってきたノードの値をリストに保存していく
+    - 同様にqまで行く
+    - 各ノードの値がリストに存在する場合、答えを更新し続ける
+    - qにたどり着いたら答えを返す
+- Solutionでは再帰的な方法と反復的な方法が紹介されていた
+    - 要はpとqが左右に分かれる、もしくはpまたはqがもう片方の親になるノードを見つければよい
+        - elegant!
+    - p, qともに現在のノードの右にある場合、右の部分木に先延ばし
+    - p, qともに現在のノードの左にある場合、左の部分木に先延ばし
+    - それ以外（pとqが左右に分かれる、もしくはpまたはqがもう片方の親になる）の場合、現在のノードが答え
+
+```python
+# 自力実装
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        lis = []
+        head = root
+        # pを探索
+        while True:
+            lis.append(root.val)
+            if root.val==p.val:
+                break
+            if root.val<p.val:
+                root = root.right
+            elif p.val<root.val:
+                root = root.left
+
+        # qを探索
+        while True:
+            if head.val in lis:
+                ans = head
+            if head.val==q.val:
+                return ans
+            if head.val<q.val:
+                head = head.right
+            elif q.val<head.val:
+                head = head.left
+```
+
+```python
+# 再帰的な方法（Solutionを参考に実装）
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        rv = root.val
+        pv = p.val
+        qv = q.val
+        if rv<pv and rv<qv:
+            return self.lowestCommonAncestor(root.right, p, q)  # p, qともにrootの右にある場合、右の部分木に探索を先送りする
+        elif pv<rv and qv<rv:
+            return self.lowestCommonAncestor(root.left, p, q)  # p, qともにrootの左にある場合、左の部分木に探索を先送りする
+        else:
+            return root
+```
+
+```python
+# 反復的な方法（Solutionを参考に実装）
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        pv = p.val
+        qv = q.val
+        while root:
+            rv = root.val
+            if rv<pv and rv<qv:
+                root = root.right
+            elif pv<rv and qv<rv:
+                root = root.left
+            else:
+                return root
 ```
