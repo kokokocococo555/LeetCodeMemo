@@ -57,6 +57,7 @@
     - [1.1.40. 225. Implement Stack using Queues](#1140-225-implement-stack-using-queues)
     - [1.1.41. ▲231. Power of Two](#1141-%E2%96%B2231-power-of-two)
     - [1.1.42. ▲232. Implement Queue using Stacks](#1142-%E2%96%B2232-implement-queue-using-stacks)
+    - [242. Valid Anagram](#242-valid-anagram)
 
 <!-- /TOC -->
 
@@ -1841,3 +1842,36 @@ class MyQueue:
         return len(self.s)==0
 ```
 
+### [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/)
+
+- Pythonの組み込み関数`sorted()`で文字列をソート済みリストに変換し、比較した
+- 組み込み関数を使わないのであれば、辞書を用いた方法が考えられる
+- Solutionでもこれら2つの方法が紹介されていた
+
+
+```python
+# 自力実装
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        s_sorted_list = sorted(s)
+        t_sorted_list = sorted(t)
+        return s_sorted_list==t_sorted_list
+```
+
+```python
+# 半分自力、半分Solutionを参考に実装
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        s_dic = {}
+        for x in s:
+            s_dic[x] = 1+s_dic.get(x, 0)
+        for y in t:
+            if y in s_dic:
+                s_dic[y] -= 1
+            else:
+                return False
+        for k in s_dic:
+            if s_dic[k]!=0:
+                return False
+        return True
+```

@@ -16,6 +16,7 @@
     - [1.1.5. 203. Remove Linked List Elements](#115-203-remove-linked-list-elements)
     - [1.1.6. ▲206. Reverse Linked List](#116-%E2%96%B2206-reverse-linked-list)
     - [1.1.7. ▲234. Palindrome Linked List](#117-%E2%96%B2234-palindrome-linked-list)
+    - [237. Delete Node in a Linked List](#237-delete-node-in-a-linked-list)
 
 <!-- /TOC -->
 ## 1.1. Easy
@@ -340,3 +341,30 @@ class Solution:
             s = s.next
         return not rev
 ```
+
+### [237. Delete Node in a Linked List](https://leetcode.com/problems/delete-node-in-a-linked-list/)
+
+- headとnodeの2の引数が必要そうな設問なのに、コードでは引数がnodeのみ
+- Solutionを見ると、削除すべきノードとしてnodeが与えられている
+    - コード上で`node.val`, `node.next.val`の値を確認することで確かめられた
+    - Down voteが大量についている
+
+```python
+# Solutionを参考に実装
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def deleteNode(self, node):
+        """
+        :type node: ListNode
+        :rtype: void Do not return anything, modify node in-place instead.
+        """
+        node.val = node.next.val
+        node.next = node.next.next
+```
+
