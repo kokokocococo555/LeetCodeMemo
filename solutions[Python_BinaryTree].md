@@ -18,6 +18,7 @@
     - [1.1.8. 112. Path Sum](#118-112-path-sum)
     - [1.1.9. ▲226. Invert Binary Tree](#119-%E2%96%B2226-invert-binary-tree)
     - [235. Lowest Common Ancestor of a Binary Search Tree](#235-lowest-common-ancestor-of-a-binary-search-tree)
+    - [▲257. Binary Tree Paths](#%E2%96%B2257-binary-tree-paths)
 
 <!-- /TOC -->
 
@@ -481,4 +482,57 @@ class Solution:
                 root = root.left
             else:
                 return root
+```
+
+### ▲[257. Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/)
+
+- リストとしての扱いがうまくいかず、断念
+- ▲DiscussionではDFS, BFSでの方法が紹介されていた
+- DFSではstackに`(node, "list")`のタプルを積んでいって、nodeとリストを同時に処理していく方法が取られていた
+- DFSでは再帰的な方法も取られていた
+    - returnしなければ関数から脱出しないため、順にleftとrightを処理できる点が盲点だった
+
+```python
+# DFS, stack（Discussionをコピー）
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def binaryTreePaths(self, root: TreeNode) -> List[str]:
+        if not root:
+            return []
+        res, stack = [], [(root, "")]
+        while stack:
+            node, ls = stack.pop()
+            if not node.left and not node.right:
+                res.append(ls+str(node.val))
+            if node.right:
+                stack.append((node.right, ls+str(node.val)+"->"))
+            if node.left:
+                stack.append((node.left, ls+str(node.val)+"->"))
+        return res
+```
+
+```python
+# DFS, recursive（Discussionをコピー）
+class Solution:
+    def binaryTreePaths(self, root: TreeNode) -> List[str]:
+        if not root:
+            return []
+        res = []
+        self.dfs(root, "", res)
+        return res
+
+    def dfs(self, root, ls, res):
+        if not root.left and not root.right:
+            res.append(ls+str(root.val))
+        if root.left:
+            self.dfs(root.left, ls+str(root.val)+"->", res)
+        if root.right:
+            self.dfs(root.right, ls+str(root.val)+"->", res)
 ```
