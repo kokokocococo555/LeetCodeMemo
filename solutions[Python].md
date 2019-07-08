@@ -58,6 +58,9 @@
     - [1.1.41. ▲231. Power of Two](#1141-%E2%96%B2231-power-of-two)
     - [1.1.42. ▲232. Implement Queue using Stacks](#1142-%E2%96%B2232-implement-queue-using-stacks)
     - [242. Valid Anagram](#242-valid-anagram)
+    - [▲258. Add Digits](#%E2%96%B2258-add-digits)
+    - [263. Ugly Number](#263-ugly-number)
+    - [268. Missing Number](#268-missing-number)
 
 <!-- /TOC -->
 
@@ -1874,4 +1877,85 @@ class Solution:
             if s_dic[k]!=0:
                 return False
         return True
+```
+
+### ▲[258. Add Digits](https://leetcode.com/problems/add-digits/)
+
+- まずはwhileループを使用して普通に実装
+- ▲Follow upではwhileも再帰も使用せずにruntime O(1)での実行を要求
+    - 11は2になる->`11%9=2`から、9で割った余りを使用することを考える
+    - `%9`だけだと`9`の答えが`0`になってしまうので、`(n-1)%9 + 1`として対応
+
+```python
+# 自力実装
+class Solution:
+    def addDigits(self, num: int) -> int:
+        x = num
+        while x/10>=1:
+            num = x
+            x = 0
+            while num>0:
+                x += num%10
+                num = num//10
+            x += num%10
+        return x
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def addDigits(self, num: int) -> int:
+        if num==0:
+            return num
+        
+        return (num-1)%9+1
+```
+
+### [263. Ugly Number](https://leetcode.com/problems/ugly-number/)
+
+- 2で割れるところまで割って、3で割れるところまで割って、5で割れるところまで割って、答えが1か否かをcheck
+- Discussionで採られている方法も同様
+
+```python
+# 自力実装
+class Solution:
+    def isUgly(self, num: int) -> bool:
+        if num<=0:
+            return False
+        if num==1:
+            return True
+        
+        while num%2==0:
+            num /= 2
+        while num%3==0:
+            num /= 3
+        while num%5==0:
+            num /= 5
+        return num==1
+```
+
+### [268. Missing Number](https://leetcode.com/problems/missing-number/)
+
+- リストの長さを得て合計を出し、前から順に引いていくと消えた数字が残る
+- SolutionではXORを使用した方法も紹介されていた
+
+```python
+# 自力実装
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        length = len(nums)
+        perfect_sum = (length*(1+length))/2
+        for i in nums:
+            perfect_sum -= i
+        return int(perfect_sum)
+```
+
+```python
+# XORを使用した方法（Solutionを参考に実装）
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        length = len(nums)
+        for i, n in enumerate(nums):
+            length ^= i^n
+        return length
 ```
