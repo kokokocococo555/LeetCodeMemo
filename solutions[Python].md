@@ -57,10 +57,14 @@
     - [1.1.40. 225. Implement Stack using Queues](#1140-225-implement-stack-using-queues)
     - [1.1.41. ▲231. Power of Two](#1141-%E2%96%B2231-power-of-two)
     - [1.1.42. ▲232. Implement Queue using Stacks](#1142-%E2%96%B2232-implement-queue-using-stacks)
-    - [242. Valid Anagram](#242-valid-anagram)
-    - [▲258. Add Digits](#%E2%96%B2258-add-digits)
-    - [263. Ugly Number](#263-ugly-number)
-    - [268. Missing Number](#268-missing-number)
+    - [1.1.43. 242. Valid Anagram](#1143-242-valid-anagram)
+    - [1.1.44. ▲258. Add Digits](#1144-%E2%96%B2258-add-digits)
+    - [1.1.45. 263. Ugly Number](#1145-263-ugly-number)
+    - [1.1.46. 268. Missing Number](#1146-268-missing-number)
+    - [1.1.47. ▲278. First Bad Version](#1147-%E2%96%B2278-first-bad-version)
+    - [1.1.48. ▲283. Move Zeroes](#1148-%E2%96%B2283-move-zeroes)
+    - [1.1.49. 290. Word Pattern](#1149-290-word-pattern)
+    - [1.1.50. 292. Nim Game](#1150-292-nim-game)
 
 <!-- /TOC -->
 
@@ -1845,7 +1849,7 @@ class MyQueue:
         return len(self.s)==0
 ```
 
-### [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/)
+### 1.1.43. [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/)
 
 - Pythonの組み込み関数`sorted()`で文字列をソート済みリストに変換し、比較した
 - 組み込み関数を使わないのであれば、辞書を用いた方法が考えられる
@@ -1879,7 +1883,7 @@ class Solution:
         return True
 ```
 
-### ▲[258. Add Digits](https://leetcode.com/problems/add-digits/)
+### 1.1.44. ▲[258. Add Digits](https://leetcode.com/problems/add-digits/)
 
 - まずはwhileループを使用して普通に実装
 - ▲Follow upではwhileも再帰も使用せずにruntime O(1)での実行を要求
@@ -1911,7 +1915,7 @@ class Solution:
         return (num-1)%9+1
 ```
 
-### [263. Ugly Number](https://leetcode.com/problems/ugly-number/)
+### 1.1.45. [263. Ugly Number](https://leetcode.com/problems/ugly-number/)
 
 - 2で割れるところまで割って、3で割れるところまで割って、5で割れるところまで割って、答えが1か否かをcheck
 - Discussionで採られている方法も同様
@@ -1934,7 +1938,7 @@ class Solution:
         return num==1
 ```
 
-### [268. Missing Number](https://leetcode.com/problems/missing-number/)
+### 1.1.46. [268. Missing Number](https://leetcode.com/problems/missing-number/)
 
 - リストの長さを得て合計を出し、前から順に引いていくと消えた数字が残る
 - SolutionではXORを使用した方法も紹介されていた
@@ -1958,4 +1962,156 @@ class Solution:
         for i, n in enumerate(nums):
             length ^= i^n
         return length
+```
+
+### 1.1.47. ▲[278. First Bad Version](https://leetcode.com/problems/first-bad-version/)
+
+- 二分探索で解いた
+- Solutionも二分探索
+    - ▲overflow bugを避けるために`(left+right)/2`ではなく`left+(right-left)/2`を使うべきと説かれていた
+
+```python
+# 自力実装
+
+# The isBadVersion API is already defined for you.
+# @param version, an integer
+# @return a bool
+# def isBadVersion(version):
+
+class Solution:
+    def firstBadVersion(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if isBadVersion(1):
+            return 1
+        
+        if isBadVersion(n) and not isBadVersion(n-1):
+            return n
+        
+        l, r = 1, n
+        m = int((l+r)/2)
+        while True:
+            if isBadVersion(m) and not isBadVersion(m-1):
+                return int(m)
+            
+            if isBadVersion(m):
+                r = m
+                m = int((l+r)/2)
+            else:
+                l = m
+                m = int((l+r)/2)
+```
+
+```python
+# Solutionを参考にリファクタリング
+class Solution:
+    def firstBadVersion(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        l, r = 1, n
+        while True:
+            m = int((l+r)/2)
+            if isBadVersion(m) and not isBadVersion(m-1):
+                return int(m)
+
+            if isBadVersion(m):
+                r = m
+            else:
+                l = m+1
+```
+
+### 1.1.48. ▲[283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
+
+- ポインタを2つ使用
+- ▲Solutionもポインタを2つ使いつつ、より最適な解法になっている
+    - elegant!
+
+```python
+# 自力実装
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if len(nums)<=1:
+            return
+
+        ps, pf = 0, 0
+        while pf<len(nums):
+            while nums[pf]==0:
+                if pf>=len(nums)-1:
+                    break
+                pf += 1
+            if pf<len(nums):
+                nums[ps] = nums[pf]
+            ps += 1
+            pf += 1
+
+        while ps<len(nums):
+            nums[ps] = 0
+            ps += 1
+```
+
+```python
+# Solutionを参考にリファクタリング
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if len(nums)<=1:
+            return
+
+        ps = 0
+        for i in range(len(nums)):
+            if nums[i]!=0:
+                nums[ps], nums[i] = nums[i], nums[ps]
+                ps += 1
+```
+
+### 1.1.49. [290. Word Pattern](https://leetcode.com/problems/word-pattern/)
+
+- 205.の発展形といった形の問題
+- ここではstrを`split()`メソッドでリスト化して205と同様の設定に落とし込んだが、`split()`を使えない場合もwhileループなどを使用して同じ状況に持ち込めばよい
+- Discussionも似たような感じ
+
+```python
+# 自力実装
+class Solution:
+    def wordPattern(self, pattern: str, str: str) -> bool:
+        s2 = str.split(" ")
+        if len(s2)!=len(pattern):
+            return False
+
+        dic_s2p = {}
+        for i, s in enumerate(s2):
+            dic_s2p[s] = pattern[i]
+        dic_p2s = {}
+        for i, p in enumerate(pattern):
+            dic_p2s[p] = s2[i]
+        return [p for p in pattern]==[dic_s2p[s] for s in s2] and [dic_p2s[p] for p in pattern]==[s for s in s2]
+```
+
+```python
+# 205.のメモを参考に実装
+class Solution:
+    def wordPattern(self, pattern: str, str: str) -> bool:
+        s2 = str.split(" ")
+        return len(set(zip(pattern, s2)))==len(set(pattern))==len(set(s2)) and len(pattern)==len(s2)
+```
+
+### 1.1.50. [292. Nim Game](https://leetcode.com/problems/nim-game/)
+
+- 相手に4の倍数で手番を渡し続ければ勝てる
+- そのためには4の倍数以外から始められると良い
+
+```python
+# 自力実装
+class Solution:
+    def canWinNim(self, n: int) -> bool:
+        return n%4!=0
 ```
