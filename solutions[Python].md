@@ -65,6 +65,7 @@
     - [1.1.48. ▲283. Move Zeroes](#1148-%E2%96%B2283-move-zeroes)
     - [1.1.49. 290. Word Pattern](#1149-290-word-pattern)
     - [1.1.50. 292. Nim Game](#1150-292-nim-game)
+    - [1.1.51. 303. Range Sum Query - Immutable](#1151-303-range-sum-query---immutable)
 
 <!-- /TOC -->
 
@@ -2114,4 +2115,37 @@ class Solution:
 class Solution:
     def canWinNim(self, n: int) -> bool:
         return n%4!=0
+```
+### 1.1.51. [303. Range Sum Query - Immutable](https://leetcode.com/problems/range-sum-query-immutable/)
+
+- `sum()`で合計を求めるとぎりぎり終わる
+    - Queryごとにforループを回しているとTLEになる
+- Solutionでは結果を先にブルートフォースで保持しておき、Queryで結果を呼び出す方針
+
+```python
+# 自力実装
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+
+    def sumRange(self, i: int, j: int) -> int:
+        return sum(self.nums[i:j+1])
+
+# Your NumArray object will be instantiated and called as such:
+# obj = NumArray(nums)
+# param_1 = obj.sumRange(i,j)
+```
+
+```python
+# Solutionを参考に実装
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        self.dic = {}
+        for i in range(len(nums)+1):
+            self.dic[i] = sum(nums[:i])
+
+    def sumRange(self, i: int, j: int) -> int:
+        return self.dic[j+1]-self.dic[i]
 ```
