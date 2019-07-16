@@ -66,6 +66,7 @@
     - [1.1.49. 290. Word Pattern](#1149-290-word-pattern)
     - [1.1.50. 292. Nim Game](#1150-292-nim-game)
     - [1.1.51. 303. Range Sum Query - Immutable](#1151-303-range-sum-query---immutable)
+    - [1.1.52. ▲326. Power of Three](#1152-%E2%96%B2326-power-of-three)
 
 <!-- /TOC -->
 
@@ -2148,4 +2149,23 @@ class NumArray:
 
     def sumRange(self, i: int, j: int) -> int:
         return self.dic[j+1]-self.dic[i]
+```
+
+### 1.1.52. ▲[326. Power of Three](https://leetcode.com/problems/power-of-three/)
+
+- whileループを使うと簡単だが、Follow upに「ループと再帰を使わずに解け」とある
+- 3進数に変換する？
+    - 変換時にループか再帰が必要だから意味ないか
+- ▲Solutionではループ、3進数への変換、対数をとる、intで表現できる最大数以内の最大の3の乗数をnで割った余りが0か否かで判定
+
+```python
+# 自力実装（whileループ使用ver）
+class Solution:
+    def isPowerOfThree(self, n: int) -> bool:
+        while True:
+            if n==1:
+                return True
+            if n%3!=0 or n<=0:
+                return False
+            n /= 3
 ```
