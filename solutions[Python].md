@@ -67,6 +67,7 @@
     - [1.1.50. 292. Nim Game](#1150-292-nim-game)
     - [1.1.51. 303. Range Sum Query - Immutable](#1151-303-range-sum-query---immutable)
     - [1.1.52. ▲326. Power of Three](#1152-%E2%96%B2326-power-of-three)
+    - [342. Power of Four](#342-power-of-four)
 
 <!-- /TOC -->
 
@@ -2168,4 +2169,38 @@ class Solution:
             if n%3!=0 or n<=0:
                 return False
             n /= 3
+```
+
+### [342. Power of Four](https://leetcode.com/problems/power-of-four/)
+
+- 326を参考に実装した
+    - 素数の乗数ではない点が326と比べて厄介
+    - 32bitのintの2の補数で表現できる符号付き整数は −2,147,483,648 から 2,147,483,647(Wikipediaより)
+    - 2147483647以下で最大の4の乗数は4**16=4294967296
+    - よって、4294967296を割りきれる、かつ4で割りきれる場合にTrue, と考えたがこれでは8などもTrueになってしまう
+        - 4で割り切れる、ではなく4294967296を割った商の平方根が整数（2で割り切れる）かどうかに変更したら通った
+            - 4\*\*16を4\*\*xで割ると4\*\*y=2\*\*2y が商になるため、平方根をとると2の倍数になるはず
+            - 8などの2**z (z=2n+1)で割ると商も2\*\*y' (y'=2n+1)になる
+- discussionではbit演算が活用されていた
+    - num & (num-1) == 0  # numが2の乗数であることの確認　と　32bitの1010101010101010101010101010101 (1431655765) & num = num によって、numがbinで10000...(先頭が1で0が偶数個ある=4**nであること)を確認
+    - elegant!
+
+```python
+# 自力実装
+class Solution:
+    def isPowerOfFour(self, num: int) -> bool:
+        if num<1:
+            return False
+        
+        if num==1:
+            return True
+        
+        return 4294967296%num==0 and ((4294967296/num)**(1/2))%2==0
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def isPowerOfFour(self, num: int) -> bool:
+        return num>0 and num&(num-1)==0 and num&1431655765==num
 ```
