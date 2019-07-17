@@ -67,7 +67,8 @@
     - [1.1.50. 292. Nim Game](#1150-292-nim-game)
     - [1.1.51. 303. Range Sum Query - Immutable](#1151-303-range-sum-query---immutable)
     - [1.1.52. ▲326. Power of Three](#1152-%E2%96%B2326-power-of-three)
-    - [342. Power of Four](#342-power-of-four)
+    - [1.1.53. 342. Power of Four](#1153-342-power-of-four)
+    - [1.1.54. 344. Reverse String](#1154-344-reverse-string)
 
 <!-- /TOC -->
 
@@ -2171,7 +2172,7 @@ class Solution:
             n /= 3
 ```
 
-### [342. Power of Four](https://leetcode.com/problems/power-of-four/)
+### 1.1.53. [342. Power of Four](https://leetcode.com/problems/power-of-four/)
 
 - 326を参考に実装した
     - 素数の乗数ではない点が326と比べて厄介
@@ -2203,4 +2204,22 @@ class Solution:
 class Solution:
     def isPowerOfFour(self, num: int) -> bool:
         return num>0 and num&(num-1)==0 and num&1431655765==num
+```
+
+### 1.1.54. [344. Reverse String](https://leetcode.com/problems/reverse-string/)
+
+- memoryをO(1)に抑えろとのことだったため、先頭と最後尾から順に入れ替えて実装
+- Discussionでは同じような解法、`s[::-1]`で完了としている回答が見られた
+    - 本問ではreturnではなくリストそのものを変更せよ、ということで誤解法になるが、再帰的な解法もあった
+        - `self.reverseString(s[l/2:]) + self.reverseString(s[:l/2])`を活用
+
+```python
+# 自力実装
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        for i in range(int(len(s)/2)):
+            s[i], s[-i-1] = s[-i-1], s[i]
 ```
