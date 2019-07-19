@@ -69,6 +69,9 @@
     - [1.1.52. ▲326. Power of Three](#1152-%E2%96%B2326-power-of-three)
     - [1.1.53. 342. Power of Four](#1153-342-power-of-four)
     - [1.1.54. 344. Reverse String](#1154-344-reverse-string)
+    - [1.1.55. 345. Reverse Vowels of a String](#1155-345-reverse-vowels-of-a-string)
+    - [1.1.56. 349. Intersection of Two Arrays](#1156-349-intersection-of-two-arrays)
+    - [1.1.57. 350. Intersection of Two Arrays II](#1157-350-intersection-of-two-arrays-ii)
 
 <!-- /TOC -->
 
@@ -2223,3 +2226,132 @@ class Solution:
         for i in range(int(len(s)/2)):
             s[i], s[-i-1] = s[-i-1], s[i]
 ```
+
+### 1.1.55. [345. Reverse Vowels of a String](https://leetcode.com/problems/reverse-vowels-of-a-string/)
+
+- 素直に実装
+    - 344問を少し改良する形
+- Discussionでも2つのpointerを使用する方法が採られていた
+
+```python
+# 自力実装
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        vset = {"a", "i", "u", "e", "o", "A", "I", "U", "E", "O"}
+        l = 0
+        r = len(s)
+        s = "x" + s + "x"  # IndexErrorを防ぐため
+        while l<r:
+            if s[l] in vset and s[r] in vset:
+                s = s[:l] + s[r] + s[l+1:r] + s[l] + s[r+1:]
+                l += 1
+                r -= 1
+
+            while l<r and s[l] not in vset:
+                l += 1
+
+            while l<r and s[r] not in vset:
+                r -= 1
+                
+        return s[1:-1]
+```
+
+### 1.1.56. [349. Intersection of Two Arrays](https://leetcode.com/problems/intersection-of-two-arrays/)
+
+- 2つのリストを一意にしてソートし、2つのポインタを使って素直に解いた
+- Solutionではよりスマートな方法が解説されていた
+- 小さい方のsetを前から順に回してもう片方のsetに含まれるか否かを判定
+- 他にも、setの和集合をとる演算も紹介されていた
+
+```python
+# 自力実装
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        snums1 = list(set(nums1))
+        snums2 = list(set(nums2))
+        snums1.sort()
+        snums2.sort()
+        p1, p2 = 0, 0
+        ans = []
+        while p1<len(snums1) and p2<len(snums2):
+            if snums1[p1]==snums2[p2]:
+                ans.append(snums1[p1])
+                p1 += 1
+                p2 += 1
+
+            while p1<len(snums1) and p2<len(snums2) and snums1[p1]<snums2[p2]:
+                p1 += 1
+                
+            while p1<len(snums1) and p2<len(snums2) and snums2[p2]<snums1[p1]:
+                p2 += 1
+                    
+        return ans
+```
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        snums1 = set(nums1)
+        snums2 = set(nums2)
+        if len(snums1)<len(snums2):
+            return [x for x in snums1 if x in snums2]
+        else:
+            return [x for x in snums2 if x in snums1]
+```
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        snums1 = set(nums1)
+        snums2 = set(nums2)
+        return list(snums1 & snums2)
+```
+
+### 1.1.57. [350. Intersection of Two Arrays II](https://leetcode.com/problems/intersection-of-two-arrays-ii/)
+
+- リストがソートされている場合、については349問とほぼ同様の方法で解いた
+- Discussionでは2つのポインタを使う方法に加え、辞書型を使う方法や`collections`を使う方法が紹介されていた
+
+```python
+# 自力実装
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        p1 = 0
+        p2 = 0
+        nums1.sort()
+        nums2.sort()
+        ans = []
+        while p1<len(nums1) and p2<len(nums2):
+            if nums1[p1]==nums2[p2]:
+                ans.append(nums1[p1])
+                p1 += 1
+                p2 += 1
+            
+            while p1<len(nums1) and p2<len(nums2) and nums1[p1]<nums2[p2]:
+                p1 += 1
+                
+            while p1<len(nums1) and p2<len(nums2) and nums1[p1]>nums2[p2]:
+                p2 += 1
+                
+        return ans
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        dic = {}
+        ans = []
+        for n1 in nums1:
+            dic[n1] = dic.get(n1, 0) + 1
+            
+        for n2 in nums2:
+            if n2 in dic and dic[n2]>0:
+                ans.append(n2)
+                dic[n2] -= 1
+                
+        return ans
+```
+
