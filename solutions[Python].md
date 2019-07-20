@@ -72,6 +72,8 @@
     - [1.1.55. 345. Reverse Vowels of a String](#1155-345-reverse-vowels-of-a-string)
     - [1.1.56. 349. Intersection of Two Arrays](#1156-349-intersection-of-two-arrays)
     - [1.1.57. 350. Intersection of Two Arrays II](#1157-350-intersection-of-two-arrays-ii)
+    - [1.1.58. ▲367. Valid Perfect Square](#1158-%E2%96%B2367-valid-perfect-square)
+    - [1.1.59. ▲371. Sum of Two Integers](#1159-%E2%96%B2371-sum-of-two-integers)
 
 <!-- /TOC -->
 
@@ -2355,3 +2357,79 @@ class Solution:
         return ans
 ```
 
+### 1.1.58. ▲[367. Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/)
+
+- 1から順に因数分解しようとしたものの、TLE
+- Related TopicsにBinary Searchとあるのを目にして二分探索を行ったところ、Accepted
+- ▲Discussionでは二分探索に加えて、n**2=1+3+5+...+(2n-1)となることを活用した方法や[ニュートン法](https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%88%E3%83%B3%E6%B3%95)などが紹介されていた
+
+```python
+# ヒントを見て自力実装
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        if num==1:
+            return True
+
+        l, r = 1, num
+        while l<r:
+            mid = int((l+r)/2)
+            if mid**2==num:
+                return True
+            elif mid**2<num:
+                l = mid+1
+            elif mid**2>num:
+                r = mid
+
+        return False
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        i = 1
+        sq = 0
+        while sq<=num:
+            if sq==num:
+                return True
+            else:
+                sq += i
+                i += 2
+                
+        return False
+```
+
+```python
+# Discussionを参考に実装（ニュートン法）
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        i = num
+        while i**2>num:
+                i = (i+(num/i))//2
+
+        return i**2==num
+```
+
+### 1.1.59. ▲[371. Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/)
+
+- +, -を使わずに加算を表現する
+- 2ビットに直してAND, XORを使う
+    - 負の数に対応できず、断念
+- ▲途中までの実装は合っていたので負の数に関する実装を加えればOK
+    - [参考](https://leetcode.com/problems/sum-of-two-integers/discuss/84282/Python-solution-with-no-%22%2B-*%22-completely-bit-manipulation-guaranteed)
+
+```python
+# 自力実装（途中まで）
+class Solution:
+    def getSum(self, a: int, b: int) -> int:
+        xor_ans = a ^ b
+        and_ans = int(bin((a & b) << 1), 2)
+        xor_ans2 = xor_ans ^ and_ans
+        and_ans2 = int(bin((xor_ans & and_ans) << 1), 2)
+        while and_ans2!=0:
+            xor_ans, and_ans = xor_ans2, and_ans2
+            xor_ans2 = xor_ans ^ and_ans
+            and_ans2 = int(bin((xor_ans & and_ans) << 1), 2)
+            
+        return xor_ans2
+```
