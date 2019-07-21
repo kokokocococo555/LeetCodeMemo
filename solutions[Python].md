@@ -74,6 +74,8 @@
     - [1.1.57. 350. Intersection of Two Arrays II](#1157-350-intersection-of-two-arrays-ii)
     - [1.1.58. ▲367. Valid Perfect Square](#1158-%E2%96%B2367-valid-perfect-square)
     - [1.1.59. ▲371. Sum of Two Integers](#1159-%E2%96%B2371-sum-of-two-integers)
+    - [1.1.60. 374. Guess Number Higher or Lower](#1160-374-guess-number-higher-or-lower)
+    - [1.1.61. ▲383. Ransom Note](#1161-%E2%96%B2383-ransom-note)
 
 <!-- /TOC -->
 
@@ -2432,4 +2434,127 @@ class Solution:
             and_ans2 = int(bin((xor_ans & and_ans) << 1), 2)
             
         return xor_ans2
+```
+
+### 1.1.60. [374. Guess Number Higher or Lower](https://leetcode.com/problems/guess-number-higher-or-lower/)
+
+- 二分探索で解けた
+- SolutionではTernary Searchという3分割での探索方法も紹介されていた
+    - ただし、一般的に使われるのは二分探索、その理由はworstなケースで二分探索の方が速いから、らしい
+
+```python
+# 自力実装
+
+# The guess API is already defined for you.
+# @param num, your guess
+# @return -1 if my number is lower, 1 if my number is higher, otherwise return 0
+# def guess(num):
+
+class Solution(object):
+    def guessNumber(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        l = 1
+        h = n
+        while l<=h:
+            m = int((l+h)/2)
+            if guess(m)==0:
+                return m
+            elif guess(m)==-1:
+                h = m-1
+            elif guess(m)==1:
+                l = m+1
+```
+
+```python
+# Solutionを参考にリファクタリング
+class Solution(object):
+    def guessNumber(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        l = 1
+        h = n
+        while l<=h:
+            m = l + int((h-l)/2)  # オーバーフロー対策？
+            res = guess(m)  # guess(m)呼び出し回数を抑える
+            if res==0:
+                return m
+            elif res==-1:
+                h = m-1
+            elif res==1:
+                l = m+1
+```
+
+```python
+# Solutionを参考に実装
+class Solution(object):
+    def guessNumber(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        l = 1
+        h = n
+        while l<=h:
+            m1 = l + int((h-l)/3)
+            m2 = h - int((h-l)/3)
+            res1 = guess(m1)
+            res2 = guess(m2)
+            if res1==0:
+                return m1
+            elif res2==0:
+                return m2
+            elif res1==-1:
+                h = m1-1
+            elif res2==1:
+                l = m2+1
+            elif res1==1 and res2==-1:
+                l = m1+1
+                h = m2-1
+```
+
+### 1.1.61. ▲[383. Ransom Note](https://leetcode.com/problems/ransom-note/)
+
+- 2つのポインタで実装したものの、パフォーマンスが悪い
+- ▲Discussionでは文字数を数える方法で実装されていた
+    - `str.count()`というメソッドが使用されていた
+
+```python
+# 自力実装
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        if ransomNote=="":
+            return True
+        if magazine=="":
+            return False
+
+        p1, p2 = 0, 0
+        ran = sorted(ransomNote)
+        mag = sorted(magazine)
+        while p1<len(ran) and p2<len(mag):
+            if ran[p1]==mag[p2]:
+                p1 += 1
+                p2 += 1
+            else:
+                p2 += 1
+
+        if p1==len(ran):
+            return True
+        else:
+            return False
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        rset = set(ransomNote)
+        for s in rset:
+            if ransomNote.count(s)>magazine.count(s):
+                return False
+        return True
 ```
