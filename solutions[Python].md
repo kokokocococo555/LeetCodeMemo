@@ -76,6 +76,8 @@
     - [1.1.59. ▲371. Sum of Two Integers](#1159-%E2%96%B2371-sum-of-two-integers)
     - [1.1.60. 374. Guess Number Higher or Lower](#1160-374-guess-number-higher-or-lower)
     - [1.1.61. ▲383. Ransom Note](#1161-%E2%96%B2383-ransom-note)
+    - [1.1.62. 387. First Unique Character in a String](#1162-387-first-unique-character-in-a-string)
+    - [1.1.63. ▲389. Find the Difference](#1163-%E2%96%B2389-find-the-difference)
 
 <!-- /TOC -->
 
@@ -2557,4 +2559,63 @@ class Solution:
             if ransomNote.count(s)>magazine.count(s):
                 return False
         return True
+```
+
+### 1.1.62. [387. First Unique Character in a String](https://leetcode.com/problems/first-unique-character-in-a-string/)
+
+- 前から順にstr.count()していこうとするとTLE
+- 先に出現する小文字アルファベットの数の辞書を作っておき、文字列の前から順に数を確認していくとAC
+- Solutionも同様
+
+```python
+# 自力実装
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        dic = {}
+        for i in range(len(s)):
+            if not s[i] in dic:
+                dic[s[i]] = s.count(s[i])
+
+        for j in range(len(s)):
+            if dic[s[j]]==1:
+                return j
+        
+        return -1
+```
+
+### 1.1.63. ▲[389. Find the Difference](https://leetcode.com/problems/find-the-difference/)
+
+- 辞書に文字の出現回数を足したり引いたりして実装した
+- ▲Discussionでは辞書による方法の他、文字を数値化して足し引きし、最後に残った数字を文字化して答えを得る方法、XORを使った方法、ソートしてzipで1文字ずつ比較していく方法などがあった
+    - 追加される文字が1文字、というのを見逃しており、複数文字に対応できる解法を作ってしまった
+
+```python
+# 自力実装
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        dic = {}
+        ans = ""
+        for x in t:
+            dic[x] = dic.get(x, 0) + 1
+            
+        for y in s:
+            dic[y] = dic[y] - 1
+            
+        for k in dic:
+            if dic[k]>0:
+                ans += k
+                
+        return ans
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        s = sorted(s)
+        t = sorted(t)
+        if s==t[:-1]:
+            return t[-1]
+        else:
+            return [x[1] for x in zip(s, t) if x[0]!=x[1]][0]
 ```
