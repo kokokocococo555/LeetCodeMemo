@@ -78,6 +78,7 @@
     - [1.1.61. ▲383. Ransom Note](#1161-%E2%96%B2383-ransom-note)
     - [1.1.62. 387. First Unique Character in a String](#1162-387-first-unique-character-in-a-string)
     - [1.1.63. ▲389. Find the Difference](#1163-%E2%96%B2389-find-the-difference)
+    - [1.1.64. ▲400. Nth Digit](#1164-%E2%96%B2400-nth-digit)
 
 <!-- /TOC -->
 
@@ -2619,3 +2620,10 @@ class Solution:
         else:
             return [x[1] for x in zip(s, t) if x[0]!=x[1]][0]
 ```
+
+### 1.1.64. ▲[400. Nth Digit](https://leetcode.com/problems/nth-digit/)
+
+- 順に数を文字列として結合していって、文字列の長さがnを超えた段階でs[n-1]を返す
+    - TLEになった
+- ▲Discussionでは無駄な部分（桁数が異なる部分）をskipして処理を速くしている
+    - 頭が働かなくて解法が頭に入ってこないため、こんどやる
