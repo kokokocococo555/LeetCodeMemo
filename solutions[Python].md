@@ -79,6 +79,7 @@
     - [1.1.62. 387. First Unique Character in a String](#1162-387-first-unique-character-in-a-string)
     - [1.1.63. ▲389. Find the Difference](#1163-%E2%96%B2389-find-the-difference)
     - [1.1.64. ▲400. Nth Digit](#1164-%E2%96%B2400-nth-digit)
+    - [1.1.65. ▲401. Binary Watch](#1165-%E2%96%B2401-binary-watch)
 
 <!-- /TOC -->
 
@@ -2627,3 +2628,51 @@ class Solution:
     - TLEになった
 - ▲Discussionでは無駄な部分（桁数が異なる部分）をskipして処理を速くしている
     - 頭が働かなくて解法が頭に入ってこないため、こんどやる
+
+### 1.1.65. ▲[401. Binary Watch](https://leetcode.com/problems/binary-watch/)
+
+- 時と分を並べて10bitとみなす
+    1.  考えられる2進数の組み合わせを列挙
+    2.  2進数を時刻に変換
+    - という2段階の処理で実装
+    - 2.は実装できたものの、1.は`itertools.permutations(s)`によるsのアナグラムに時間がかかるのか、TLEに
+- Discussionでは逆に12, 60までを列挙して1の数が`num`と等しいケースのみを抽出していた
+    - elegant!
+- ▲他にもDFSと再帰による解法もあった
+
+```python
+# 自力実装（TLE）
+import itertools
+
+
+class Solution:
+    def readBinaryWatch(self, num: int) -> List[str]:
+        # 考えられる2進数の組み合わせを列挙
+        s = "1"*num+"0"*(10-num)
+        s_list = ["".join(x) for x in itertools.permutations(s)]
+        # 2進数を時刻に変換
+        ans = []
+        for xbs in s_list:
+            h = int(xbs[:4], 2)
+            m = int(xbs[4:], 2)
+            if h>11 or m>60:
+                continue
+            else:
+                time = "{}:{:02}".format(h, m)
+                ans.append(time)
+        return ans
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def readBinaryWatch(self, num: int) -> List[str]:
+        ans =[]
+        for i in range(12):
+            for j in range(60):
+                xbs = bin(i)+bin(j)
+                if xbs.count("1")==num:
+                    time = "{}:{:02}".format(i, j)
+                    ans.append(time)
+        return ans
+```
