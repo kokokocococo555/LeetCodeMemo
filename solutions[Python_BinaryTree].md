@@ -17,8 +17,9 @@
     - [1.1.7. 111. Minimum Depth of Binary Tree](#117-111-minimum-depth-of-binary-tree)
     - [1.1.8. 112. Path Sum](#118-112-path-sum)
     - [1.1.9. ▲226. Invert Binary Tree](#119-%E2%96%B2226-invert-binary-tree)
-    - [235. Lowest Common Ancestor of a Binary Search Tree](#235-lowest-common-ancestor-of-a-binary-search-tree)
-    - [▲257. Binary Tree Paths](#%E2%96%B2257-binary-tree-paths)
+    - [1.1.10. 235. Lowest Common Ancestor of a Binary Search Tree](#1110-235-lowest-common-ancestor-of-a-binary-search-tree)
+    - [1.1.11. ▲257. Binary Tree Paths](#1111-%E2%96%B2257-binary-tree-paths)
+    - [1.1.12. 404. Sum of Left Leaves](#1112-404-sum-of-left-leaves)
 
 <!-- /TOC -->
 
@@ -403,7 +404,7 @@ class Solution:
         return root
 ```
 
-### [235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+### 1.1.10. [235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
 
 - binary search tree (BST) をたどってpまで行く
     - その際に通ってきたノードの値をリストに保存していく
@@ -484,7 +485,7 @@ class Solution:
                 return root
 ```
 
-### ▲[257. Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/)
+### 1.1.11. ▲[257. Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/)
 
 - リストとしての扱いがうまくいかず、断念
 - ▲DiscussionではDFS, BFSでの方法が紹介されていた
@@ -535,4 +536,52 @@ class Solution:
             self.dfs(root.left, ls+str(root.val)+"->", res)
         if root.right:
             self.dfs(root.right, ls+str(root.val)+"->", res)
+```
+
+### 1.1.12. [404. Sum of Left Leaves](https://leetcode.com/problems/sum-of-left-leaves/)
+
+- 再帰で解いた
+- DiscussionではDFSも
+
+```python
+# 自力実装
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def sumOfLeftLeaves(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        if root.left and not root.left.left and not root.left.right:
+            if root.right:
+                return root.left.val + self.sumOfLeftLeaves(root.right)
+            else:
+                return root.left.val
+        elif root.left:
+            if root.right:
+                return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
+            else:
+                return self.sumOfLeftLeaves(root.left)
+        elif not root.left:
+            if root.right:
+                return self.sumOfLeftLeaves(root.right)
+            else:
+                return 0
+```
+
+```python
+# Discussionを参考にリファクタリング
+class Solution:
+    def sumOfLeftLeaves(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        if root.left and not root.left.left and not root.left.right:
+            return root.left.val + self.sumOfLeftLeaves(root.right)
+        else:
+            return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
 ```

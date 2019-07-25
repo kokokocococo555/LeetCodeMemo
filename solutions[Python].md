@@ -80,6 +80,8 @@
     - [1.1.63. ▲389. Find the Difference](#1163-%E2%96%B2389-find-the-difference)
     - [1.1.64. ▲400. Nth Digit](#1164-%E2%96%B2400-nth-digit)
     - [1.1.65. ▲401. Binary Watch](#1165-%E2%96%B2401-binary-watch)
+    - [1.1.66. ▲405. Convert a Number to Hexadecimal](#1166-%E2%96%B2405-convert-a-number-to-hexadecimal)
+    - [1.1.67. 409. Longest Palindrome](#1167-409-longest-palindrome)
 
 <!-- /TOC -->
 
@@ -2674,5 +2676,94 @@ class Solution:
                 if xbs.count("1")==num:
                     time = "{}:{:02}".format(i, j)
                     ans.append(time)
+        return ans
+```
+
+### 1.1.66. ▲[405. Convert a Number to Hexadecimal](https://leetcode.com/problems/convert-a-number-to-hexadecimal/)
+
+- 2の補数表現、10進数->2進数への変換を活用して実装
+- ▲Discussionでは[bit演算で解く方法も紹介](https://leetcode.com/problems/convert-a-number-to-hexadecimal/discuss/89261/easy-10-line-python-solution-with-inline-explanation)されていた
+
+```python
+# 自力実装
+class Solution:
+    def toHex(self, num: int) -> str:
+        if num==0:
+            return "0"
+        if num<0:
+            num = 2**32+num
+        lis = [str(i) for i in range(10)]
+        lis.extend(["a", "b", "c", "d", "e", "f"])
+        ans = ""
+        while num>0:
+            ans = lis[num%16]+ans
+            num = num//16
+        return ans
+```
+
+```python
+# Discussionのコードにコメントを付与して理解
+class Solution:
+    def toHex(self, num: int) -> str:
+        if num==0:
+            return '0'
+        mp = '0123456789abcdef'
+        ans = ''
+        # 32bitなので32/4=8回処理を実行
+        for i in range(8):
+            # 2進数の下4桁を抽出
+            n = num & 15
+            c = mp[n]
+            ans = c + ans
+            # ansに転記済の2進数下4桁を削除
+            num = num >> 4
+        # 8回処理を行う際に先頭に付与される0をlstrip()で削除
+        return ans.lstrip('0')
+```
+
+### 1.1.67. [409. Longest Palindrome](https://leetcode.com/problems/longest-palindrome/)
+
+- 回文は「偶数の文字+奇数の文字1種類」で構成されていることを元に実装
+    - 最初、奇数の文字も-1すれば回文に組み込めることを見逃していた
+- Solutionでは貪欲法での解法が解説されていた
+    - 考え方は同じ
+    - どこらへんが貪欲法なのだろうか...
+
+```python
+# 自力実装
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        # 文字の数を辞書化
+        dic = {}
+        for x in s:
+            dic[x] = dic.get(x, 0)+1
+        # 偶数の文字を任意の数と2以上の奇数の文字-1の合計を答えとする
+        ans = 0
+        odd = 0
+        for k in dic:
+            if dic[k]%2==0:
+                ans += dic[k]
+            elif 1<dic[k]:  # 奇数-1も回文に使える
+                ans += dic[k]-1
+                odd = 1
+            else:  # 奇数が1つでもあれば+1しなければならない
+                odd = 1
+        return ans+odd
+```
+
+```python
+# Solution参考に実装
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        # 文字の数を辞書化
+        dic = {}
+        for x in s:
+            dic[x] = dic.get(x, 0)+1
+        # 偶数の文字を任意の数と2以上の奇数の文字-1の合計を答えとする
+        ans = 0
+        for k in dic:
+            ans += dic[k]//2*2
+            if ans%2==0 and dic[k]%2==1:  # 奇数が1つでもあれば+1しなければならない(1度だけ)
+                ans += 1
         return ans
 ```
