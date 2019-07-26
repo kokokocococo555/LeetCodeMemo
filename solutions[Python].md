@@ -82,6 +82,8 @@
     - [1.1.65. ▲401. Binary Watch](#1165-%E2%96%B2401-binary-watch)
     - [1.1.66. ▲405. Convert a Number to Hexadecimal](#1166-%E2%96%B2405-convert-a-number-to-hexadecimal)
     - [1.1.67. 409. Longest Palindrome](#1167-409-longest-palindrome)
+    - [412. Fizz Buzz](#412-fizz-buzz)
+    - [414. Third Maximum Number](#414-third-maximum-number)
 
 <!-- /TOC -->
 
@@ -2766,4 +2768,92 @@ class Solution:
             if ans%2==0 and dic[k]%2==1:  # 奇数が1つでもあれば+1しなければならない(1度だけ)
                 ans += 1
         return ans
+```
+
+### [412. Fizz Buzz](https://leetcode.com/problems/fizz-buzz/)
+
+- 普通のFizzBuzz問題を普通に解いた
+- Solutionによると、普通に条件分岐で解くのではFizzBuzzJazzのように数が増えたときに対応できない
+    - 文字列を結合していく方法が紹介されていた
+
+```python
+# 自力実装
+class Solution:
+    def fizzBuzz(self, n: int) -> List[str]:
+        ans = []
+        for i in range(1, n+1):
+            if i%3==0 and i%5==0:
+                i = "FizzBuzz"
+            elif i%3==0:
+                i = "Fizz"
+            elif i%5==0:
+                i = "Buzz"
+            else:
+                i = str(i)
+            ans.append(i)
+        return ans
+```
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def fizzBuzz(self, n: int) -> List[str]:
+        ans = []
+        dic = {3: "Fizz", 5: "Buzz"}
+        for i in range(1, n+1):
+            ans_str = ""
+            for k, v in dic.items():
+                if i%k==0:
+                    ans_str += v
+            if not ans_str:
+                ans_str = str(i)
+            ans.append(ans_str)
+        return ans
+```
+
+### [414. Third Maximum Number](https://leetcode.com/problems/third-maximum-number/)
+
+- ユニークなリストを作成し、ソートして長さに応じて出力を変更する
+    - おそらくソートでO(n)を超えるため、期待される実装ではない
+- Discussionでは最初に1st, 2nd, 3rdに`float("-inf")`をいれておいて、順に比較して値を更新していく方法が採られていた
+
+```python
+# 自力実装
+class Solution:
+    def thirdMax(self, nums: List[int]) -> int:
+        maximum = 0
+        second_maximun = 0
+        third_maximum = 0
+        cnt = 0
+        u_nums = {}
+        for i in nums:
+            u_nums[i] = 1
+
+        u_nums_keys = list(u_nums.keys())
+        u_nums_keys.sort()
+        if len(u_nums_keys)==1:
+            return u_nums_keys[0]
+        elif len(u_nums_keys)==2:
+            return u_nums_keys[1]
+        else:
+            return u_nums_keys[-3]
+```
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def thirdMax(self, nums: List[int]) -> int:
+        v = [float("-inf"), float("-inf"), float("-inf")]
+        for i in nums:
+            if i not in v:
+                if v[0]<i:
+                    v[0], v[1], v[2] = i, v[0], v[1]
+                elif v[1]<i:
+                    v[1], v[2] = i, v[1]
+                elif v[2]<i:
+                    v[2] = i
+        if float("-inf") in v:
+            return v[0]
+        else:
+            return v[2]
 ```
