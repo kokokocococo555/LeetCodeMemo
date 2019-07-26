@@ -20,6 +20,7 @@
     - [1.1.10. 235. Lowest Common Ancestor of a Binary Search Tree](#1110-235-lowest-common-ancestor-of-a-binary-search-tree)
     - [1.1.11. ▲257. Binary Tree Paths](#1111-%E2%96%B2257-binary-tree-paths)
     - [1.1.12. 404. Sum of Left Leaves](#1112-404-sum-of-left-leaves)
+    - [1.1.13. 429. N-ary Tree Level Order Traversal](#1113-429-n-ary-tree-level-order-traversal)
 
 <!-- /TOC -->
 
@@ -584,4 +585,61 @@ class Solution:
             return root.left.val + self.sumOfLeftLeaves(root.right)
         else:
             return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
+```
+
+### 1.1.13. [429. N-ary Tree Level Order Traversal](https://leetcode.com/problems/n-ary-tree-level-order-traversal/)
+
+- DFS?で解いた
+- 問題の建て付け的にはBFSそのもの
+- DiscussionでもBFSで解かれていた
+
+```python
+# 自力実装
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, children):
+        self.val = val
+        self.children = children
+"""
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        if not root:
+            return []
+        if not root.children:
+            return [[root.val]]
+        ans = []
+        tmp = []
+        stack = [[root]]
+        while stack:
+            tmp = []
+            tmp_children = []
+            children = stack.pop(0)
+            while children:
+                node = children.pop(0)
+                tmp.append(node.val)
+                tmp_children.extend(node.children)
+            if tmp:
+                ans.append(tmp)
+            if tmp_children:
+                stack.append(tmp_children)
+        return ans
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        q, ret = [root], []
+        while any(q):
+            ret.append([node.val for node in q])
+            # q = [child for node in q for child in node.children if child]  # これを書き下すと以下のfor文になる
+            # ---ここから---
+            tmp, q = q, []
+            for node in tmp:
+                for child in node.children:
+                    if child:
+                        q.append(child)
+            # ---ここまで---
+        return ret
 ```

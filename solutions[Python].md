@@ -82,8 +82,9 @@
     - [1.1.65. ▲401. Binary Watch](#1165-%E2%96%B2401-binary-watch)
     - [1.1.66. ▲405. Convert a Number to Hexadecimal](#1166-%E2%96%B2405-convert-a-number-to-hexadecimal)
     - [1.1.67. 409. Longest Palindrome](#1167-409-longest-palindrome)
-    - [412. Fizz Buzz](#412-fizz-buzz)
-    - [414. Third Maximum Number](#414-third-maximum-number)
+    - [1.1.68. 412. Fizz Buzz](#1168-412-fizz-buzz)
+    - [1.1.69. 414. Third Maximum Number](#1169-414-third-maximum-number)
+    - [1.1.70. 415. Add Strings](#1170-415-add-strings)
 
 <!-- /TOC -->
 
@@ -2770,7 +2771,7 @@ class Solution:
         return ans
 ```
 
-### [412. Fizz Buzz](https://leetcode.com/problems/fizz-buzz/)
+### 1.1.68. [412. Fizz Buzz](https://leetcode.com/problems/fizz-buzz/)
 
 - 普通のFizzBuzz問題を普通に解いた
 - Solutionによると、普通に条件分岐で解くのではFizzBuzzJazzのように数が増えたときに対応できない
@@ -2811,7 +2812,7 @@ class Solution:
         return ans
 ```
 
-### [414. Third Maximum Number](https://leetcode.com/problems/third-maximum-number/)
+### 1.1.69. [414. Third Maximum Number](https://leetcode.com/problems/third-maximum-number/)
 
 - ユニークなリストを作成し、ソートして長さに応じて出力を変更する
     - おそらくソートでO(n)を超えるため、期待される実装ではない
@@ -2856,4 +2857,27 @@ class Solution:
             return v[0]
         else:
             return v[2]
+```
+
+### 1.1.70. [415. Add Strings](https://leetcode.com/problems/add-strings/)
+
+- どこまで許されるのかが分からず
+- Discussionを見るに、1桁ずつ数値化するなら問題なさそう
+    - 1桁ずつ足し算していく練習？
+
+```python
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        num1 = list(num1)
+        num2 = list(num2)
+        ans = []
+        carry = 0
+        while len(num1)>0 or len(num2)>0:
+            n1 = ord(num1.pop())-ord("0") if len(num1)>0 else 0
+            n2 = ord(num2.pop())-ord("0") if len(num2)>0 else 0
+            tmp = n1+n2+carry
+            ans.append(tmp%10)
+            carry = tmp//10
+        if carry>0: ans.append(carry)
+        return "".join([str(i) for i in ans])[::-1]
 ```
