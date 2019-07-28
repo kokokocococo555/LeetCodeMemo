@@ -85,6 +85,7 @@
     - [1.1.68. 412. Fizz Buzz](#1168-412-fizz-buzz)
     - [1.1.69. 414. Third Maximum Number](#1169-414-third-maximum-number)
     - [1.1.70. 415. Add Strings](#1170-415-add-strings)
+    - [1.1.71. 434. Number of Segments in a String](#1171-434-number-of-segments-in-a-string)
 
 <!-- /TOC -->
 
@@ -2878,6 +2879,39 @@ class Solution:
             tmp = n1+n2+carry
             ans.append(tmp%10)
             carry = tmp//10
-        if carry>0: ans.append(carry)
+        if carry>0: ans.append(carry)(
         return "".join([str(i) for i in ans])[::-1]
+```
+
+### 1.1.71. [434. Number of Segments in a String](https://leetcode.com/problems/number-of-segments-in-a-string/)
+
+- whileループでスペースを飛ばす・文字列を飛ばす、を繰り返す
+- Solutionではbuilt-inのメソッドを使用する、前の文字がスペースかつ今の文字がスペース以外の数をカウントする、という解法が紹介されていた
+
+```python
+# 自力実装
+class Solution:
+    def countSegments(self, s: str) -> int:
+        ans = 0
+        i = 0
+        while i<len(s) and s[i]==" ":
+            i += 1
+        while i<len(s):
+            while i<len(s) and s[i]!=" ":
+                i += 1
+            ans += 1
+            while i<len(s) and s[i]==" ":
+                i += 1
+        return ans
+```
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def countSegments(self, s: str) -> int:
+        ans = 0
+        for i in range(len(s)):
+            if (i==0 or s[i-1]==" ") and s[i]!=" ":
+                ans += 1
+        return ans
 ```
