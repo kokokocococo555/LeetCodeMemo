@@ -21,7 +21,7 @@
     - [1.1.11. ▲257. Binary Tree Paths](#1111-%E2%96%B2257-binary-tree-paths)
     - [1.1.12. 404. Sum of Left Leaves](#1112-404-sum-of-left-leaves)
     - [1.1.13. ▲429. N-ary Tree Level Order Traversal](#1113-%E2%96%B2429-n-ary-tree-level-order-traversal)
-    - [437. Path Sum III](#437-path-sum-iii)
+    - [1.1.14. ▲437. Path Sum III](#1114-%E2%96%B2437-path-sum-iii)
 
 <!-- /TOC -->
 
@@ -645,5 +645,54 @@ class Solution:
         return ret
 ```
 
-### [437. Path Sum III](https://leetcode.com/problems/path-sum-iii/)
+### 1.1.14. ▲[437. Path Sum III](https://leetcode.com/problems/path-sum-iii/)
 
+- ちょっとよく分からない
+- ▲Discussionではブルートフォース（再帰的方法）とキャッシュを使った方法が紹介されていた
+    - 要復習
+    - 再帰的な方法ではtarget引数にtarget-valを入れることで、合計状態を次に伝えている
+- 112., 113.も参考に
+
+```python
+# Discussionをコピペしてコメントを付与
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: int
+        """
+        self.numOfPaths = 0
+        self.dfs(root, sum)
+        return self.numOfPaths
+    
+    def dfs(self, node, target):
+        """
+        始点を下っていきながらtest()を順次実行していく
+        """
+        if node is None:
+            return 
+        self.test(node, target)
+        # targetをval分だけ減らしてツリーを下っていく
+        self.dfs(node.left, target)
+        self.dfs(node.right, target)
+        
+    def test(self, node, target):
+        """
+        targetをval分だけ減らしながらツリーを下り、途中でsumに合致すればカウントを増やす
+        """
+        if node is None:
+            return
+        if node.val == target:
+            self.numOfPaths += 1
+        self.test(node.left, target-node.val)
+        self.test(node.right, target-node.val)
+```
