@@ -86,6 +86,9 @@
     - [1.1.69. 414. Third Maximum Number](#1169-414-third-maximum-number)
     - [1.1.70. 415. Add Strings](#1170-415-add-strings)
     - [1.1.71. 434. Number of Segments in a String](#1171-434-number-of-segments-in-a-string)
+    - [1.1.72. 441. Arranging Coins](#1172-441-arranging-coins)
+    - [1.1.73. ▲443. String Compression](#1173-%E2%96%B2443-string-compression)
+    - [1.1.74. ▲447. Number of Boomerangs](#1174-%E2%96%B2447-number-of-boomerangs)
 
 <!-- /TOC -->
 
@@ -2915,3 +2918,67 @@ class Solution:
                 ans += 1
         return ans
 ```
+
+### 1.1.72. [441. Arranging Coins](https://leetcode.com/problems/arranging-coins/)
+
+- 連続数の合計の式を使いつつ、二分探索した
+- Discussionでは式を解いてしまうことで答えを出していた
+
+```python
+# 自力実装
+class Solution:
+    def arrangeCoins(self, n: int) -> int:
+        l = 0
+        r = n
+        while l<=r:
+            mid = (l+r)//2
+            if ((1+mid)*mid)//2<=n and n<((1+(mid+1))*(mid+1))//2:
+                return mid
+            elif n<((1+mid)*mid)//2:
+                r = mid-1
+            else:
+                l = mid+1
+```
+
+### 1.1.73. ▲[443. String Compression](https://leetcode.com/problems/string-compression/)
+
+- 2つのポインタを使用して解いた
+- ▲Solutionは3つのポインタで解いている
+    - `anchor`という、同一文字ブロックの開始点を保持するポインタが活用されている
+
+```python
+# 自力実装
+class Solution:
+    def compress(self, chars: List[str]) -> int:
+        if len(chars)<=1:
+            return len(chars)
+        ps = 1
+        pf = 1
+        while pf<len(chars):
+            cnt = 1
+            while pf<len(chars) and chars[pf-1]==chars[pf]:
+                cnt += 1
+                pf += 1
+            if cnt==0:
+                pf += 1
+                ps += 1
+            else:
+                if cnt>=10:
+                    for x in str(cnt):
+                        chars[ps] = x
+                        ps += 1
+                elif cnt>1:
+                    chars[ps]=str(cnt)
+                    ps += 1
+                if pf<len(chars) and ps<len(chars):
+                    chars[ps] = chars[pf]
+                    pf += 1
+                    ps += 1
+        del chars[ps:]
+        return len(chars)
+```
+
+### 1.1.74. ▲[447. Number of Boomerangs](https://leetcode.com/problems/number-of-boomerangs/)
+
+- 問題文の意味が分からなかった
+    - Discussionを見ても分からない
