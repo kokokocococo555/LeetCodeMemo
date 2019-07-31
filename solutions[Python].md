@@ -89,6 +89,7 @@
     - [1.1.72. 441. Arranging Coins](#1172-441-arranging-coins)
     - [1.1.73. ▲443. String Compression](#1173-%E2%96%B2443-string-compression)
     - [1.1.74. ▲447. Number of Boomerangs](#1174-%E2%96%B2447-number-of-boomerangs)
+    - [▲448. Find All Numbers Disappeared in an Array](#%E2%96%B2448-find-all-numbers-disappeared-in-an-array)
 
 <!-- /TOC -->
 
@@ -2982,3 +2983,18 @@ class Solution:
 
 - 問題文の意味が分からなかった
     - Discussionを見ても分からない
+
+### ▲[448. Find All Numbers Disappeared in an Array](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)
+
+- 難しい...。ソートして解こうとしてもだめ。
+- ▲Discussionではリスト内の各要素をインデックスと見なし、該当インデックスの値を負に変換していくことで、正のままだった数値のインデックス+1が抜けている値と見なす方法が採られていた
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        for i in range(len(nums)):
+            idx = abs(nums[i])-1
+            nums[idx] = -abs(nums[idx])
+        return [i+1 for i in range(len(nums)) if nums[i]>0]
+```
