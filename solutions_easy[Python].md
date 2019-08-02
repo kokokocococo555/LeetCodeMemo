@@ -1,6 +1,7 @@
-# 1. LeetCode勉強記録（Python編）
+# 1. LeetCode勉強記録（Python編）_Easy
 
 - LeetCodeの勉強記録
+    - Easy問題編
 - 自力で実装したコードの他にも、Solution, Discussionに投稿されている内容等を参照し、自分でも実装してみる
 - 復習が必要な問題には▲をつけている
 - 使用言語は`Python`
@@ -13,7 +14,7 @@
 
 <!-- TOC -->
 
-- [1. LeetCode勉強記録（Python編）](#1-leetcode%E5%8B%89%E5%BC%B7%E8%A8%98%E9%8C%B2python%E7%B7%A8)
+- [1. LeetCode勉強記録（Python編）_Easy](#1-leetcode%E5%8B%89%E5%BC%B7%E8%A8%98%E9%8C%B2python%E7%B7%A8easy)
   - [1.1. Easy](#11-easy)
     - [1.1.1. 1. Two Sum](#111-1-two-sum)
     - [1.1.2. 7. Reverse Integer](#112-7-reverse-integer)
@@ -89,7 +90,7 @@
     - [1.1.72. 441. Arranging Coins](#1172-441-arranging-coins)
     - [1.1.73. ▲443. String Compression](#1173-%E2%96%B2443-string-compression)
     - [1.1.74. ▲447. Number of Boomerangs](#1174-%E2%96%B2447-number-of-boomerangs)
-    - [▲448. Find All Numbers Disappeared in an Array](#%E2%96%B2448-find-all-numbers-disappeared-in-an-array)
+    - [1.1.75. ▲448. Find All Numbers Disappeared in an Array](#1175-%E2%96%B2448-find-all-numbers-disappeared-in-an-array)
 
 <!-- /TOC -->
 
@@ -2984,7 +2985,7 @@ class Solution:
 - 問題文の意味が分からなかった
     - Discussionを見ても分からない
 
-### ▲[448. Find All Numbers Disappeared in an Array](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)
+### 1.1.75. ▲[448. Find All Numbers Disappeared in an Array](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)
 
 - 難しい...。ソートして解こうとしてもだめ。
 - ▲Discussionではリスト内の各要素をインデックスと見なし、該当インデックスの値を負に変換していくことで、正のままだった数値のインデックス+1が抜けている値と見なす方法が採られていた

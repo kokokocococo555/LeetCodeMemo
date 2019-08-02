@@ -1,13 +1,14 @@
-# 1. LeetCode勉強記録（Python_LinkedList編）
+# 1. LeetCode勉強記録（Python_LinkedList編）_Easy
 
 - LeetCodeの勉強記録
     - LinkedListの問題
+    - Easy編
 - その他詳細・雑感は[solutions[Python].md](https://github.com/kokokocococo555/LeetCodeMemo/blob/master/solutions%5BPython%5D.md)の冒頭参照
 
 
 <!-- TOC -->
 
-- [1. LeetCode勉強記録（Python_LinkedList編）](#1-leetcode%E5%8B%89%E5%BC%B7%E8%A8%98%E9%8C%B2pythonlinkedlist%E7%B7%A8)
+- [1. LeetCode勉強記録（Python_LinkedList編）_Easy](#1-leetcode%E5%8B%89%E5%BC%B7%E8%A8%98%E9%8C%B2pythonlinkedlist%E7%B7%A8easy)
   - [1.1. Easy](#11-easy)
     - [1.1.1. ▲21. Merge Two Sorted Lists](#111-%E2%96%B221-merge-two-sorted-lists)
     - [1.1.2. ▲83. Remove Duplicates from Sorted List](#112-%E2%96%B283-remove-duplicates-from-sorted-list)
@@ -367,4 +368,3 @@ class Solution:
         node.val = node.next.val
         node.next = node.next.next
 ```
-
