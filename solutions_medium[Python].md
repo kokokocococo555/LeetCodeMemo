@@ -11,7 +11,9 @@
 - [1. LeetCode勉強記録（Python編）_Medium](#1-leetcode%E5%8B%89%E5%BC%B7%E8%A8%98%E9%8C%B2python%E7%B7%A8medium)
   - [1.1. Medium](#11-medium)
     - [1.1.1. ▲3. Longest Substring Without Repeating Characters](#111-%E2%96%B23-longest-substring-without-repeating-characters)
-    - [▲5. Longest Palindromic Substring](#%E2%96%B25-longest-palindromic-substring)
+    - [1.1.2. ▲5. Longest Palindromic Substring](#112-%E2%96%B25-longest-palindromic-substring)
+    - [1.1.3. 6. ZigZag Conversion](#113-6-zigzag-conversion)
+    - [1.1.4. 8. String to Integer (atoi)](#114-8-string-to-integer-atoi)
 
 <!-- /TOC -->
 
@@ -74,7 +76,7 @@ class Solution:
         return ans
 ```
 
-### ▲[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
+### 1.1.2. ▲[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
 
 - 3.を参考にwindowをずらしながら検証していった
 - ▲Solutionでは、各文字を中心として左右に範囲を広げていき、どこまでが回文になっているかを順次確認していく方法などが採られていた
@@ -125,4 +127,85 @@ class Solution:
             start -= 1
             end += 1
         return end-start-1
+```
+
+### 1.1.3. [6. ZigZag Conversion](https://leetcode.com/problems/zigzag-conversion/submissions/)
+
+- 実際に文字を並び替えて1つ1つのインデックスを確認した
+- Solutionも似たような感じだった
+
+```python
+# 自力実装
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows==1:
+            return s
+        ans =""
+        cnt = 0
+        while cnt*2*(numRows-1)<len(s):
+            ans += s[cnt*2*(numRows-1)]
+            cnt += 1
+        for i in range(1, numRows-1):
+            cnt = 0
+            while cnt*2*(numRows-1)-i<len(s):
+                if cnt>0:
+                    ans += s[cnt*2*(numRows-1)-i]
+                if cnt*2*(numRows-1)+i<len(s):
+                    ans += s[cnt*2*(numRows-1)+i]
+                cnt += 1
+        cnt = 0
+        while cnt*2*(numRows-1)+numRows-1<len(s):
+            ans += s[cnt*2*(numRows-1)+numRows-1]
+            cnt += 1
+
+        return ans
+```
+
+```python
+# Solutionを参考にリファクタリング
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows==1:
+            return s
+        ans =""
+        for i in range(numRows):
+            cnt = 0
+            while cnt*2*(numRows-1)-i<len(s):
+                if cnt>0 and i!=0:
+                    ans += s[cnt*2*(numRows-1)-i]
+                if cnt*2*(numRows-1)+i<len(s) and i!=numRows-1:
+                    ans += s[cnt*2*(numRows-1)+i]
+                cnt += 1
+
+        return ans
+```
+
+### 1.1.4. [8. String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/)
+
+- 条件を満たすようにif文、while文を使用
+- Discussionも似た感じ。正規表現を使っている解法もあった
+
+```python
+# 自力実装
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        dic = {}
+        for i in range(48, 59):
+            dic[chr(i)] = 0
+
+        p = 0
+        ans = ""
+        while p<len(s) and s[p]==" ":
+            p += 1
+        if p<len(s) and (s[p]=="-" or s[p]=="+"):
+            ans += s[p]
+            p += 1
+        while p<len(s) and s[p] in dic:
+            ans += s[p]
+            p += 1
+
+        if ans=="" or ans=="-" or ans=="+":
+            return 0
+        else:
+            return min(max(int(ans), -2**31), 2**31-1)
 ```
