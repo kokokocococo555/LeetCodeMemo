@@ -14,6 +14,7 @@
     - [1.1.2. ▲5. Longest Palindromic Substring](#112-%E2%96%B25-longest-palindromic-substring)
     - [1.1.3. 6. ZigZag Conversion](#113-6-zigzag-conversion)
     - [1.1.4. 8. String to Integer (atoi)](#114-8-string-to-integer-atoi)
+    - [1.1.5. ▲11. Container With Most Water](#115-%E2%96%B211-container-with-most-water)
 
 <!-- /TOC -->
 
@@ -208,4 +209,28 @@ class Solution:
             return 0
         else:
             return min(max(int(ans), -2**31), 2**31-1)
+```
+
+### 1.1.5. ▲[11. Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
+
+- windowをずらしていく方法で実装したが、TLE
+    - 2重ループになっていたから仕方ない
+- ▲Solutionでは左右からポインタを狭めていく方法をとっていた
+    - 似たようなことは考えたが、考えきれなかった
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        l = 0
+        r = len(height)-1
+        ans = 0
+        while l<r:
+            s = min(height[l], height[r])*(r-l)
+            ans = max(ans, s)
+            if height[l]<height[r]:
+                l += 1
+            else:
+                r -= 1
+        return ans
 ```
