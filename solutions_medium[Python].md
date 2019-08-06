@@ -15,6 +15,8 @@
     - [1.1.3. 6. ZigZag Conversion](#113-6-zigzag-conversion)
     - [1.1.4. 8. String to Integer (atoi)](#114-8-string-to-integer-atoi)
     - [1.1.5. ▲11. Container With Most Water](#115-%E2%96%B211-container-with-most-water)
+    - [1.1.6. 12. Integer to Roman](#116-12-integer-to-roman)
+    - [1.1.7. 15. 3Sum](#117-15-3sum)
 
 <!-- /TOC -->
 
@@ -232,5 +234,115 @@ class Solution:
                 l += 1
             else:
                 r -= 1
+        return ans
+```
+
+### 1.1.6. [12. Integer to Roman](https://leetcode.com/problems/integer-to-roman/)
+
+- できるだけ条件分岐が少なくなるようにした
+- Solutionでは4, 9といった場合のRomanも使用していた
+
+```python
+# 自力実装
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        dic = {
+            1: "I",
+            5: "V",
+            10: "X",
+            50: "L",
+            100: "C",
+            500: "D",
+            1000: "M",
+            5000: "",  # dummy
+            10000: "",  # dummy
+        }
+        dig = 0
+        ans = ""
+        while num>0:
+            n = num%10
+            num = num//10
+            if n==4 or n==9:
+                ans = dic[1*(10**dig)]+dic[(n+1)*(10**dig)]+ans
+            else:
+                ans = dic[5*(10**dig)]*(n//5)+dic[1*(10**dig)]*(n%5)+ans
+            dig += 1
+        return ans
+```
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        strs = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+        nums = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        ans = ""
+        for s, n in zip(strs, nums):
+            ans += s*(num//n)
+            num %= n
+        return ans
+```
+
+### 1.1.7. [15. 3Sum](https://leetcode.com/problems/3sum/)
+
+- 3重ループに工夫を加えたものの、TLE
+- 2つ目のループと3つ目のループを融合し、O(N**2)で抑える
+    - 合計値の正負に応じて左右から範囲を狭めていく
+
+```python
+# 自力実装（TLE）
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        n = len(nums)
+        u_nums = list(set(nums))
+        p1, p2, p3 =0, 0, 0
+        ans = []
+        while p1<n-2 and nums[p1]<=0:
+            if p1==0 or nums[p1-1]!=nums[p1]:
+                p2 = p1+1
+                p2flg = True
+                while p1<p2 and p2<n-1:
+                    if p2flg==True:
+                        p3 = n-1
+                        while p2<p3 and p3<n:
+                            if nums[p1]+nums[p2]+nums[p3]<=0:
+                                if nums[p1]+nums[p2]+nums[p3]==0:
+                                    ans.append([nums[p1], nums[p2], nums[p3]])
+                                p3 = p2-1
+                            else:
+                                p3 -= 1
+                    p2n = nums[p2]
+                    p2 += 1
+                    p2flg = nums[p2]!=p2n
+            p1 += 1
+        return ans
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        n = len(nums)
+        ans = []
+        for p1 in range(n-2):
+            if p1>0 and nums[p1-1]==nums[p1]:
+                continue
+            l, r = p1+1, n-1
+            while l<r:
+                sum3 = nums[p1]+nums[l]+nums[r]
+                if sum3<0:
+                    l += 1
+                elif 0<sum3:
+                    r -= 1
+                else:
+                    ans.append([nums[p1], nums[l], nums[r]])
+                    while l<r and nums[l]==nums[l+1]:
+                        l += 1
+                    while l<r and nums[r-1]==nums[r]:
+                        r -= 1
+                    l += 1
+                    r -= 1
         return ans
 ```
