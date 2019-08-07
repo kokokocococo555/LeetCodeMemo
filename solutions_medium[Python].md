@@ -16,7 +16,9 @@
     - [1.1.4. 8. String to Integer (atoi)](#114-8-string-to-integer-atoi)
     - [1.1.5. ▲11. Container With Most Water](#115-%E2%96%B211-container-with-most-water)
     - [1.1.6. 12. Integer to Roman](#116-12-integer-to-roman)
-    - [1.1.7. 15. 3Sum](#117-15-3sum)
+    - [1.1.7. ▲15. 3Sum](#117-%E2%96%B215-3sum)
+    - [16. 3Sum Closest](#16-3sum-closest)
+    - [▲17. Letter Combinations of a Phone Number](#%E2%96%B217-letter-combinations-of-a-phone-number)
 
 <!-- /TOC -->
 
@@ -283,10 +285,10 @@ class Solution:
         return ans
 ```
 
-### 1.1.7. [15. 3Sum](https://leetcode.com/problems/3sum/)
+### 1.1.7. ▲[15. 3Sum](https://leetcode.com/problems/3sum/)
 
 - 3重ループに工夫を加えたものの、TLE
-- 2つ目のループと3つ目のループを融合し、O(N**2)で抑える
+- ▲Discussionでは2つ目のループと3つ目のループを融合し、O(N**2)で抑えている
     - 合計値の正負に応じて左右から範囲を狭めていく
 
 ```python
@@ -345,4 +347,93 @@ class Solution:
                     l += 1
                     r -= 1
         return ans
+```
+
+### [16. 3Sum Closest](https://leetcode.com/problems/3sum-closest/)
+
+- 15.を応用した
+
+```python
+# 自力実装
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        diff = float("inf")
+        nums.sort()
+        for i in range(len(nums)):
+            l, r = i+1, len(nums)-1
+            while l<r:
+                n_sum = nums[i]+nums[l]+nums[r]
+                if n_sum==target:
+                    return n_sum
+                elif abs(n_sum-target)<diff:
+                    diff = abs(n_sum-target)
+                    ret = n_sum
+
+                if n_sum-target<0:
+                    l += 1
+                else:
+                    r -= 1
+        return ret
+```
+
+### ▲[17. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
+
+- for文を組み合わせて実装
+- ▲Solutionによると、[`backtracking`](https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%83%E3%82%AF%E3%83%88%E3%83%A9%E3%83%83%E3%82%AD%E3%83%B3%E3%82%B0)というアルゴリズムがあるらしい
+    - 再帰呼び出しの深さ優先探索の一種
+
+```python
+# 自力実装
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if len(digits)==0:
+            return []
+        dic ={
+            "2": "abc",
+            "3": "def",
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "pqrs",
+            "8": "tuv",
+            "9": "wxyz"
+        }
+        ret = [x for x in dic[digits[0]]]
+        for i in digits[1:]:
+            tmp1 = []
+            tmp2 = []
+            for st in ret:
+                tmp1 = [st+x for x in dic[i]]
+                tmp2.extend(tmp1)
+                ret = tmp2
+        return ret
+```
+
+```python
+# Solutionを参考に実装(backtrack)
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if len(digits)==0:
+            return []
+        DIC ={
+            "2": "abc",
+            "3": "def",
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "pqrs",
+            "8": "tuv",
+            "9": "wxyz"
+        }
+
+        def backtrack(combination, next_digits):
+            if len(next_digits)==0:
+                ret.append(combination)
+            else:
+                for x in DIC[next_digits[0]]:
+                    backtrack(combination+x, next_digits[1:])
+
+        ret = []
+        backtrack("", digits)
+        return ret
 ```
