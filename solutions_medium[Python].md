@@ -17,8 +17,9 @@
     - [1.1.5. ▲11. Container With Most Water](#115-%E2%96%B211-container-with-most-water)
     - [1.1.6. 12. Integer to Roman](#116-12-integer-to-roman)
     - [1.1.7. ▲15. 3Sum](#117-%E2%96%B215-3sum)
-    - [16. 3Sum Closest](#16-3sum-closest)
-    - [▲17. Letter Combinations of a Phone Number](#%E2%96%B217-letter-combinations-of-a-phone-number)
+    - [1.1.8. 16. 3Sum Closest](#118-16-3sum-closest)
+    - [1.1.9. ▲17. Letter Combinations of a Phone Number](#119-%E2%96%B217-letter-combinations-of-a-phone-number)
+    - [1.1.10. ▲18. 4Sum](#1110-%E2%96%B218-4sum)
 
 <!-- /TOC -->
 
@@ -349,7 +350,7 @@ class Solution:
         return ans
 ```
 
-### [16. 3Sum Closest](https://leetcode.com/problems/3sum-closest/)
+### 1.1.8. [16. 3Sum Closest](https://leetcode.com/problems/3sum-closest/)
 
 - 15.を応用した
 
@@ -376,7 +377,7 @@ class Solution:
         return ret
 ```
 
-### ▲[17. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
+### 1.1.9. ▲[17. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
 
 - for文を組み合わせて実装
 - ▲Solutionによると、[`backtracking`](https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%83%E3%82%AF%E3%83%88%E3%83%A9%E3%83%83%E3%82%AD%E3%83%B3%E3%82%B0)というアルゴリズムがあるらしい
@@ -436,4 +437,38 @@ class Solution:
         ret = []
         backtrack("", digits)
         return ret
+```
+
+### 1.1.10. ▲[18. 4Sum](https://leetcode.com/problems/4sum/)
+
+- 解けなかった
+- ▲Discussionでは2Sum問題に分解して解いていた
+    - 要復習
+
+```python
+# https://leetcode.com/problems/4sum/discuss/128591/Easy-to-understand-python-Solution をコピー
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        d = dict()
+        for i in range(len(nums)):
+            for j in range(i+1,len(nums)):
+                sum2 = nums[i]+nums[j]
+                if sum2 in d:
+                    d[sum2].append((i,j))
+                else:
+                    d[sum2] = [(i,j)]
+
+        result = set()
+        for key in d:
+            value = target - key
+            if value in d:
+                list1 = d[key]
+                list2 = d[value]
+                for (i,j) in list1:
+                    for (k,l) in list2:
+                        if i!=k and i!=l and j!=k and j!=l:
+                            flist = [nums[i],nums[j],nums[k],nums[l]]
+                            flist.sort()
+                            result.add(tuple(flist))
+        return list(result)
 ```
