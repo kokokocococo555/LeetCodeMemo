@@ -11,6 +11,7 @@
 - [1. LeetCode勉強記録（Python_LinkedList編）_Easy](#1-leetcode%E5%8B%89%E5%BC%B7%E8%A8%98%E9%8C%B2pythonlinkedlist%E7%B7%A8easy)
   - [1.1. Medium](#11-medium)
     - [1.1.1. 2. Add Two Numbers](#111-2-add-two-numbers)
+    - [1.1.2. ▲19. Remove Nth Node From End of List](#112-%E2%96%B219-remove-nth-node-from-end-of-list)
 
 <!-- /TOC -->
 
@@ -90,4 +91,55 @@ class Solution:
         if carry>0:
             ans.next = ListNode(carry)
         return head.next
+```
+
+### 1.1.2. ▲[19. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
+
+- 最初に一度全リストをスキャンして長さを得る
+- その後、改めてリストを辿っていって、指定の位置のノードを飛ばして繋げる
+- ▲Solutionでは長さを得るためのスキャンを無しにして、代わりにnの差がある2つのポインタを使用している
+
+```python
+# 自力実装
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        cnt = 0
+        tmp = head
+        while tmp:
+            cnt += 1
+            tmp = tmp.next
+        if cnt==1:
+            return None
+        ans = head
+        ret = ans
+        for i in range(cnt-1):
+            if i>=cnt-n:
+                ans.val = ans.next.val
+            if i==cnt-2:
+                ans.next = None
+            ans = ans.next
+        return ret
+```
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        dummy = ListNode(0)
+        dummy.next = head
+        p1, p2 = dummy, dummy
+        for _ in range(n+1):
+            p1 = p1.next
+        while p1:
+            p1 = p1.next
+            p2 = p2.next
+        p2.next = p2.next.next
+        return dummy.next
 ```

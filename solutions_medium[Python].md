@@ -20,6 +20,7 @@
     - [1.1.8. 16. 3Sum Closest](#118-16-3sum-closest)
     - [1.1.9. ▲17. Letter Combinations of a Phone Number](#119-%E2%96%B217-letter-combinations-of-a-phone-number)
     - [1.1.10. ▲18. 4Sum](#1110-%E2%96%B218-4sum)
+    - [1.1.11. 22. Generate Parentheses](#1111-22-generate-parentheses)
 
 <!-- /TOC -->
 
@@ -471,4 +472,28 @@ class Solution:
                             flist.sort()
                             result.add(tuple(flist))
         return list(result)
+```
+
+### 1.1.11. [22. Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
+
+- 妥当な`()`になる条件を考えたりもしたが、うまいことケースを列挙しつつ計算量を抑える方法が思いつかず、断念
+- Solutionでは`backtracking`が使用されていた
+    - 木構造的に再帰が進んでいく
+
+```python
+# Solutionを写経
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        ans = []
+        def backtrack(s="", l=0, r=0):
+            if len(s)==2*n:
+                ans.append(s)
+                return
+            if l<n:
+                backtrack(s+"(", l+1, r)
+            if r<l:
+                backtrack(s+")", l, r+1)
+
+        backtrack()
+        return ans
 ```
