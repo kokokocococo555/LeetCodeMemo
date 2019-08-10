@@ -21,6 +21,7 @@
     - [1.1.9. ▲17. Letter Combinations of a Phone Number](#119-%E2%96%B217-letter-combinations-of-a-phone-number)
     - [1.1.10. ▲18. 4Sum](#1110-%E2%96%B218-4sum)
     - [1.1.11. 22. Generate Parentheses](#1111-22-generate-parentheses)
+    - [1.1.12. ▲29. Divide Two Integers](#1112-%E2%96%B229-divide-two-integers)
 
 <!-- /TOC -->
 
@@ -496,4 +497,32 @@ class Solution:
 
         backtrack()
         return ans
+```
+
+### 1.1.12. ▲[29. Divide Two Integers](https://leetcode.com/problems/divide-two-integers/)
+
+- 掛け算、割り算、modを使用せずに商を求める
+- 引き算を繰り返す方法だとTLE
+- ▲Discussionではビットシフト`<<`を使用して引き算の試行を高速化していた
+    - 1bitシフトすると値が2倍になる
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        if dividend*divisor>=0:
+            c = 1
+        else:
+            c = -1
+        dividend = abs(dividend)
+        divisor = abs(divisor)
+        ret = 0
+        while dividend>=divisor:
+            tmp, i = divisor, 1
+            while dividend>=tmp:
+                dividend -= tmp
+                ret += i
+                i <<= 1  # ビットシフト
+                tmp <<= 1  # ビットシフト
+        return min(max(c*ret, -2147483648), 2147483647)  # overflow対策
 ```

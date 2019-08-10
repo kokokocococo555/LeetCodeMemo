@@ -12,6 +12,7 @@
   - [1.1. Medium](#11-medium)
     - [1.1.1. 2. Add Two Numbers](#111-2-add-two-numbers)
     - [1.1.2. ▲19. Remove Nth Node From End of List](#112-%E2%96%B219-remove-nth-node-from-end-of-list)
+    - [1.1.3. ▲24. Swap Nodes in Pairs](#113-%E2%96%B224-swap-nodes-in-pairs)
 
 <!-- /TOC -->
 
@@ -143,3 +144,13 @@ class Solution:
         p2.next = p2.next.next
         return dummy.next
 ```
+
+### 1.1.3. ▲[24. Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/)
+
+- 方針は立ったが、実装はできず
+    1. ペアの前のノード(後ろから2n番目)を最後尾にもってくる
+    2. ペアの後ろ以降のノード(後ろから2n-1番目)を、その中の先頭から順に最後尾にもってくる
+    3. 2.を2n-2回繰り返す
+    4. 1~3を`2n<len(head)`の間、繰り返す
+- ▲Discussionを見ると、自分が難しく考えすぎていたことが分かる
+    - 処理を追っても理解しきれず
