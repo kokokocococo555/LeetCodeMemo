@@ -22,6 +22,7 @@
     - [1.1.10. ▲18. 4Sum](#1110-%E2%96%B218-4sum)
     - [1.1.11. 22. Generate Parentheses](#1111-22-generate-parentheses)
     - [1.1.12. ▲29. Divide Two Integers](#1112-%E2%96%B229-divide-two-integers)
+    - [31. Next Permutation](#31-next-permutation)
 
 <!-- /TOC -->
 
@@ -525,4 +526,48 @@ class Solution:
                 i <<= 1  # ビットシフト
                 tmp <<= 1  # ビットシフト
         return min(max(c*ret, -2147483648), 2147483647)  # overflow対策
+```
+
+### [31. Next Permutation](https://leetcode.com/problems/next-permutation/)
+
+- 複雑な処理が必要そうでさっぱり分からん
+- Solution
+    - 終端から`a[i-1]<a[i]`となる`a[i-1]`を見つける
+    - `a[i:]`の中で`a[i-1]`より大きい最小の値`a[j]`と`a[i-1]`を交換
+    - `a[i:]`を昇順に並べ替え
+    - という手順
+
+```python
+# Solution(Java)を写経(Python)
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if len(nums)<2:
+            return
+        elif len(nums)==2:
+            nums[0], nums[1] = nums[1], nums[0]
+            return
+        
+        p = len(nums)-2
+        while 0<=p and nums[p]>=nums[p+1]:
+            p -= 1
+        if p>=0:
+            p2 = len(nums)-1
+            while 0<=p2 and nums[p2]<=nums[p]:
+                p2 -= 1
+            self.swap(nums, p, p2)
+        self.reverse(nums, p+1)
+
+    def reverse(self, nums, start):
+        i = start
+        j = len(nums)-1
+        while i<j:
+            self.swap(nums, i, j)
+            i += 1
+            j -= 1
+
+    def swap(self, nums, i, j):
+        nums[i], nums[j] = nums[j], nums[i]
 ```
