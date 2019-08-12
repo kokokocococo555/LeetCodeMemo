@@ -23,6 +23,7 @@
     - [1.1.11. 22. Generate Parentheses](#1111-22-generate-parentheses)
     - [1.1.12. ▲29. Divide Two Integers](#1112-%E2%96%B229-divide-two-integers)
     - [31. Next Permutation](#31-next-permutation)
+    - [33. Search in Rotated Sorted Array](#33-search-in-rotated-sorted-array)
 
 <!-- /TOC -->
 
@@ -570,4 +571,38 @@ class Solution:
 
     def swap(self, nums, i, j):
         nums[i], nums[j] = nums[j], nums[i]
+```
+
+### [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+
+- ずれた数だけ補正し、通常の二分探索のように解いた
+- Discussionでは、切れ目の前後どちらかをtargetに応じて-Inf, Infに置換した上で二分探索を行う方法や、`nums[l], nums[m], nums[r], target`の値の大小でうまくl, rを更新していく方法も紹介されていた
+    - elegant!
+
+```python
+# 自力実装
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        if n==0:
+            return -1
+        if n==1:
+            return 0 if nums[0]==target else -1
+        p = n-1
+        cnt = 1
+        while cnt<n and nums[p-1]<=nums[p]:
+            p -= 1
+            cnt += 1
+        l = 0
+        r = n-1
+        while l<=r:
+            m = (l+r)//2
+            m2 = m-cnt
+            if nums[m2]==target:
+                return m2 if m2>=0 else m2+n
+            elif nums[m2]<target:
+                l = m+1
+            elif nums[m2]>target:
+                r = m-1
+        return -1
 ```
