@@ -22,8 +22,10 @@
     - [1.1.10. ▲18. 4Sum](#1110-%E2%96%B218-4sum)
     - [1.1.11. 22. Generate Parentheses](#1111-22-generate-parentheses)
     - [1.1.12. ▲29. Divide Two Integers](#1112-%E2%96%B229-divide-two-integers)
-    - [31. Next Permutation](#31-next-permutation)
-    - [33. Search in Rotated Sorted Array](#33-search-in-rotated-sorted-array)
+    - [1.1.13. 31. Next Permutation](#1113-31-next-permutation)
+    - [1.1.14. 33. Search in Rotated Sorted Array](#1114-33-search-in-rotated-sorted-array)
+    - [1.1.15. 34. Find First and Last Position of Element in Sorted Array](#1115-34-find-first-and-last-position-of-element-in-sorted-array)
+    - [1.1.16. 36. Valid Sudoku](#1116-36-valid-sudoku)
 
 <!-- /TOC -->
 
@@ -529,7 +531,7 @@ class Solution:
         return min(max(c*ret, -2147483648), 2147483647)  # overflow対策
 ```
 
-### [31. Next Permutation](https://leetcode.com/problems/next-permutation/)
+### 1.1.13. [31. Next Permutation](https://leetcode.com/problems/next-permutation/)
 
 - 複雑な処理が必要そうでさっぱり分からん
 - Solution
@@ -573,7 +575,7 @@ class Solution:
         nums[i], nums[j] = nums[j], nums[i]
 ```
 
-### [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+### 1.1.14. [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
 
 - ずれた数だけ補正し、通常の二分探索のように解いた
 - Discussionでは、切れ目の前後どちらかをtargetに応じて-Inf, Infに置換した上で二分探索を行う方法や、`nums[l], nums[m], nums[r], target`の値の大小でうまくl, rを更新していく方法も紹介されていた
@@ -605,4 +607,101 @@ class Solution:
             elif nums[m2]>target:
                 r = m-1
         return -1
+```
+
+### 1.1.15. [34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+
+- 2回二分探索を行う
+
+```python
+# 自力実装
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        l = 0
+        r = len(nums)-1
+        ans1 = -1
+        while l<=r:
+            m = (l+r)//2
+            if nums[m]==target:
+                if m==0 or (m>0 and nums[m-1]<nums[m]):
+                    ans1 = m
+                    break
+                else:
+                    r = m-1
+            elif nums[m]<target:
+                l = m+1
+            elif nums[m]>target:
+                r = m-1
+
+        if ans1==-1:
+            return [-1, -1]
+
+        l = ans1
+        r = len(nums)-1
+        while l<=r:
+            m = (l+r)//2
+            if nums[m]==target:
+                if m==len(nums)-1 or (m<len(nums)-1 and nums[m]<nums[m+1]):
+                    ans2 = m
+                    break
+                else:
+                    l = m+1
+            elif nums[m]<target:
+                l = m+1
+            elif nums[m]>target:
+                r = m-1
+
+        return [ans1, ans2]
+```
+
+### 1.1.16. [36. Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
+
+- 9個の数字が条件を満たすかどうかを判定するメソッドを作成
+- 行、列、3*3の3種類それぞれのリストを作成し、判定用メソッドを適用
+- Discussionでは、`zip`や`set`を活用したシンプルな実装がなされていた
+    - https://leetcode.com/problems/valid-sudoku/discuss/15451/A-readable-Python-solution
+
+```python
+# 自力実装
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        # columns
+        col_board = [[] for _ in range(9)]
+        # 9*9
+        nine_board = [[] for _ in range(9)]
+        for i in range(len(board)):
+            lis = board[i]
+            # rows
+            if not self.isValid(lis):
+                return False
+
+            for j in range(len(lis)):
+                # columns
+                col_board[j].append(lis[j])
+                # 9*9
+                idx = (i//3)+((j//3)*3)
+                nine_board[idx].append(lis[j])
+        # columns
+        for col in col_board:
+            # print(col)
+            if not self.isValid(col):
+                return False
+        # 9*9
+        for nine in nine_board:
+            # print(nine)
+            if not self.isValid(nine):
+                return False
+            
+        return True
+
+
+    def isValid(self, lis):
+        dic = {}
+        for i in lis:
+            if i!=".":
+                dic[i] = dic.get(i, 0)+1
+                # print(dic[i])
+                if dic[i]==2:
+                    return False
+        return True
 ```
