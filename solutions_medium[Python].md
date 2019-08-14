@@ -26,6 +26,8 @@
     - [1.1.14. 33. Search in Rotated Sorted Array](#1114-33-search-in-rotated-sorted-array)
     - [1.1.15. 34. Find First and Last Position of Element in Sorted Array](#1115-34-find-first-and-last-position-of-element-in-sorted-array)
     - [1.1.16. 36. Valid Sudoku](#1116-36-valid-sudoku)
+    - [1.1.17. ▲39. Combination Sum](#1117-%E2%96%B239-combination-sum)
+    - [1.1.18. 40. Combination Sum II](#1118-40-combination-sum-ii)
 
 <!-- /TOC -->
 
@@ -704,4 +706,80 @@ class Solution:
                 if dic[i]==2:
                     return False
         return True
+```
+
+### 1.1.17. ▲[39. Combination Sum](https://leetcode.com/problems/combination-sum/)
+
+- 重複あり、使用個数の指定なしで合計値がtargetになる要素の組をすべて求める
+- 方針すら思い浮かばないため、Discussionを見た
+- DFSとDPで解かれていた
+- ▲DFSは再帰で全ケースを確認、targetを超えた際には枝切り
+- DPはうまく動かず...
+
+```python
+# DFS（Discussionを写経）
+# https://leetcode.com/problems/combination-sum/discuss/16510/Python-dfs-solution.
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+        candidates.sort()
+        self.dfs(candidates, target, 0, [], ans)
+        return ans
+    
+    def dfs(self, nums, target, idx, path, ans):
+        if target<0:
+            return
+        elif target==0:
+            ans.append(path)
+            return
+        for i in range(idx, len(nums)):
+            self.dfs(nums, target-nums[i], i, path+[nums[i]], ans)
+```
+
+### 1.1.18. [40. Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)
+
+- 39.のDFSを少し修正
+- Discussionによると、`if i > start and nums[i] == nums[i - 1]: continue`で重複を防いでいた
+
+```python
+# 自力実装
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+        candidates.sort()
+        self.dfs(candidates, target, 0, [], ans)
+        return ans
+    
+    
+    def dfs(self, nums, target, idx, path, ans):
+        if target<0:
+            return
+        if target==0:
+            if not path in ans:
+                ans.append(path)
+            return
+        for i in range(idx, len(nums)):
+            self.dfs(nums, target-nums[i], i+1, path+[nums[i]], ans)
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+        candidates.sort()
+        self.dfs(candidates, target, 0, [], ans)
+        return ans
+    
+    
+    def dfs(self, nums, target, idx, path, ans):
+        if target<0:
+            return
+        if target==0:
+            ans.append(path)
+            return
+        for i in range(idx, len(nums)):
+            if i>idx and nums[i]==nums[i-1]:  # 重複を防ぐ
+                continue
+            self.dfs(nums, target-nums[i], i+1, path+[nums[i]], ans)
 ```
