@@ -28,6 +28,8 @@
     - [1.1.16. 36. Valid Sudoku](#1116-36-valid-sudoku)
     - [1.1.17. ▲39. Combination Sum](#1117-%E2%96%B239-combination-sum)
     - [1.1.18. 40. Combination Sum II](#1118-40-combination-sum-ii)
+    - [1.1.19. ▲43. Multiply Strings](#1119-%E2%96%B243-multiply-strings)
+    - [1.1.20. 46. Permutations](#1120-46-permutations)
 
 <!-- /TOC -->
 
@@ -782,4 +784,59 @@ class Solution:
             if i>idx and nums[i]==nums[i-1]:  # 重複を防ぐ
                 continue
             self.dfs(nums, target-nums[i], i+1, path+[nums[i]], ans)
+```
+
+
+### 1.1.19. ▲[43. Multiply Strings](https://leetcode.com/problems/multiply-strings/)
+
+- 文字列で与えられる数値の積を計算する
+- ただしビルトイン関数を用いて直接計算したり数値型に直したりしてはいけない
+- 何をすればよいのか分からず
+- ▲Discussionでは1桁ずつ積を計算し、掛け算の筆算を再現していた
+    - リストを用意して計算する方法は繰り上がりの扱いも楽そうで、応用が利きそう
+
+```python
+# Discussionを写経
+# https://leetcode.com/problems/multiply-strings/discuss/17615/Simple-Python-solution-18-lines
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        product = [0]*(len(num1)+len(num2))
+        pos = len(product)-1
+        for n1 in reversed(num1):
+            tmp = pos
+            for n2 in reversed(num2):
+                product[tmp] += int(n1)*int(n2)
+                product[tmp-1] += product[tmp]//10
+                product[tmp] %= 10
+                tmp -= 1
+            pos -= 1
+        p = 0
+        while p<len(product)-1 and product[p]==0:
+            p += 1
+        return "".join(map(str, product[p:]))
+```
+
+### 1.1.20. [46. Permutations](https://leetcode.com/problems/permutations/)
+
+- 39.を応用して再帰（backtracking）で解いた
+- `path`は`path.append(x)`するとグローバルに変更が伝播してしまうため、再帰の引数で`path+[x]`とすること
+- Discussionもbacktracking
+
+```python
+# 自力実装
+class Solution:
+    def permute(self, nums):
+        ans = []
+        self.backtracking(nums, [], ans)
+        return ans
+
+    def backtracking(self, nums, path, ans):
+        if not nums:
+            ans.append(path)
+            return
+
+        for i in range(len(nums)):
+            tmp = nums.copy()
+            x = tmp.pop(i)
+            self.backtracking(tmp, path+[x], ans)
 ```
