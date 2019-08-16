@@ -30,6 +30,8 @@
     - [1.1.18. 40. Combination Sum II](#1118-40-combination-sum-ii)
     - [1.1.19. ▲43. Multiply Strings](#1119-%E2%96%B243-multiply-strings)
     - [1.1.20. 46. Permutations](#1120-46-permutations)
+    - [1.1.21. 47. Permutations II](#1121-47-permutations-ii)
+    - [1.1.22. 48. Rotate Image](#1122-48-rotate-image)
 
 <!-- /TOC -->
 
@@ -819,6 +821,7 @@ class Solution:
 ### 1.1.20. [46. Permutations](https://leetcode.com/problems/permutations/)
 
 - 39.を応用して再帰（backtracking）で解いた
+- `nums`はそのまま`.pop(x)`するとグローバルに反映されるため、`.copy()`してから`.pop(x)`すること
 - `path`は`path.append(x)`するとグローバルに変更が伝播してしまうため、再帰の引数で`path+[x]`とすること
 - Discussionもbacktracking
 
@@ -839,4 +842,49 @@ class Solution:
             tmp = nums.copy()
             x = tmp.pop(i)
             self.backtracking(tmp, path+[x], ans)
+```
+
+### 1.1.21. [47. Permutations II](https://leetcode.com/problems/permutations-ii/)
+
+- 46.とほぼ同じ
+
+```python
+# 自力実装
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        self.backtracking(nums, [], ans)
+        return ans
+
+    def backtracking(self, nums, path, ans):
+        if not nums:
+            if not path in ans:
+                ans.append(path)
+            return
+
+        for i in range(len(nums)):
+            tmp = nums.copy()
+            x = tmp.pop(i)
+            self.backtracking(tmp, path+[x], ans)
+```
+
+### 1.1.22. [48. Rotate Image](https://leetcode.com/problems/rotate-image/)
+
+- 4箇所をそれぞれで同時に置換する
+- Discussionではone-linerの解法`matrix[:] = zip(*matrix[::-1])`が紹介されていたが、まだよく分かっていない
+- 他にも、`matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]`で転置し、各行内を逆順にすれば90°回転する、という方法も
+
+```python
+# 自力実装
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        ni = len(matrix)
+        nj = len(matrix[0])
+        for i in range(ni//2+1):
+            for j in range(i, nj-i-1):
+                matrix[i][j], matrix[j][nj-i-1], matrix[ni-i-1][nj-j-1], matrix[ni-j-1][i] = \
+                matrix[ni-j-1][i], matrix[i][j], matrix[j][nj-i-1], matrix[ni-i-1][nj-j-1]
 ```
