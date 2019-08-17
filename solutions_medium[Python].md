@@ -32,6 +32,8 @@
     - [1.1.20. 46. Permutations](#1120-46-permutations)
     - [1.1.21. 47. Permutations II](#1121-47-permutations-ii)
     - [1.1.22. 48. Rotate Image](#1122-48-rotate-image)
+    - [1.1.23. 49. Group Anagrams](#1123-49-group-anagrams)
+    - [1.1.24. 50. Pow(x, n)](#1124-50-powx-n)
 
 <!-- /TOC -->
 
@@ -888,3 +890,26 @@ class Solution:
                 matrix[i][j], matrix[j][nj-i-1], matrix[ni-i-1][nj-j-1], matrix[ni-j-1][i] = \
                 matrix[ni-j-1][i], matrix[i][j], matrix[j][nj-i-1], matrix[ni-i-1][nj-j-1]
 ```
+
+### 1.1.23. [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
+
+- ソートした文字列を辞書のキーに据え、キーとの一致を確認した
+- Solutionによると、文字列のソートではなく文字数のカウントだともっと速くなる（文字列ソートは`KlogK`だが文字数カウントは`K`なので）
+
+```python
+# 自力実装
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        dic = {}
+        for s in strs:
+            sorted_s = "".join(sorted(s))
+            tmp = dic.get(sorted_s, [])
+            tmp.append(s)
+            dic[sorted_s] = tmp
+        return dic.values()
+```
+
+### 1.1.24. [50. Pow(x, n)](https://leetcode.com/problems/powx-n/)
+
+- 普通にループしようとするとTLE
+- ビットシフトか？
