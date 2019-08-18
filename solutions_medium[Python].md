@@ -33,7 +33,8 @@
     - [1.1.21. 47. Permutations II](#1121-47-permutations-ii)
     - [1.1.22. 48. Rotate Image](#1122-48-rotate-image)
     - [1.1.23. 49. Group Anagrams](#1123-49-group-anagrams)
-    - [1.1.24. 50. Pow(x, n)](#1124-50-powx-n)
+    - [1.1.24. ▲50. Pow(x, n)](#1124-%E2%96%B250-powx-n)
+    - [1.1.25. 54. Spiral Matrix](#1125-54-spiral-matrix)
 
 <!-- /TOC -->
 
@@ -909,7 +910,65 @@ class Solution:
         return dic.values()
 ```
 
-### 1.1.24. [50. Pow(x, n)](https://leetcode.com/problems/powx-n/)
+### 1.1.24. ▲[50. Pow(x, n)](https://leetcode.com/problems/powx-n/)
 
 - 普通にループしようとするとTLE
 - ビットシフトか？
+- ▲Discussionではビットシフトを利用した方法、再帰的な方法が採られていた
+
+```python
+# Discussionをコピペ
+# https://leetcode.com/problems/powx-n/discuss/19560/Shortest-Python-Guaranteed
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n < 0:
+            x = 1 / x
+            n = -n
+        pow = 1
+        while n:
+            if n & 1:  # 2進数で1が立っている桁に来た際にpowにxを掛ける=最終的にxのn乗になる
+                pow *= x
+            x *= x  # 2進数の桁とx**yのyとを一致させる
+            n >>= 1
+        return pow
+```
+
+### 1.1.25. [54. Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)
+
+- 上辺、右辺、下辺、左辺の4段階に分けて処理
+- 処理終了の条件が`if not matrix`だと`matrix=[[]]`の場合に終了しないため、注意
+
+```python
+# 自力実装
+class Solution:
+    def spiralOrder(self, matrix):
+        ans = []
+        while matrix and matrix[0]:
+            # 先頭行をpop（順方向）
+            tmp = matrix.pop(0)
+            ans.extend(tmp)
+            if not matrix or not matrix[0]:
+                return ans
+
+            # 最終列をpop（順方向）
+            for i in range(len(matrix)):
+                tmp = matrix[i].pop(-1)
+                ans += [tmp]
+            if not matrix or not matrix[0]:
+                return ans
+
+            # 最終行をpop（逆方向）
+            tmp = matrix.pop(-1)
+            tmp.reverse()
+            ans.extend(tmp)
+            if not matrix or not matrix[0]:
+                return ans
+
+            # 先頭列をpop（逆方向）
+            tmp = []
+            for i in range(len(matrix)):
+                tmp.append(matrix[i].pop(0))
+            tmp.reverse()
+            ans.extend(tmp)
+        return ans
+```
