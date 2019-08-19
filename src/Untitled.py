@@ -221,4 +221,6 @@ matrix = []
 not matrix
 # -
 
+min([1])
+
 
