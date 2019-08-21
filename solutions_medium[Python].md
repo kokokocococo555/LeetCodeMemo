@@ -35,7 +35,8 @@
     - [1.1.23. 49. Group Anagrams](#1123-49-group-anagrams)
     - [1.1.24. ▲50. Pow(x, n)](#1124-%E2%96%B250-powx-n)
     - [1.1.25. 54. Spiral Matrix](#1125-54-spiral-matrix)
-    - [▲55. Jump Game](#%E2%96%B255-jump-game)
+    - [1.1.26. ▲55. Jump Game](#1126-%E2%96%B255-jump-game)
+    - [1.1.27. 56. Merge Intervals](#1127-56-merge-intervals)
 
 <!-- /TOC -->
 
@@ -975,7 +976,7 @@ class Solution:
         return ans
 ```
 
-### ▲[55. Jump Game](https://leetcode.com/problems/jump-game/)
+### 1.1.26. ▲[55. Jump Game](https://leetcode.com/problems/jump-game/)
 
 - 後ろから順に確認していき、0の際にその前の場所で0を飛び越えられるかどうかを確認
 - 1あれば順に次に行けるため、0の場合のみを考えればよい
@@ -1004,4 +1005,29 @@ class Solution:
                 if p==-1:
                     return False
         return True
+```
+
+### 1.1.27. [56. Merge Intervals](https://leetcode.com/problems/merge-intervals/)
+
+- 各区間を含む最大・最小値を更新していく
+- Solutionではグラフを作成してbrute forceで解く方法と、ソートして前から順に比較していく方法が紹介されていた
+
+```python
+# 自力実装
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort()
+        ans = []
+        p = 0
+        n = len(intervals)
+        while p<n:
+            start = intervals[p][0]
+            end = intervals[p][1]
+            while p<n-1 and end>=intervals[p+1][0]:
+                start = min(start, intervals[p+1][0])
+                end = max(end, intervals[p+1][1])
+                p += 1
+            ans.append([start, end])
+            p += 1
+        return ans
 ```
