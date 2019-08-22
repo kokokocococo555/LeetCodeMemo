@@ -37,6 +37,7 @@
     - [1.1.25. 54. Spiral Matrix](#1125-54-spiral-matrix)
     - [1.1.26. ▲55. Jump Game](#1126-%E2%96%B255-jump-game)
     - [1.1.27. 56. Merge Intervals](#1127-56-merge-intervals)
+    - [1.1.28. 59. Spiral Matrix II](#1128-59-spiral-matrix-ii)
 
 <!-- /TOC -->
 
@@ -1029,5 +1030,26 @@ class Solution:
                 p += 1
             ans.append([start, end])
             p += 1
+        return ans
+```
+
+### 1.1.28. [59. Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)
+
+- 実装方法分からず
+- Discussionでは、インデックスの増加を制御して実装していた
+
+```python
+# Discussionを参考に実装
+# https://leetcode.com/problems/spiral-matrix-ii/discuss/22282/4-9-lines-Python-solutions
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        ans = [[0]*n for _ in range(n)]
+        r, c, dr, dc = 0, 0, 0, 1
+        for k in range(n**2):
+            ans[r][c] += k+1
+            if ans[(r+dr)%n][(c+dc)%n]:
+                dr, dc = dc, -dr
+            r += dr
+            c += dc
         return ans
 ```
