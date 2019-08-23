@@ -37,7 +37,8 @@
     - [1.1.25. 54. Spiral Matrix](#1125-54-spiral-matrix)
     - [1.1.26. ▲55. Jump Game](#1126-%E2%96%B255-jump-game)
     - [1.1.27. 56. Merge Intervals](#1127-56-merge-intervals)
-    - [1.1.28. 59. Spiral Matrix II](#1128-59-spiral-matrix-ii)
+    - [1.1.28. ▲59. Spiral Matrix II](#1128-%E2%96%B259-spiral-matrix-ii)
+    - [60. Permutation Sequence](#60-permutation-sequence)
 
 <!-- /TOC -->
 
@@ -1033,10 +1034,10 @@ class Solution:
         return ans
 ```
 
-### 1.1.28. [59. Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)
+### 1.1.28. ▲[59. Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)
 
 - 実装方法分からず
-- Discussionでは、インデックスの増加を制御して実装していた
+- ▲Discussionでは、インデックスの増加を制御して実装していた
 
 ```python
 # Discussionを参考に実装
@@ -1052,4 +1053,50 @@ class Solution:
             r += dr
             c += dc
         return ans
+```
+
+### [60. Permutation Sequence](https://leetcode.com/problems/permutation-sequence/)
+
+- backtrackingで実装したところ、コードテストではうまくいくものの、提出するとTLEになる
+- Discussionによると、与えられているkを活用する
+    - [参考](https://leetcode.com/problems/permutation-sequence/discuss/22512/Share-my-Python-solution-with-detailed-explanation)
+
+```python
+# 自力実装（TLE）
+class Solution:
+    def getPermutation(self, n: int, k: int) -> str:
+        nums = [i for i in range(1, n+1)]
+        perm = ""
+        lis = []
+
+        def backtracking(nums, perm, n):
+            if n==0:
+                lis.append(perm)
+            else:
+                for i in range(n):
+                    tmp = nums.copy()
+                    x = tmp.pop(i)
+                    backtracking(tmp, perm+str(x), n-1)
+
+        backtracking(nums, perm, n)
+        return lis[k-1]
+```
+
+```python
+# Discussionを写経
+# https://leetcode.com/problems/permutation-sequence/discuss/22512/Share-my-Python-solution-with-detailed-explanation
+import math
+
+class Solution:
+    def getPermutation(self, n: int, k: int) -> str:
+        nums = [i for i in range(1, n+1)]
+        perm = ""
+        k -= 1
+        while n>0:
+            n -= 1
+            # get the index of current digit
+            index, k = divmod(k, math.factorial(n))  # k/階乗の商, 余りを返す
+            perm += str(nums.pop(index))
+
+        return perm
 ```
