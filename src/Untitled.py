@@ -223,4 +223,57 @@ not matrix
 
 min([1])
 
+# +
+# https://atcoder.jp/contests/abc138/submissions/6992193
+from collections import deque
+ 
+N, Q = 4, 3
+to = [[] for _ in range(N)]
+
+ab = [
+    [1,2],
+    [2,3],
+    [2,4]
+]
+px = [
+    [2,10],
+    [1,100],
+    [3,1]
+]
+
+# to: つながっているノード番号を保持
+for i in range(N - 1):
+    a, b = ab[i]
+    to[a - 1].append(b - 1)
+    to[b - 1].append(a - 1)
+
+# P: 各ノード番号にxの和を保持（後に累積和をとる準備）
+P = [0] * N
+for j in range(Q):
+    p, x = px[j]
+    P[p - 1] += x
+
+# cnt: 累積和の計算用    
+cnt = [0] * N
+
+# rootから順に累積和をとっていく
+q = deque()
+q.append((0, 0, -1))  # ダミーの値
+while len(q):
+    p, x, prev = q.pop()  # スタックとして使用
+    x += P[p]
+    cnt[p] = x
+    for b in to[p]:  # つながっているノードにもxを加算
+        if b != prev:
+            print(b, x, p, prev, q, cnt)
+            q.append((b, x, p))  # b: xを加算するノード, p: xが親（本ループですでに加算したノード）に波及して来ないようにするための制御用の値
+print(*cnt)
+# -
+
+to
+
+P
+
+cnt
+
 

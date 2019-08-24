@@ -13,6 +13,7 @@
     - [1.1.1. 2. Add Two Numbers](#111-2-add-two-numbers)
     - [1.1.2. ▲19. Remove Nth Node From End of List](#112-%E2%96%B219-remove-nth-node-from-end-of-list)
     - [1.1.3. ▲24. Swap Nodes in Pairs](#113-%E2%96%B224-swap-nodes-in-pairs)
+    - [1.1.4. 61. Rotate List](#114-61-rotate-list)
 
 <!-- /TOC -->
 
@@ -154,3 +155,66 @@ class Solution:
     4. 1~3を`2n<len(head)`の間、繰り返す
 - ▲Discussionを見ると、自分が難しく考えすぎていたことが分かる
     - 処理を追っても理解しきれず
+
+### 1.1.4. [61. Rotate List](https://leetcode.com/problems/rotate-list/)
+
+- 愚直に実装した
+- テストケースに引っかかってばかりだった
+    - テストケース作成の重要さが分かった
+- Discussionでは2つのリストを使用して同時に処理していた
+
+```python
+# 自力実装
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def rotateRight(self, head: ListNode, k: int) -> ListNode:
+        if not head or not head.next or k==0:
+            return head
+        n = 0
+        head2 = head
+        while head2:
+            n += 1
+            head2 = head2.next
+        if k%n==0:
+            return head
+        m = n-k%n
+        head3 = head
+        for _ in range(m-1):
+            head3 = head3.next
+        ans = head3.next
+        while head3.next:
+            head3 = head3.next
+        head3.next = head
+        for _ in range(m):
+            head3 = head3.next
+        head3.next = None
+        return ans
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def rotateRight(self, head: ListNode, k: int) -> ListNode:
+        if not head or not head.next or k==0:
+            return head
+        n = 1
+        head2 = head
+        while head2.next:
+            n += 1
+            head2 = head2.next
+        if k%n==0:
+            return head
+
+        m = n-k%n
+        head3 = head
+        for _ in range(m-1):
+            head3 = head3.next
+        head2.next, head3.next, ans = head, None, head3.next
+        return ans
+```

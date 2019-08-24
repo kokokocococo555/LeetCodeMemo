@@ -38,7 +38,7 @@
     - [1.1.26. ▲55. Jump Game](#1126-%E2%96%B255-jump-game)
     - [1.1.27. 56. Merge Intervals](#1127-56-merge-intervals)
     - [1.1.28. ▲59. Spiral Matrix II](#1128-%E2%96%B259-spiral-matrix-ii)
-    - [60. Permutation Sequence](#60-permutation-sequence)
+    - [1.1.29. 60. Permutation Sequence](#1129-60-permutation-sequence)
 
 <!-- /TOC -->
 
@@ -1055,7 +1055,7 @@ class Solution:
         return ans
 ```
 
-### [60. Permutation Sequence](https://leetcode.com/problems/permutation-sequence/)
+### 1.1.29. [60. Permutation Sequence](https://leetcode.com/problems/permutation-sequence/)
 
 - backtrackingで実装したところ、コードテストではうまくいくものの、提出するとTLEになる
 - Discussionによると、与えられているkを活用する
