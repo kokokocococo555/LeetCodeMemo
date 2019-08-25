@@ -39,6 +39,8 @@
     - [1.1.27. 56. Merge Intervals](#1127-56-merge-intervals)
     - [1.1.28. ▲59. Spiral Matrix II](#1128-%E2%96%B259-spiral-matrix-ii)
     - [1.1.29. 60. Permutation Sequence](#1129-60-permutation-sequence)
+    - [1.1.30. 62. Unique Paths](#1130-62-unique-paths)
+    - [1.1.31. 63. Unique Paths II](#1131-63-unique-paths-ii)
 
 <!-- /TOC -->
 
@@ -1099,4 +1101,76 @@ class Solution:
             perm += str(nums.pop(index))
 
         return perm
+```
+
+### 1.1.30. [62. Unique Paths](https://leetcode.com/problems/unique-paths/submissions/)
+
+- よくある問題なので`((m-1)+(n-1))!/((m-1)!*(n-1)!)`で計算した
+- DiscussionではDPでの回答が紹介されていた
+    - 前のマスまでのルート数を足し合わせていく
+
+```python
+# 自力実装
+import math
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        # ((m-1)+(n-1))!/((m-1)!*(n-1)!)
+        m2 = math.factorial(m-1)
+        n2 = math.factorial(n-1)
+        mn2 = math.factorial(m+n-2)
+        return int(mn2/(m2*n2))
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        route = [[1 for _ in range(m)] for _ in range(n)]
+        for i in range(1, n):
+            for j in range(1, m):
+                route[i][j] = route[i-1][j]+route[i][j-1]
+        return route[-1][-1]
+```
+
+### 1.1.31. [63. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/)
+
+- 62.問のDPを応用
+- 1行目、1列目に障害物がある場合に手間取った
+- Solutionも1行目・1列目に前処理をしてDPを用いるという同様な回答
+
+```python
+# 自力実装
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        og = obstacleGrid
+        r = len(og)
+        c = len(og[0])
+        for i in range(r):
+            for j in range(c):
+                if og[i][j]==1:
+                    og[i][j] = 0
+                else:
+                    og[i][j] = 1
+
+        flg = 0
+        for j in range(c):
+            if og[0][j]==0:
+                flg = 1
+            if flg==1:
+                og[0][j] = 0
+
+        flg = 0
+        for i in range(r):
+            if og[i][0]==0:
+                flg = 1
+            if flg==1:
+                og[i][0] = 0
+
+        for i in range(1, r):
+            for j in range(1, c):
+                if og[i][j]!=0:
+                    og[i][j] = og[i-1][j]+og[i][j-1]
+                    
+        return og[-1][-1]
 ```

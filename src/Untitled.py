@@ -13,6 +13,57 @@
 #     name: python3
 # ---
 
+# +
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid):
+        og = obstacleGrid
+        r = len(og)
+        c = len(og[0])
+        for i in range(r):
+            for j in range(c):
+                if og[i][j]==1:
+                    og[i][j] = 0
+                else:
+                    og[i][j] = 1
+
+        print(og)
+        flg = 0
+        for j in range(c):
+            if og[0][j]==0:
+                flg = 1
+            if flg==1:
+                og[0][j] = 0
+            
+        flg = 0
+        for i in range(r):
+            if og[i][0]==0:
+                flg = 1
+            if flg==1:
+                og[i][0] = 0
+        
+        for i in range(1, r):
+            for j in range(1, c):
+                if og[i][j]!=0:
+                    og[i][j] = og[i-1][j]+og[i][j-1]
+                    
+        print(og)
+        return og[-1][-1]
+    
+ins = Solution()
+obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]
+ins.uniquePathsWithObstacles(obstacleGrid)
+# -
+
+
+
+
+
+
+
+
+
+
+
 class Solution:
     def isValidSudoku(self, board):
         # columns
