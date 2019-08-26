@@ -41,6 +41,7 @@
     - [1.1.29. 60. Permutation Sequence](#1129-60-permutation-sequence)
     - [1.1.30. 62. Unique Paths](#1130-62-unique-paths)
     - [1.1.31. 63. Unique Paths II](#1131-63-unique-paths-ii)
+    - [1.1.32. 64. Minimum Path Sum](#1132-64-minimum-path-sum)
 
 <!-- /TOC -->
 
@@ -1173,4 +1174,25 @@ class Solution:
                     og[i][j] = og[i-1][j]+og[i][j-1]
                     
         return og[-1][-1]
+```
+
+### 1.1.32. [64. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)
+
+- 分からず
+- DiscussionではDPで解いていた
+- 1行目、1列目の累積和をまずとって、あとは上・左のminとの和をとっていく
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        for i in range(1, m):
+            grid[i][0] = grid[i-1][0]+grid[i][0]
+        for j in range(1, n):
+            grid[0][j] = grid[0][j-1]+grid[0][j]
+        for i in range(1, m):
+            for j in range(1, n):
+                grid[i][j] += min(grid[i-1][j], grid[i][j-1])
+        return grid[-1][-1]
 ```
