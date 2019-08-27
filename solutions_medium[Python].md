@@ -42,6 +42,8 @@
     - [1.1.30. 62. Unique Paths](#1130-62-unique-paths)
     - [1.1.31. 63. Unique Paths II](#1131-63-unique-paths-ii)
     - [1.1.32. 64. Minimum Path Sum](#1132-64-minimum-path-sum)
+    - [1.1.33. 71. Simplify Path](#1133-71-simplify-path)
+    - [1.1.34. 73. Set Matrix Zeroes](#1134-73-set-matrix-zeroes)
 
 <!-- /TOC -->
 
@@ -1195,4 +1197,99 @@ class Solution:
             for j in range(1, n):
                 grid[i][j] += min(grid[i-1][j], grid[i][j-1])
         return grid[-1][-1]
+```
+
+### 1.1.33. [71. Simplify Path](https://leetcode.com/problems/simplify-path/)
+
+- 文字列を'/'で区切ってリスト化し、流れに沿って文字列を変換していく
+
+```python
+# 自力実装
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        # // -> /
+        ans = path.split("/")
+        p = 0
+        while p<len(ans):
+            if ans[p]=="." or ans[p]=="":
+                ans.pop(p)
+            # /a/b/.. -> /a
+            elif ans[p]==".." and p>0:
+                ans.pop(p)
+                ans.pop(p-1)
+                p -= 1
+            # /a/b/../../../.. -> /
+            elif ans[p]==".." and p==0:
+                ans.pop(p)
+            else:
+                p += 1
+        ans = "/".join(ans)
+        return "/"+ans
+```
+
+### 1.1.34. [73. Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)
+
+- メモリをO(1)で実装せよというお題
+- O(m*n)ならできたが、分からず
+- 多次元のリストは値だけコピーする際には`copy.deepcopy(list)`とする
+    - `list.copy()`や`list[:]`では参照を渡すだけ
+- Solutionを見ると、該当する行・列の値を一旦0ではなくダミーの値`-1`などに置換しておき、最後にダミーの値を0に置換し直すという方法が採られていた
+    - これなら0にした要素が影響を及ぼすことなく処理できる
+    - ただし計算量が多い
+- SolutionではメモリO(1)に加え、計算量も抑えた方法として、最初の行・列をフラグとして利用する方法が採られていた
+
+```python
+# 自力実装
+import copy
+
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        mat = copy.deepcopy(matrix)
+        m = len(matrix)
+        n = len(matrix[0])
+        for i in range(m):
+            for j in range(n):
+                # print(i, j)
+                # print(mat)
+                # print(matrix)
+                if mat[i][j]==0:
+                    for iall in range(m):
+                        matrix[iall][j] = 0
+                    for jall in range(n):
+                        matrix[i][jall] = 0
+```
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        is_col = False
+        m = len(matrix)
+        n = len(matrix[0])
+        for i in range(m):
+            if matrix[i][0]==0:
+                is_col = True
+            for j in range(1, n):
+                if matrix[i][j]==0:
+                    matrix[i][0] = 0
+                    matrix[0][j] = 0
+
+        for i in range(1, m):
+            for j in range(1, n):
+                if matrix[i][0]==0 or matrix[0][j]==0:
+                    matrix[i][j] = 0
+
+        if matrix[0][0]==0:
+            for j in range(n):
+                matrix[0][j] = 0
+
+        if is_col:
+            for i in range(m):
+                matrix[i][0] = 0
 ```
