@@ -44,6 +44,8 @@
     - [1.1.32. 64. Minimum Path Sum](#1132-64-minimum-path-sum)
     - [1.1.33. 71. Simplify Path](#1133-71-simplify-path)
     - [1.1.34. 73. Set Matrix Zeroes](#1134-73-set-matrix-zeroes)
+    - [1.1.35. 74. Search a 2D Matrix](#1135-74-search-a-2d-matrix)
+    - [1.1.36. ▲75. Sort Colors](#1136-%E2%96%B275-sort-colors)
 
 <!-- /TOC -->
 
@@ -1292,4 +1294,117 @@ class Solution:
         if is_col:
             for i in range(m):
                 matrix[i][0] = 0
+```
+
+### 1.1.35. [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
+
+- 二分探索を2回行った
+- Discussionでは1つのリストと見なし、二分探索1回で終わらせていた
+
+```python
+# 自力実装
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        r = len(matrix)
+        if r==0:
+            return False
+        c = len(matrix[0])
+        if c==0:
+            return False
+        f1, l1 = 0, r-1
+        r_ans = -1
+        while f1<=l1:
+            m1 = (f1+l1)//2
+            if matrix[m1][0]<=target and matrix[m1][c-1]>=target:
+                r_ans = m1
+                break
+            elif matrix[m1][0]<target:
+                f1 = m1+1
+            elif matrix[m1][0]>target:
+                l1 = m1-1
+        if r_ans==-1:
+            return False
+
+        f2, l2 = 0, c-1
+        while f2<=l2:
+            m2 = (f2+l2)//2
+            if matrix[r_ans][m2]==target:
+                return True
+            elif matrix[r_ans][m2]<target:
+                f2 = m2+1
+            else:
+                l2 = m2-1
+        return False
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        r = len(matrix)
+        if r==0:
+            return False
+        c = len(matrix[0])
+        if c==0:
+            return False
+        f1, l1 = 0, r*c-1
+        while f1<=l1:
+            m1 = (f1+l1)//2
+            if matrix[m1//c][m1%c]==target:
+                return True
+            elif matrix[m1//c][m1%c]<target:
+                f1 = m1+1
+            elif matrix[m1//c][m1%c]>target:
+                l1 = m1-1
+        return False
+```
+
+### 1.1.36. ▲[75. Sort Colors](https://leetcode.com/problems/sort-colors/)
+
+- 2回スキャンではなく、1周で完了せよというお題
+- ポインタを3つ使用し、前から順に2なら後ろの方と、1なら0の中で一番後ろのものと入れ替えていく実装
+- ▲Discussionの実装はよりスマート
+
+```python
+# 自力実装
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        p1, p2, p3 = 0, len(nums)-1, len(nums)-1
+        while p1<p3:
+            if nums[p1]==2:
+                nums[p1], nums[p3] = nums[p3], nums[p1]
+                p3 -= 1
+            elif nums[p1]==1:
+                while p1<p2 and nums[p2]!=0:
+                    p2 -= 1
+                if p1<p2:
+                    nums[p1], nums[p2] = nums[p2], nums[p1]
+                    p2 -= 1
+                else:
+                    p1 += 1
+            else:
+                p1 += 1
+```
+
+```python
+# Discussionを参考に実装
+# https://leetcode.com/problems/sort-colors/discuss/26479/AC-Python-in-place-one-pass-solution-O(n)-time-O(1)-space-no-swap-no-count
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        p0, p1 = 0, 0
+        for i in range(len(nums)):
+            tmp = nums[i]
+            nums[i] = 2
+            if tmp<=1:
+                nums[p1] = 1
+                p1 += 1
+            if tmp==0:
+                nums[p0] = 0
+                p0 += 1
 ```
