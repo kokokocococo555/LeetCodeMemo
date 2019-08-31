@@ -46,6 +46,7 @@
     - [1.1.34. 73. Set Matrix Zeroes](#1134-73-set-matrix-zeroes)
     - [1.1.35. 74. Search a 2D Matrix](#1135-74-search-a-2d-matrix)
     - [1.1.36. ▲75. Sort Colors](#1136-%E2%96%B275-sort-colors)
+    - [1.1.37. 77. Combinations](#1137-77-combinations)
 
 <!-- /TOC -->
 
@@ -1407,4 +1408,44 @@ class Solution:
             if tmp==0:
                 nums[p0] = 0
                 p0 += 1
+```
+
+### 1.1.37. [77. Combinations](https://leetcode.com/problems/combinations/)
+
+- backtrackingで実装した
+- Discussionではbacktrackingの他にも再帰、順次でのコード例もあった
+
+```python
+# 自力実装
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        ans = []
+        
+        def backtrack(first, last, k, ktmp, path):
+            for i in range(first, last+k+1):
+                if ktmp==0:
+                    ans.append(path)
+                    return
+                elif i<=n:
+                    backtrack(i+1, n, k, ktmp-1, path+[i])
+        
+        backtrack(1, n, k, k, [])
+        return ans
+```
+
+```python
+# Discussionを参考にリファクタリング
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        ans = []
+        
+        def backtrack(first, last, k, path):
+            if k==0:
+                ans.append(path)
+                return
+            for i in range(first, last+1):
+                backtrack(i+1, n, k-1, path+[i])
+        
+        backtrack(1, n, k, [])
+        return ans
 ```
