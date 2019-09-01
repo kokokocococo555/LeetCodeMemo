@@ -47,6 +47,7 @@
     - [1.1.35. 74. Search a 2D Matrix](#1135-74-search-a-2d-matrix)
     - [1.1.36. ▲75. Sort Colors](#1136-%E2%96%B275-sort-colors)
     - [1.1.37. 77. Combinations](#1137-77-combinations)
+    - [1.1.38. 78. Subsets](#1138-78-subsets)
 
 <!-- /TOC -->
 
@@ -1447,5 +1448,60 @@ class Solution:
                 backtrack(i+1, n, k-1, path+[i])
         
         backtrack(1, n, k, [])
+        return ans
+```
+
+### 1.1.38. [78. Subsets](https://leetcode.com/problems/subsets/)
+
+- backtrackingで解いた
+- Discussionでは再帰のコードが紹介されていたり、backtrackingでのコードがDFSとして紹介されていたりした
+
+```python
+# 自力実装
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        nums.sort()
+        
+        def backtrack(nums, k, path):
+            if k==0:
+                ans.append(path)
+                return
+            
+            for i in range(len(nums)):
+                tmp = nums[:]
+                x = tmp.pop(i)
+                if not path or x>path[-1]:
+                    backtrack(tmp, k-1, path+[x])
+                
+        for i in range(len(nums)+1):
+            backtrack(nums, i, [])
+            
+        return ans
+```
+
+```python
+# Discussionを参考に改善
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        
+        def backtrack(nums, idx, path):
+            ans.append(path)
+            for i in range(idx, len(nums)):
+                backtrack(nums, i+1, path+[nums[i]])
+                
+        backtrack(nums, 0, [])
+        return ans
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        ans = [[]]
+        nums.sort()
+        for num in nums:
+            ans += [item+[num] for item in ans]
         return ans
 ```
