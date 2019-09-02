@@ -48,6 +48,7 @@
     - [1.1.36. ▲75. Sort Colors](#1136-%E2%96%B275-sort-colors)
     - [1.1.37. 77. Combinations](#1137-77-combinations)
     - [1.1.38. 78. Subsets](#1138-78-subsets)
+    - [1.1.39. 79. Word Search](#1139-79-word-search)
 
 <!-- /TOC -->
 
@@ -1504,4 +1505,39 @@ class Solution:
         for num in nums:
             ans += [item+[num] for item in ans]
         return ans
+```
+
+### 1.1.39. [79. Word Search](https://leetcode.com/problems/word-search/)
+
+- 指定の文字列を作成するパスの発見と、一度通った道は通らないという条件づけとを同時に行う方法が思いつかず、断念
+- Discussionを見ると、なんとなく思い浮かべていた方法が実装されていた
+- 実装力の大切さ
+
+```python
+# Discussionを写経
+# https://leetcode.com/problems/word-search/discuss/27660/Python-dfs-solution-with-comments.
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        if not board:
+            return False
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                if self.dfs(board, r, c, word):
+                    return True
+        return False
+    
+    
+    def dfs(self, board, r, c, word):
+        if len(word)==0:
+            return True
+        if r<0 or r>=len(board) or c<0 or c>=len(board[0]) or word[0]!=board[r][c]:
+            return False
+        tmp = board[r][c]
+        board[r][c] = ""
+        res = self.dfs(board, r+1, c, word[1:]) or \
+              self.dfs(board, r-1, c, word[1:]) or \
+              self.dfs(board, r, c+1, word[1:]) or \
+              self.dfs(board, r, c-1, word[1:])
+        board[r][c] = tmp
+        return res
 ```
