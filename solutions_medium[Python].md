@@ -49,6 +49,7 @@
     - [1.1.37. 77. Combinations](#1137-77-combinations)
     - [1.1.38. 78. Subsets](#1138-78-subsets)
     - [1.1.39. 79. Word Search](#1139-79-word-search)
+    - [80. Remove Duplicates from Sorted Array II](#80-remove-duplicates-from-sorted-array-ii)
 
 <!-- /TOC -->
 
@@ -1540,4 +1541,25 @@ class Solution:
               self.dfs(board, r, c-1, word[1:])
         board[r][c] = tmp
         return res
+```
+
+### [80. Remove Duplicates from Sorted Array II](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/)
+
+- ポインタとカウンタを使用
+
+```python
+# 自力実装
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        p = 1
+        cnt = 0
+        for i in range(1, len(nums)):
+            if nums[i-1]==nums[i]:
+                cnt += 1
+            else:
+                cnt = 0
+            if cnt<=1:
+                nums[p] = nums[i]
+                p += 1
+        return p
 ```
