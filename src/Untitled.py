@@ -13,6 +13,9 @@
 #     name: python3
 # ---
 
+-1%7
+
+
 # +
 class Solution:
     def uniquePathsWithObstacles(self, obstacleGrid):

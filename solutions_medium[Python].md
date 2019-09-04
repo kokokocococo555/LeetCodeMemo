@@ -49,7 +49,8 @@
     - [1.1.37. 77. Combinations](#1137-77-combinations)
     - [1.1.38. 78. Subsets](#1138-78-subsets)
     - [1.1.39. 79. Word Search](#1139-79-word-search)
-    - [80. Remove Duplicates from Sorted Array II](#80-remove-duplicates-from-sorted-array-ii)
+    - [1.1.40. 80. Remove Duplicates from Sorted Array II](#1140-80-remove-duplicates-from-sorted-array-ii)
+    - [1.1.41. ▲81. Search in Rotated Sorted Array II](#1141-%E2%96%B281-search-in-rotated-sorted-array-ii)
 
 <!-- /TOC -->
 
@@ -1543,7 +1544,7 @@ class Solution:
         return res
 ```
 
-### [80. Remove Duplicates from Sorted Array II](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/)
+### 1.1.40. [80. Remove Duplicates from Sorted Array II](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/)
 
 - ポインタとカウンタを使用
 
@@ -1562,4 +1563,35 @@ class Solution:
                 nums[p] = nums[i]
                 p += 1
         return p
+```
+
+### 1.1.41. ▲[81. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
+
+- 分からず
+- ▲Discussionでは、探索範囲を半分に分け、順に並んでいる方に二分探索をかける、というのを繰り返していた
+
+```python
+# Discussionを写経
+# https://leetcode.com/problems/search-in-rotated-sorted-array-ii/discuss/28195/Python-easy-to-understand-solution-(with-comments).
+class Solution:
+    def search(self, nums: List[int], target: int) -> bool:
+        n = len(nums)
+        l, r = 0, n-1
+        while l<=r:
+            m = (l+r)//2
+            if nums[m]==target:
+                return True
+            while l<m and nums[l]==nums[m]:  # ???
+                l += 1
+            if nums[l]<=nums[m]:
+                if nums[l]<=target<nums[m]:
+                    r = m-1
+                else:
+                    l = m+1
+            else:
+                if nums[m]<target<=nums[r]:
+                    l = m+1
+                else:
+                    r = m-1
+        return False
 ```
