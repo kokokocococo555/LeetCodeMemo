@@ -14,6 +14,7 @@
     - [1.1.2. ▲19. Remove Nth Node From End of List](#112-%E2%96%B219-remove-nth-node-from-end-of-list)
     - [1.1.3. ▲24. Swap Nodes in Pairs](#113-%E2%96%B224-swap-nodes-in-pairs)
     - [1.1.4. 61. Rotate List](#114-61-rotate-list)
+    - [1.1.5. 82. Remove Duplicates from Sorted List II](#115-82-remove-duplicates-from-sorted-list-ii)
 
 <!-- /TOC -->
 
@@ -217,4 +218,35 @@ class Solution:
             head3 = head3.next
         head2.next, head3.next, ans = head, None, head3.next
         return ans
+```
+
+### 1.1.5. [82. Remove Duplicates from Sorted List II](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/)
+
+- 惜しいところまでいっている気がするが、実装しきれていない
+
+```python
+# Discussionを写経
+# https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/discuss/28336/Python-in-place-solution-with-dummy-head-node.
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        dummy = pre = ListNode(0)
+        dummy.next = head
+        while head and head.next:
+            if head.val==head.next.val:
+                while head and head.next and head.val==head.next.val:
+                    head.next = head.next.next
+                head = head.next
+                pre.next = head
+            else:
+                pre = pre.next
+                head = head.next
+            
+        return dummy.next
 ```
