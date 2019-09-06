@@ -15,6 +15,7 @@
     - [1.1.3. ▲24. Swap Nodes in Pairs](#113-%E2%96%B224-swap-nodes-in-pairs)
     - [1.1.4. 61. Rotate List](#114-61-rotate-list)
     - [1.1.5. 82. Remove Duplicates from Sorted List II](#115-82-remove-duplicates-from-sorted-list-ii)
+    - [86. Partition List](#86-partition-list)
 
 <!-- /TOC -->
 
@@ -249,4 +250,38 @@ class Solution:
                 head = head.next
             
         return dummy.next
+```
+
+### [86. Partition List](https://leetcode.com/problems/partition-list/)
+
+- 実装が分からん
+- Solutionでは2つのリストを新たに作成して最後に結合していた
+
+```python
+# Solutionを写経
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def partition(self, head: ListNode, x: int) -> ListNode:
+        before = before_head = ListNode(0)
+        after = after_head = ListNode(0)
+        
+        while head:
+            if head.val<x:
+                before.next = head
+                before = before.next
+            else:
+                after.next = head
+                after = after.next
+            head = head.next
+            
+        after.next = None
+        before.next = after_head.next
+        
+        return before_head.next
 ```
