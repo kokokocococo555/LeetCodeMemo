@@ -51,6 +51,7 @@
     - [1.1.39. 79. Word Search](#1139-79-word-search)
     - [1.1.40. 80. Remove Duplicates from Sorted Array II](#1140-80-remove-duplicates-from-sorted-array-ii)
     - [1.1.41. ▲81. Search in Rotated Sorted Array II](#1141-%E2%96%B281-search-in-rotated-sorted-array-ii)
+    - [89. Gray Code](#89-gray-code)
 
 <!-- /TOC -->
 
@@ -1594,4 +1595,20 @@ class Solution:
                 else:
                     r = m-1
         return False
+```
+
+### [89. Gray Code](https://leetcode.com/problems/gray-code/)
+
+- 問題の意味がよくわからない
+
+```python
+# Discussionを参考に実装
+# https://leetcode.com/problems/gray-code/discuss/29954/DP-Python-solution
+# https://leetcode.com/problems/gray-code/discuss/29893/One-liner-Python-solution-(with-demo-in-comments)
+class Solution:
+    def grayCode(self, n: int) -> List[int]:
+        dp = [0]
+        for i in range(1, n + 1):
+            dp = dp + [j + 2**(i - 1) for j in dp][::-1]
+        return dp
 ```

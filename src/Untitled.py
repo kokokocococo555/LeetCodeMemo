@@ -13,6 +13,17 @@
 #     name: python3
 # ---
 
+# +
+ans = 0
+for i in range(1, 8):
+    ans += i*i
+    print(i, ans)
+    
+print(ans)
+# -
+
+A
+
 -1%7
 
 
