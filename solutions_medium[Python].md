@@ -51,7 +51,8 @@
     - [1.1.39. 79. Word Search](#1139-79-word-search)
     - [1.1.40. 80. Remove Duplicates from Sorted Array II](#1140-80-remove-duplicates-from-sorted-array-ii)
     - [1.1.41. ▲81. Search in Rotated Sorted Array II](#1141-%E2%96%B281-search-in-rotated-sorted-array-ii)
-    - [89. Gray Code](#89-gray-code)
+    - [1.1.42. 89. Gray Code](#1142-89-gray-code)
+    - [1.1.43. ▲90. Subsets II](#1143-%E2%96%B290-subsets-ii)
 
 <!-- /TOC -->
 
@@ -1597,7 +1598,7 @@ class Solution:
         return False
 ```
 
-### [89. Gray Code](https://leetcode.com/problems/gray-code/)
+### 1.1.42. [89. Gray Code](https://leetcode.com/problems/gray-code/)
 
 - 問題の意味がよくわからない
 
@@ -1611,4 +1612,29 @@ class Solution:
         for i in range(1, n + 1):
             dp = dp + [j + 2**(i - 1) for j in dp][::-1]
         return dp
+```
+
+### 1.1.43. ▲[90. Subsets II](https://leetcode.com/problems/subsets-ii/)
+
+- backtrackingでやろうとしたらTLEになった
+- ▲Discussionではイテレータのようなbacktracking(DFS)で解いていた
+
+```python
+# Discussionを写経
+# https://leetcode.com/problems/subsets-ii/discuss/30305/Simple-python-solution-(DFS).
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        nums.sort()
+        
+        def backtrack(nums, idx, path):
+            ans.append(path)
+            
+            for i in range(idx, len(nums)):
+                if i > idx and nums[i] == nums[i-1]:
+                    continue
+                backtrack(nums, i + 1, path + [nums[i]])
+                
+        backtrack(nums, 0, [])
+        return ans
 ```
