@@ -53,6 +53,7 @@
     - [1.1.41. ▲81. Search in Rotated Sorted Array II](#1141-%E2%96%B281-search-in-rotated-sorted-array-ii)
     - [1.1.42. 89. Gray Code](#1142-89-gray-code)
     - [1.1.43. ▲90. Subsets II](#1143-%E2%96%B290-subsets-ii)
+    - [91. Decode Ways](#91-decode-ways)
 
 <!-- /TOC -->
 
@@ -1637,4 +1638,30 @@ class Solution:
                 
         backtrack(nums, 0, [])
         return ans
+```
+
+### [91. Decode Ways](https://leetcode.com/problems/decode-ways/)
+
+- backtrackで解こうとしたらTLEになった
+- Discussionを見るとDPで解かれていたが、その理屈がいまいち納得いかないのと、思いつく気がしない
+
+```python
+# Discussionを参考に写経
+# https://leetcode.com/problems/decode-ways/discuss/253018/Python%3A-Easy-to-understand-explanation-bottom-up-dynamic-programming
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        if not s:
+            return 0
+
+        dp = [0 for x in range(len(s) + 1)] 
+
+        dp[0] = 1 
+        dp[1] = 0 if s[0] == "0" else 1
+
+        for i in range(2, len(s) + 1): 
+            if 0 < int(s[i-1]) <= 9:
+                dp[i] += dp[i - 1]
+            if 10 <= int(s[i-2:i]) <= 26:
+                dp[i] += dp[i - 2]
+        return dp[len(s)]
 ```
