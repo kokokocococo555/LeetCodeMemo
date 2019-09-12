@@ -53,7 +53,8 @@
     - [1.1.41. ▲81. Search in Rotated Sorted Array II](#1141-%E2%96%B281-search-in-rotated-sorted-array-ii)
     - [1.1.42. 89. Gray Code](#1142-89-gray-code)
     - [1.1.43. ▲90. Subsets II](#1143-%E2%96%B290-subsets-ii)
-    - [91. Decode Ways](#91-decode-ways)
+    - [1.1.44. ▲91. Decode Ways](#1144-%E2%96%B291-decode-ways)
+    - [93. Restore IP Addresses](#93-restore-ip-addresses)
 
 <!-- /TOC -->
 
@@ -1640,10 +1641,10 @@ class Solution:
         return ans
 ```
 
-### [91. Decode Ways](https://leetcode.com/problems/decode-ways/)
+### 1.1.44. ▲[91. Decode Ways](https://leetcode.com/problems/decode-ways/)
 
 - backtrackで解こうとしたらTLEになった
-- Discussionを見るとDPで解かれていたが、その理屈がいまいち納得いかないのと、思いつく気がしない
+- ▲Discussionを見るとDPで解かれていたが、その理屈がいまいち納得いかないのと、思いつく気がしない
 
 ```python
 # Discussionを参考に写経
@@ -1655,7 +1656,7 @@ class Solution:
 
         dp = [0 for x in range(len(s) + 1)] 
 
-        dp[0] = 1 
+        dp[0] = 1
         dp[1] = 0 if s[0] == "0" else 1
 
         for i in range(2, len(s) + 1): 
@@ -1664,4 +1665,67 @@ class Solution:
             if 10 <= int(s[i-2:i]) <= 26:
                 dp[i] += dp[i - 2]
         return dp[len(s)]
+```
+
+### [93. Restore IP Addresses](https://leetcode.com/problems/restore-ip-addresses/)
+
+- 強引な処理がところどころ見られる
+- Discussionではbacktrackingで解いていた
+
+```python
+# 自力実装
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        n = len(s)
+        if 12 < n or n < 4:
+            return []
+
+        cuts = []
+        for i in range(1, n-2):
+            for j in range(i+1, n-1):
+                for k in range(j+1, n):
+                    cut = [0, i, j, k, n]
+                    cuts.append(cut)
+        ips = []
+        for cut in cuts:
+            ip = []
+            for i in range(4):
+                ip.append(int(s[cut[i]:cut[i+1]]))
+            ips.append(ip)
+
+        ans = []
+        for ip in ips:
+            if 0 <= ip[0] <= 255 and\
+               0 <= ip[1] <= 255 and\
+               0 <= ip[2] <= 255 and\
+               0 <= ip[3] <= 255:
+                tmp = ".".join([str(x) for x in ip])
+                if len(tmp) == n + 3:  # `000`といった部分でバグらないようにしている（強引）
+                    ans.append(tmp)
+
+        return ans
+```
+
+```python
+# Discussionを参考に実装
+# https://leetcode.com/problems/restore-ip-addresses/discuss/31140/Python-easy-to-understand-solution-with-comments-(backtracking).
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        ans = []
+        self.dfs(s, 0, "", ans)
+        return ans
+    
+    def dfs(self, s, index, path, res):
+        if index == 4:
+            if not s:
+                res.append(path[:-1])
+            return
+        for i in range(1, 4):
+            if i <= len(s):
+                if i == 1:
+                    self.dfs(s[i:], index+1, path + s[:i] + ".", res)
+                elif i == 2 and s[0] != "0":
+                    self.dfs(s[i:], index+1, path + s[:i] + ".", res)
+                elif i == 3 and s[0] != "0" and int(s[:3]) <= 255:
+                    self.dfs(s[i:], index+1, path + s[:i] + ".", res)
 ```
