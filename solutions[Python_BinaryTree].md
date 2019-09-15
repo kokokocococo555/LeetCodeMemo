@@ -22,6 +22,8 @@
     - [1.1.12. 404. Sum of Left Leaves](#1112-404-sum-of-left-leaves)
     - [1.1.13. ▲429. N-ary Tree Level Order Traversal](#1113-%E2%96%B2429-n-ary-tree-level-order-traversal)
     - [1.1.14. ▲437. Path Sum III](#1114-%E2%96%B2437-path-sum-iii)
+  - [Medium](#medium)
+    - [94. Binary Tree Inorder Traversal](#94-binary-tree-inorder-traversal)
 
 <!-- /TOC -->
 
@@ -696,3 +698,10 @@ class Solution:
         self.test(node.left, target-node.val)
         self.test(node.right, target-node.val)
 ```
+
+## Medium
+
+### [94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
+
+- そもそも問題の意図が分からない
+
