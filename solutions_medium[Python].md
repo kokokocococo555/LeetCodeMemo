@@ -8,53 +8,54 @@
 
 <!-- TOC -->
 
-- [1. LeetCode勉強記録（Python編）_Medium](#1-leetcode%E5%8B%89%E5%BC%B7%E8%A8%98%E9%8C%B2python%E7%B7%A8medium)
-  - [1.1. Medium](#11-medium)
-    - [1.1.1. ▲3. Longest Substring Without Repeating Characters](#111-%E2%96%B23-longest-substring-without-repeating-characters)
-    - [1.1.2. ▲5. Longest Palindromic Substring](#112-%E2%96%B25-longest-palindromic-substring)
-    - [1.1.3. 6. ZigZag Conversion](#113-6-zigzag-conversion)
-    - [1.1.4. 8. String to Integer (atoi)](#114-8-string-to-integer-atoi)
-    - [1.1.5. ▲11. Container With Most Water](#115-%E2%96%B211-container-with-most-water)
-    - [1.1.6. 12. Integer to Roman](#116-12-integer-to-roman)
-    - [1.1.7. ▲15. 3Sum](#117-%E2%96%B215-3sum)
-    - [1.1.8. 16. 3Sum Closest](#118-16-3sum-closest)
-    - [1.1.9. ▲17. Letter Combinations of a Phone Number](#119-%E2%96%B217-letter-combinations-of-a-phone-number)
-    - [1.1.10. ▲18. 4Sum](#1110-%E2%96%B218-4sum)
-    - [1.1.11. 22. Generate Parentheses](#1111-22-generate-parentheses)
-    - [1.1.12. ▲29. Divide Two Integers](#1112-%E2%96%B229-divide-two-integers)
-    - [1.1.13. 31. Next Permutation](#1113-31-next-permutation)
-    - [1.1.14. 33. Search in Rotated Sorted Array](#1114-33-search-in-rotated-sorted-array)
-    - [1.1.15. 34. Find First and Last Position of Element in Sorted Array](#1115-34-find-first-and-last-position-of-element-in-sorted-array)
-    - [1.1.16. 36. Valid Sudoku](#1116-36-valid-sudoku)
-    - [1.1.17. ▲39. Combination Sum](#1117-%E2%96%B239-combination-sum)
-    - [1.1.18. 40. Combination Sum II](#1118-40-combination-sum-ii)
-    - [1.1.19. ▲43. Multiply Strings](#1119-%E2%96%B243-multiply-strings)
-    - [1.1.20. 46. Permutations](#1120-46-permutations)
-    - [1.1.21. 47. Permutations II](#1121-47-permutations-ii)
-    - [1.1.22. 48. Rotate Image](#1122-48-rotate-image)
-    - [1.1.23. 49. Group Anagrams](#1123-49-group-anagrams)
-    - [1.1.24. ▲50. Pow(x, n)](#1124-%E2%96%B250-powx-n)
-    - [1.1.25. 54. Spiral Matrix](#1125-54-spiral-matrix)
-    - [1.1.26. ▲55. Jump Game](#1126-%E2%96%B255-jump-game)
-    - [1.1.27. 56. Merge Intervals](#1127-56-merge-intervals)
-    - [1.1.28. ▲59. Spiral Matrix II](#1128-%E2%96%B259-spiral-matrix-ii)
-    - [1.1.29. 60. Permutation Sequence](#1129-60-permutation-sequence)
-    - [1.1.30. 62. Unique Paths](#1130-62-unique-paths)
-    - [1.1.31. 63. Unique Paths II](#1131-63-unique-paths-ii)
-    - [1.1.32. 64. Minimum Path Sum](#1132-64-minimum-path-sum)
-    - [1.1.33. 71. Simplify Path](#1133-71-simplify-path)
-    - [1.1.34. 73. Set Matrix Zeroes](#1134-73-set-matrix-zeroes)
-    - [1.1.35. 74. Search a 2D Matrix](#1135-74-search-a-2d-matrix)
-    - [1.1.36. ▲75. Sort Colors](#1136-%E2%96%B275-sort-colors)
-    - [1.1.37. 77. Combinations](#1137-77-combinations)
-    - [1.1.38. 78. Subsets](#1138-78-subsets)
-    - [1.1.39. 79. Word Search](#1139-79-word-search)
-    - [1.1.40. 80. Remove Duplicates from Sorted Array II](#1140-80-remove-duplicates-from-sorted-array-ii)
-    - [1.1.41. ▲81. Search in Rotated Sorted Array II](#1141-%E2%96%B281-search-in-rotated-sorted-array-ii)
-    - [1.1.42. 89. Gray Code](#1142-89-gray-code)
-    - [1.1.43. ▲90. Subsets II](#1143-%E2%96%B290-subsets-ii)
-    - [1.1.44. ▲91. Decode Ways](#1144-%E2%96%B291-decode-ways)
-    - [1.1.45. 93. Restore IP Addresses](#1145-93-restore-ip-addresses)
+- [1. LeetCode勉強記録（Python編）_Medium](#1-leetcode勉強記録python編_medium)
+    - [1.1. Medium](#11-medium)
+        - [1.1.1. ▲[3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)](#111-▲3-longest-substring-without-repeating-charactershttpsleetcodecomproblemslongest-substring-without-repeating-characters)
+        - [1.1.2. ▲[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)](#112-▲5-longest-palindromic-substringhttpsleetcodecomproblemslongest-palindromic-substring)
+        - [1.1.3. [6. ZigZag Conversion](https://leetcode.com/problems/zigzag-conversion/submissions/)](#113-6-zigzag-conversionhttpsleetcodecomproblemszigzag-conversionsubmissions)
+        - [1.1.4. [8. String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/)](#114-8-string-to-integer-atoihttpsleetcodecomproblemsstring-to-integer-atoi)
+        - [1.1.5. ▲[11. Container With Most Water](https://leetcode.com/problems/container-with-most-water/)](#115-▲11-container-with-most-waterhttpsleetcodecomproblemscontainer-with-most-water)
+        - [1.1.6. [12. Integer to Roman](https://leetcode.com/problems/integer-to-roman/)](#116-12-integer-to-romanhttpsleetcodecomproblemsinteger-to-roman)
+        - [1.1.7. ▲[15. 3Sum](https://leetcode.com/problems/3sum/)](#117-▲15-3sumhttpsleetcodecomproblems3sum)
+        - [1.1.8. [16. 3Sum Closest](https://leetcode.com/problems/3sum-closest/)](#118-16-3sum-closesthttpsleetcodecomproblems3sum-closest)
+        - [1.1.9. ▲[17. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)](#119-▲17-letter-combinations-of-a-phone-numberhttpsleetcodecomproblemsletter-combinations-of-a-phone-number)
+        - [1.1.10. ▲[18. 4Sum](https://leetcode.com/problems/4sum/)](#1110-▲18-4sumhttpsleetcodecomproblems4sum)
+        - [1.1.11. [22. Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)](#1111-22-generate-parentheseshttpsleetcodecomproblemsgenerate-parentheses)
+        - [1.1.12. ▲[29. Divide Two Integers](https://leetcode.com/problems/divide-two-integers/)](#1112-▲29-divide-two-integershttpsleetcodecomproblemsdivide-two-integers)
+        - [1.1.13. [31. Next Permutation](https://leetcode.com/problems/next-permutation/)](#1113-31-next-permutationhttpsleetcodecomproblemsnext-permutation)
+        - [1.1.14. [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)](#1114-33-search-in-rotated-sorted-arrayhttpsleetcodecomproblemssearch-in-rotated-sorted-array)
+        - [1.1.15. [34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)](#1115-34-find-first-and-last-position-of-element-in-sorted-arrayhttpsleetcodecomproblemsfind-first-and-last-position-of-element-in-sorted-array)
+        - [1.1.16. [36. Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)](#1116-36-valid-sudokuhttpsleetcodecomproblemsvalid-sudoku)
+        - [1.1.17. ▲[39. Combination Sum](https://leetcode.com/problems/combination-sum/)](#1117-▲39-combination-sumhttpsleetcodecomproblemscombination-sum)
+        - [1.1.18. [40. Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)](#1118-40-combination-sum-iihttpsleetcodecomproblemscombination-sum-ii)
+        - [1.1.19. ▲[43. Multiply Strings](https://leetcode.com/problems/multiply-strings/)](#1119-▲43-multiply-stringshttpsleetcodecomproblemsmultiply-strings)
+        - [1.1.20. [46. Permutations](https://leetcode.com/problems/permutations/)](#1120-46-permutationshttpsleetcodecomproblemspermutations)
+        - [1.1.21. [47. Permutations II](https://leetcode.com/problems/permutations-ii/)](#1121-47-permutations-iihttpsleetcodecomproblemspermutations-ii)
+        - [1.1.22. [48. Rotate Image](https://leetcode.com/problems/rotate-image/)](#1122-48-rotate-imagehttpsleetcodecomproblemsrotate-image)
+        - [1.1.23. [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)](#1123-49-group-anagramshttpsleetcodecomproblemsgroup-anagrams)
+        - [1.1.24. ▲[50. Pow(x, n)](https://leetcode.com/problems/powx-n/)](#1124-▲50-powx-nhttpsleetcodecomproblemspowx-n)
+        - [1.1.25. [54. Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)](#1125-54-spiral-matrixhttpsleetcodecomproblemsspiral-matrix)
+        - [1.1.26. ▲[55. Jump Game](https://leetcode.com/problems/jump-game/)](#1126-▲55-jump-gamehttpsleetcodecomproblemsjump-game)
+        - [1.1.27. [56. Merge Intervals](https://leetcode.com/problems/merge-intervals/)](#1127-56-merge-intervalshttpsleetcodecomproblemsmerge-intervals)
+        - [1.1.28. ▲[59. Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)](#1128-▲59-spiral-matrix-iihttpsleetcodecomproblemsspiral-matrix-ii)
+        - [1.1.29. [60. Permutation Sequence](https://leetcode.com/problems/permutation-sequence/)](#1129-60-permutation-sequencehttpsleetcodecomproblemspermutation-sequence)
+        - [1.1.30. [62. Unique Paths](https://leetcode.com/problems/unique-paths/submissions/)](#1130-62-unique-pathshttpsleetcodecomproblemsunique-pathssubmissions)
+        - [1.1.31. [63. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/)](#1131-63-unique-paths-iihttpsleetcodecomproblemsunique-paths-ii)
+        - [1.1.32. [64. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)](#1132-64-minimum-path-sumhttpsleetcodecomproblemsminimum-path-sum)
+        - [1.1.33. [71. Simplify Path](https://leetcode.com/problems/simplify-path/)](#1133-71-simplify-pathhttpsleetcodecomproblemssimplify-path)
+        - [1.1.34. [73. Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)](#1134-73-set-matrix-zeroeshttpsleetcodecomproblemsset-matrix-zeroes)
+        - [1.1.35. [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)](#1135-74-search-a-2d-matrixhttpsleetcodecomproblemssearch-a-2d-matrix)
+        - [1.1.36. ▲[75. Sort Colors](https://leetcode.com/problems/sort-colors/)](#1136-▲75-sort-colorshttpsleetcodecomproblemssort-colors)
+        - [1.1.37. [77. Combinations](https://leetcode.com/problems/combinations/)](#1137-77-combinationshttpsleetcodecomproblemscombinations)
+        - [1.1.38. [78. Subsets](https://leetcode.com/problems/subsets/)](#1138-78-subsetshttpsleetcodecomproblemssubsets)
+        - [1.1.39. [79. Word Search](https://leetcode.com/problems/word-search/)](#1139-79-word-searchhttpsleetcodecomproblemsword-search)
+        - [1.1.40. [80. Remove Duplicates from Sorted Array II](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/)](#1140-80-remove-duplicates-from-sorted-array-iihttpsleetcodecomproblemsremove-duplicates-from-sorted-array-ii)
+        - [1.1.41. ▲[81. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)](#1141-▲81-search-in-rotated-sorted-array-iihttpsleetcodecomproblemssearch-in-rotated-sorted-array-ii)
+        - [1.1.42. [89. Gray Code](https://leetcode.com/problems/gray-code/)](#1142-89-gray-codehttpsleetcodecomproblemsgray-code)
+        - [1.1.43. ▲[90. Subsets II](https://leetcode.com/problems/subsets-ii/)](#1143-▲90-subsets-iihttpsleetcodecomproblemssubsets-ii)
+        - [1.1.44. ▲[91. Decode Ways](https://leetcode.com/problems/decode-ways/)](#1144-▲91-decode-wayshttpsleetcodecomproblemsdecode-ways)
+        - [1.1.45. [93. Restore IP Addresses](https://leetcode.com/problems/restore-ip-addresses/)](#1145-93-restore-ip-addresseshttpsleetcodecomproblemsrestore-ip-addresses)
+        - [1.1.46. [120. Triangle](https://leetcode.com/problems/triangle/)](#1146-120-trianglehttpsleetcodecomproblemstriangle)
 
 <!-- /TOC -->
 
@@ -1730,3 +1731,23 @@ class Solution:
                     self.dfs(s[i:], index+1, path + s[:i] + ".", res)
 ```
 
+### 1.1.46. [120. Triangle](https://leetcode.com/problems/triangle/)
+
+- 漸化式にできる -> 漸化式にできるならDPをやってみる　というのを思い出して解いた
+- Discussionではさらに効率化された解放も
+  - https://leetcode.com/problems/triangle/discuss/38741/Python-Bottom-up-DP-O(n)%2BO(n)-solution-(-5-lines-)
+
+```python
+# 自力実装
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        for s in range(1, len(triangle)):
+            for i in range(len(triangle[s])):
+                if i == 0:
+                    triangle[s][i] += triangle[s-1][i]
+                elif i == len(triangle[s]) - 1:
+                    triangle[s][i] += triangle[s-1][i-1]
+                else:
+                    triangle[s][i] += min(triangle[s-1][i-1], triangle[s-1][i])
+        return min(triangle[-1])
+```
