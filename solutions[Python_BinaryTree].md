@@ -22,8 +22,12 @@
     - [1.1.12. 404. Sum of Left Leaves](#1112-404-sum-of-left-leaves)
     - [1.1.13. ▲429. N-ary Tree Level Order Traversal](#1113-%E2%96%B2429-n-ary-tree-level-order-traversal)
     - [1.1.14. ▲437. Path Sum III](#1114-%E2%96%B2437-path-sum-iii)
-  - [Medium](#medium)
-    - [94. Binary Tree Inorder Traversal](#94-binary-tree-inorder-traversal)
+  - [1.2. Medium](#12-medium)
+    - [1.2.1. 94. Binary Tree Inorder Traversal](#121-94-binary-tree-inorder-traversal)
+    - [1.2.2. 95. Unique Binary Search Trees II](#122-95-unique-binary-search-trees-ii)
+    - [1.2.3. 96. Unique Binary Search Trees](#123-96-unique-binary-search-trees)
+    - [1.2.4. ▲98. Validate Binary Search Tree](#124-%E2%96%B298-validate-binary-search-tree)
+    - [1.2.5. ▲113. Path Sum II](#125-%E2%96%B2113-path-sum-ii)
 
 <!-- /TOC -->
 
@@ -699,9 +703,91 @@ class Solution:
         self.test(node.right, target-node.val)
 ```
 
-## Medium
+## 1.2. Medium
 
-### [94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
+### 1.2.1. [94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
 
 - そもそも問題の意図が分からない
 
+### 1.2.2. [95. Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/)
+
+- 分からない
+
+### 1.2.3. [96. Unique Binary Search Trees](https://leetcode.com/problems/unique-binary-search-trees/)
+
+- 分からない
+
+### 1.2.4. ▲[98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
+
+- 上の方の値を覚えておいて、左の木だとより小さく、右の木だとより大きく、という処理をうまく実装できなかった
+- ▲Solutionを見るととても簡潔
+- DFSによる実装も分かりやすい
+
+```python
+# Solutionを参考に実装
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isValidBST(self, root: TreeNode) -> bool:
+        return self.isValidSubBST(root, float("-inf"), float("inf"))
+        
+    def isValidSubBST(self, root, minval, maxval):
+        if not root:
+            return True
+        
+        val = root.val
+        if val <= minval or val >= maxval:
+            return False
+
+        if not self.isValidSubBST(root.right, val, maxval):
+            return False
+        if not self.isValidSubBST(root.left, minval, val):
+            return False
+        return True
+```
+
+
+### 1.2.5. ▲[113. Path Sum II](https://leetcode.com/problems/path-sum-ii/)
+
+- 再帰で解こうとしたものの、うまく引数が初期化されず断念
+- ▲Discussionを見ると、pathへの追加を引数の中で行う、sumからvalを引いていく（これも引数の中で）、といった点がポイントっぽい
+  - BFSやDFSでもなのでBFS, DFSの練習問題に適している
+  - https://leetcode.com/problems/path-sum-ii/discuss/36829/Python-solutions-(Recursively-BFS%2Bqueue-DFS%2Bstack)
+
+```python
+# Discussionを参考に実装
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def pathSum(self, root: TreeNode, s: int) -> List[List[int]]:
+        if not root:
+            return []
+        
+        ans = []
+    
+        def pathSumSub(node, path, s, ans):
+            if not node.left and not node.right:
+                if node.val == s:
+                    path.append(node.val)
+                    ans.append(path)
+
+            if node.left:
+                pathSumSub(node.left, path + [node.val], s - node.val, ans)
+            if node.right:
+                pathSumSub(node.right, path + [node.val], s - node.val, ans)
+                
+        pathSumSub(root, [], s, ans)
+        return ans
+```

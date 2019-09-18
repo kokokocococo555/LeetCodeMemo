@@ -54,7 +54,7 @@
     - [1.1.42. 89. Gray Code](#1142-89-gray-code)
     - [1.1.43. ▲90. Subsets II](#1143-%E2%96%B290-subsets-ii)
     - [1.1.44. ▲91. Decode Ways](#1144-%E2%96%B291-decode-ways)
-    - [93. Restore IP Addresses](#93-restore-ip-addresses)
+    - [1.1.45. 93. Restore IP Addresses](#1145-93-restore-ip-addresses)
 
 <!-- /TOC -->
 
@@ -1667,7 +1667,7 @@ class Solution:
         return dp[len(s)]
 ```
 
-### [93. Restore IP Addresses](https://leetcode.com/problems/restore-ip-addresses/)
+### 1.1.45. [93. Restore IP Addresses](https://leetcode.com/problems/restore-ip-addresses/)
 
 - 強引な処理がところどころ見られる
 - Discussionではbacktrackingで解いていた
@@ -1729,3 +1729,4 @@ class Solution:
                 elif i == 3 and s[0] != "0" and int(s[:3]) <= 255:
                     self.dfs(s[i:], index+1, path + s[:i] + ".", res)
 ```
+
