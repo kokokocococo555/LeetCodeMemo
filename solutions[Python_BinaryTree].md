@@ -28,6 +28,7 @@
     - [1.2.3. 96. Unique Binary Search Trees](#123-96-unique-binary-search-trees)
     - [1.2.4. ▲98. Validate Binary Search Tree](#124-%E2%96%B298-validate-binary-search-tree)
     - [1.2.5. ▲113. Path Sum II](#125-%E2%96%B2113-path-sum-ii)
+    - [▲129. Sum Root to Leaf Numbers](#%E2%96%B2129-sum-root-to-leaf-numbers)
 
 <!-- /TOC -->
 
@@ -790,4 +791,37 @@ class Solution:
                 
         pathSumSub(root, [], s, ans)
         return ans
+```
+
+### ▲[129. Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/)
+
+- ▲深さ優先探索（DFS）の練習に良い問題
+
+```python
+# 自力実装
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+
+        stack = []
+        vals = []
+        stack.append((root, str(root.val)))
+        while stack:
+            node, v = stack.pop()
+            if not node.left and not node.right:
+                vals.append(int(v))
+            if node.left:
+                stack.append((node.left, v + str(node.left.val)))
+            if node.right:
+                stack.append((node.right, v + str(node.right.val)))
+        return sum(vals)
 ```

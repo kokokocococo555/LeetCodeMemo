@@ -57,6 +57,7 @@
     - [1.1.45. 93. Restore IP Addresses](#1145-93-restore-ip-addresses)
     - [1.1.46. 120. Triangle](#1146-120-triangle)
     - [1.1.47. ▲127. Word Ladder](#1147-%E2%96%B2127-word-ladder)
+    - [130. Surrounded Regions](#130-surrounded-regions)
 
 <!-- /TOC -->
 
@@ -1843,4 +1844,53 @@ class Solution:
                 return ans
 
         return 0
+```
+
+### [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/)
+
+- 四辺からOを辿っていく
+- 実装に手間取った
+- DiscussionではBFSで解いていた
+  - やっていることは同じ
+
+```python
+# 自力実装
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board:
+            return []
+
+        rn = len(board)
+        cn = len(board[0])
+        
+        def change(r, c, rc, cc):
+            if board[r+rc][c+cc] == "O":
+                board[r+rc][c+cc] = "@"
+                if r + 1 > 0 and r + 1 < rn - 1:
+                    change(r+rc, c+cc, 1, 0,)
+                if r - 1 > 0 and r - 1 < rn - 1:
+                    change(r+rc, c+cc, -1, 0)
+                if c + 1 > 0 and c + 1 < cn - 1:
+                    change(r+rc, c+cc, 0, 1)
+                if c - 1 > 0 and c - 1 < cn - 1:
+                    change(r+rc, c+cc, 0, -1)
+            
+        for j in range(cn):
+            change(0, j, 0, 0)
+            change(rn - 1, j, 0, 0)
+
+        for i in range(rn):
+            change(i, 0, 0, 0)
+            change(i, cn - 1, 0, 0)
+            
+        
+        for i in range(rn):
+            for j in range(cn):
+                if board[i][j] == "O":
+                    board[i][j] = "X"
+                if board[i][j] == "@":
+                    board[i][j] = "O"
 ```
