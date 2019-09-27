@@ -58,6 +58,8 @@
     - [1.1.46. 120. Triangle](#1146-120-triangle)
     - [1.1.47. ▲127. Word Ladder](#1147-%E2%96%B2127-word-ladder)
     - [130. Surrounded Regions](#130-surrounded-regions)
+    - [▲131. Palindrome Partitioning](#%E2%96%B2131-palindrome-partitioning)
+    - [▲134. Gas Station](#%E2%96%B2134-gas-station)
 
 <!-- /TOC -->
 
@@ -1893,4 +1895,82 @@ class Solution:
                     board[i][j] = "X"
                 if board[i][j] == "@":
                     board[i][j] = "O"
+```
+
+### ▲[131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)
+
+- 回文か否かを判定するメソッドは作れそうだったが、それを上手に問題に当てはめる方法が分からなかった
+- ▲Discussionを見るとDFS(backtracking)の典型的な問題という印象だった
+
+```python
+# Discussionを参考に実装
+# https://leetcode.com/problems/palindrome-partitioning/discuss/42100/Python-easy-to-understand-backtracking-solution.
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        ans = []
+        
+        
+        def backtrack(s, path, ans):
+            if not s:
+                ans.append(path)
+                return
+            
+            for i in range(1, len(s) + 1):
+                if s[:i] == s[:i][::-1]:
+                    backtrack(s[i:], path + [s[:i]], ans)
+                    
+        backtrack(s, [], ans)
+        return ans
+```
+
+### ▲[134. Gas Station](https://leetcode.com/problems/gas-station/)
+
+- 普通に実装するとTLE
+- すでにチェックが終わった部分をスキップするとAC
+- ▲Discussionではさらに最適化され、最初にgasとcostの合計を比較してから、前から順番に確認するだけで実現できている
+  - elegant!
+
+```python
+# 自力実装
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        sums_gas = [g - c for g, c in zip(gas, cost)]
+            
+        p = 0
+        while p < len(gas):
+            tmp, flg = self.check_gas(p, gas, cost, sums_gas)
+            if flg:
+                return p
+            if tmp < p:
+                return -1
+            p = tmp + 1
+            
+        return -1
+
+    def check_gas(self, j, gas, cost, sums_gas):
+        tmp_sum = 0
+        for k in range(len(gas)):
+            idx = (j + k) % len(gas)
+            tmp_sum += sums_gas[idx]
+            if tmp_sum < 0:
+                return idx, False
+            
+        return idx, True
+```
+
+```python
+# Discussionを参考に実装
+# https://leetcode.com/problems/gas-station/discuss/42661/Possibly-the-MOST-easiest-approach-O(N)-one-variable-Python
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        p, tank = 0, 0
+        if sum(gas) < sum(cost):
+            return -1
+        
+        for i in range(len(gas)):
+            tank += gas[i] - cost[i]
+            if tank < 0:
+                tank = 0
+                p = i + 1
+        return p
 ```
