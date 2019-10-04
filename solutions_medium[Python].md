@@ -60,6 +60,7 @@
     - [130. Surrounded Regions](#130-surrounded-regions)
     - [▲131. Palindrome Partitioning](#%E2%96%B2131-palindrome-partitioning)
     - [▲134. Gas Station](#%E2%96%B2134-gas-station)
+    - [137. Single Number II](#137-single-number-ii)
 
 <!-- /TOC -->
 
@@ -1973,4 +1974,23 @@ class Solution:
                 tank = 0
                 p = i + 1
         return p
+```
+
+### [137. Single Number II](https://leetcode.com/problems/single-number-ii/)
+
+- 線形時間で解け、メモリを使用するな、という条件だったが、ひとまず無視して実装
+- Discussionではどうやらビット処理を行っているようだが、保留
+
+```python
+# 自力実装
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        dic = {}
+        for i in nums:
+            dic[i] = dic.get(i, 0) + 1
+            if dic[i] == 3:
+                _ = dic.pop(i)
+               
+        k, _ = dic.popitem()
+        return k
 ```
