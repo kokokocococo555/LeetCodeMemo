@@ -57,10 +57,12 @@
     - [1.1.45. 93. Restore IP Addresses](#1145-93-restore-ip-addresses)
     - [1.1.46. 120. Triangle](#1146-120-triangle)
     - [1.1.47. ▲127. Word Ladder](#1147-%E2%96%B2127-word-ladder)
-    - [130. Surrounded Regions](#130-surrounded-regions)
-    - [▲131. Palindrome Partitioning](#%E2%96%B2131-palindrome-partitioning)
-    - [▲134. Gas Station](#%E2%96%B2134-gas-station)
-    - [137. Single Number II](#137-single-number-ii)
+    - [1.1.48. 130. Surrounded Regions](#1148-130-surrounded-regions)
+    - [1.1.49. ▲131. Palindrome Partitioning](#1149-%E2%96%B2131-palindrome-partitioning)
+    - [1.1.50. ▲134. Gas Station](#1150-%E2%96%B2134-gas-station)
+    - [1.1.51. 137. Single Number II](#1151-137-single-number-ii)
+    - [1.1.52. ▲139. Word Break](#1152-%E2%96%B2139-word-break)
+    - [1.1.53. 150. Evaluate Reverse Polish Notation](#1153-150-evaluate-reverse-polish-notation)
 
 <!-- /TOC -->
 
@@ -1849,7 +1851,7 @@ class Solution:
         return 0
 ```
 
-### [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/)
+### 1.1.48. [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/)
 
 - 四辺からOを辿っていく
 - 実装に手間取った
@@ -1898,7 +1900,7 @@ class Solution:
                     board[i][j] = "O"
 ```
 
-### ▲[131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)
+### 1.1.49. ▲[131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)
 
 - 回文か否かを判定するメソッドは作れそうだったが、それを上手に問題に当てはめる方法が分からなかった
 - ▲Discussionを見るとDFS(backtracking)の典型的な問題という印象だった
@@ -1924,7 +1926,7 @@ class Solution:
         return ans
 ```
 
-### ▲[134. Gas Station](https://leetcode.com/problems/gas-station/)
+### 1.1.50. ▲[134. Gas Station](https://leetcode.com/problems/gas-station/)
 
 - 普通に実装するとTLE
 - すでにチェックが終わった部分をスキップするとAC
@@ -1976,7 +1978,7 @@ class Solution:
         return p
 ```
 
-### [137. Single Number II](https://leetcode.com/problems/single-number-ii/)
+### 1.1.51. [137. Single Number II](https://leetcode.com/problems/single-number-ii/)
 
 - 線形時間で解け、メモリを使用するな、という条件だったが、ひとまず無視して実装
 - Discussionではどうやらビット処理を行っているようだが、保留
@@ -1993,4 +1995,78 @@ class Solution:
                
         k, _ = dic.popitem()
         return k
+```
+
+### 1.1.52. ▲[139. Word Break](https://leetcode.com/problems/word-break/)
+
+- 再帰的な方法で実装したものの、TLE
+- ▲DiscussionではDPで実装されていた
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        dp = [False] * len(s)
+        for i in range(len(s)):
+            for w in wordDict:
+                if w == s[i:i + len(w)] and (dp[i - 1] or i == 0):
+                    dp[i + len(w) - 1] = True
+        return dp[-1]
+```
+
+### 1.1.53. [150. Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
+
+- Reverse Polish Notation (RPN: 逆ポーランド表記)の実装
+- stackで実装した
+- [Wikipedia](https://ja.wikipedia.org/wiki/%E9%80%86%E3%83%9D%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%E8%A8%98%E6%B3%95)にもスタックで実装する、という旨が記載されていた
+- Discussionでもstackを使用していた
+- 加えて、ラムダ式を使用してさらにすっきりとしたコードを実現
+
+```python
+# 自力実装
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        lis = ["+", "-", "/", "*"]
+        for i in range(len(tokens)):
+            stack.append(tokens[i])
+            if stack[-1] in lis:
+                op = stack.pop()
+                x2 = stack.pop()
+                x2 = int(x2)
+                x1 = stack.pop()
+                x1 = int(x1)
+                if op == "+":
+                    tmp = x1 + x2
+                elif op == "-":
+                    tmp = x1 - x2
+                elif op == "*":
+                    tmp = x1 * x2
+                elif op == "/":
+                    tmp = int(x1 / x2)
+                stack.append(tmp)
+        return int(stack[-1])
+```
+
+```python
+# Discussionを参考に実装
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        op = {
+            "+": lambda x1, x2: x1 + x2,
+            "-": lambda x1, x2: x1 - x2,
+            "*": lambda x1, x2: x1 * x2,
+            "/": lambda x1, x2: int(x1 / x2),
+        }
+        for t in tokens:
+            if t in op:
+                x2 = stack.pop()
+                x2 = int(x2)
+                x1 = stack.pop()
+                x1 = int(x1)
+                stack.append(op[t](x1, x2))
+            else:
+                stack.append(t)
+        return int(stack[-1])
 ```
