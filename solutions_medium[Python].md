@@ -63,6 +63,8 @@
     - [1.1.51. 137. Single Number II](#1151-137-single-number-ii)
     - [1.1.52. ▲139. Word Break](#1152-%E2%96%B2139-word-break)
     - [1.1.53. 150. Evaluate Reverse Polish Notation](#1153-150-evaluate-reverse-polish-notation)
+    - [1.1.54. 151. Reverse Words in a String](#1154-151-reverse-words-in-a-string)
+    - [1.1.55. ▲152. Maximum Product Subarray](#1155-%E2%96%B2152-maximum-product-subarray)
 
 <!-- /TOC -->
 
@@ -2069,4 +2071,85 @@ class Solution:
             else:
                 stack.append(t)
         return int(stack[-1])
+```
+
+### 1.1.54. [151. Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/)
+
+- 標準メソッドを使えば簡単に実装できた
+- 想定解はおそらく異なるのだろうが
+
+```python
+# 自力実装
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        s = s.split()
+        s.reverse()
+        return " ".join(s)
+```
+
+### 1.1.55. ▲[152. Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
+
+- 素直に実装した後、引っかかったケースを地道に潰していった
+- テストケースが完備されているからこそ為せる技
+- ▲Discussionでは、正負の値の情報をうまく保持しながら前から順に計算していくという方法が取られていた。すごい！
+- https://leetcode.com/problems/maximum-product-subarray/discuss/48243/In-Python-can-it-be-more-concise
+  - このコードは一部変更が必要
+  - elegant!!!
+
+```python
+# 自力実装
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        p0, p1 = 0, 0
+        ns = len(nums)
+        negidx = []
+        ans = nums[0]
+        while p1 < ns:
+            if p0 > 0:
+                ans = max(ans, 0)
+            if nums[p1] < 0:
+                negidx.append(p1)
+            if nums[p1] == 0 or p1 == ns - 1:
+                if nums[p1] != 0:
+                    p1 = p1 + 1
+                if len(negidx) % 2 == 0:
+                    tmp = 1
+                    for i in range(p0, p1):
+                        tmp *= nums[i]
+                        ans = max(ans, tmp)
+                elif len(negidx) > 1:
+                    tmp1 = 1
+                    for i in range(p0, negidx[-1]):
+                        tmp1 *= nums[i]
+                        ans = max(ans, tmp1)
+                    tmp2 = 1
+                    for i in range(negidx[0] + 1, p1):
+                        tmp2 *= nums[i]
+                        ans = max(ans, tmp2)
+                else:
+                    tmp1 = 1
+                    for i in range(p0, negidx[0]):
+                        tmp1 *= nums[i]
+                        ans = max(ans, tmp1)
+                    tmp2 = 1
+                    for i in range(negidx[0] + 1, p1):
+                        tmp2 *= nums[i]
+                        ans = max(ans, tmp2)
+                negidx = []
+                p0 = p1 + 1
+            p1 += 1
+        return ans
+```
+
+```python
+# https://leetcode.com/problems/maximum-product-subarray/discuss/48243/In-Python-can-it-be-more-concise を一部変更
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        ans = big = small = nums[0]
+        for n in nums[1:]:
+            tmp = small
+            small = min(n, n*big, n*tmp)
+            big = max(n, n*big, n*tmp)
+            ans = max(ans, big)
+        return ans
 ```
