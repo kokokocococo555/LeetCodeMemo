@@ -65,6 +65,7 @@
     - [1.1.53. 150. Evaluate Reverse Polish Notation](#1153-150-evaluate-reverse-polish-notation)
     - [1.1.54. 151. Reverse Words in a String](#1154-151-reverse-words-in-a-string)
     - [1.1.55. ▲152. Maximum Product Subarray](#1155-%E2%96%B2152-maximum-product-subarray)
+    - [1.1.56. 153. Find Minimum in Rotated Sorted Array](#1156-153-find-minimum-in-rotated-sorted-array)
 
 <!-- /TOC -->
 
@@ -2152,4 +2153,39 @@ class Solution:
             big = max(n, n*big, n*tmp)
             ans = max(ans, big)
         return ans
+```
+
+### 1.1.56. [153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+
+- 単純に実装するだけ
+- Solutionでは二分探索がなされていた
+
+```python
+# 自力実装
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        for i in range(len(nums) - 1):
+            if nums[i] > nums[i + 1]:
+                return nums[i + 1]
+        return nums[0]
+```
+
+```python
+# Solutionを参考に実装
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        l, r = 0, len(nums) - 1
+        if r == 0:
+            return nums[0]
+        if nums[l] < nums[r]:
+            return nums[l]
+        
+        while l <= r:
+            m = (l + r) // 2
+            if nums[m - 1] > nums[m]:
+                return nums[m]
+            elif nums[m] > nums[r]:
+                l = m + 1
+            elif nums[m] < nums[r]:
+                r = m - 1
 ```
