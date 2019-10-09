@@ -66,6 +66,7 @@
     - [1.1.54. 151. Reverse Words in a String](#1154-151-reverse-words-in-a-string)
     - [1.1.55. ▲152. Maximum Product Subarray](#1155-%E2%96%B2152-maximum-product-subarray)
     - [1.1.56. 153. Find Minimum in Rotated Sorted Array](#1156-153-find-minimum-in-rotated-sorted-array)
+    - [1.1.57. 373. Find K Pairs with Smallest Sums](#1157-373-find-k-pairs-with-smallest-sums)
 
 <!-- /TOC -->
 
@@ -2188,4 +2189,36 @@ class Solution:
                 l = m + 1
             elif nums[m] < nums[r]:
                 r = m - 1
+```
+
+以下、ランダムに問題を取り出して解く
+
+### 1.1.57. [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
+
+- k * k のsumと組を作成し、上から順にk個取り出す実装
+- 処理が遅い
+- Discussionではheapqでの実装やBFSでの実装が見られた（https://leetcode.com/problems/find-k-pairs-with-smallest-sums/discuss/84629/BFS-Python-104ms-with-comments）
+
+```python
+# 自力実装
+class Solution:
+    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+        if k >= len(nums1) * len(nums2):
+            return [[n1, n2] for n1 in nums1 for n2 in nums2]
+
+        dic = {}
+        for i in range(min(k, len(nums1))):
+            for j in range(min(k, len(nums2))):
+                sm = nums1[i] + nums2[j]
+                tmp = dic.get(sm, [])
+                tmp.append([nums1[i], nums2[j]])
+                dic[sm] = tmp
+        keys = sorted(dic.keys())
+        ans = []
+        for m in keys:
+            ls = dic[m]
+            ans.extend(ls)
+            if len(ans) >= k:
+                return ans[:k]
+        return ans
 ```
