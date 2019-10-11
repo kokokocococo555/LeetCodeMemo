@@ -67,6 +67,7 @@
     - [1.1.55. ▲152. Maximum Product Subarray](#1155-%E2%96%B2152-maximum-product-subarray)
     - [1.1.56. 153. Find Minimum in Rotated Sorted Array](#1156-153-find-minimum-in-rotated-sorted-array)
     - [1.1.57. 373. Find K Pairs with Smallest Sums](#1157-373-find-k-pairs-with-smallest-sums)
+    - [1.1.58. 948. Bag of Tokens](#1158-948-bag-of-tokens)
 
 <!-- /TOC -->
 
@@ -2198,6 +2199,7 @@ class Solution:
 - k * k のsumと組を作成し、上から順にk個取り出す実装
 - 処理が遅い
 - Discussionではheapqでの実装やBFSでの実装が見られた（https://leetcode.com/problems/find-k-pairs-with-smallest-sums/discuss/84629/BFS-Python-104ms-with-comments）
+- heapqの要素にリストやタプルを入れた場合、そのlist[0]やtuple[0]をキーとして値がpopされる
 
 ```python
 # 自力実装
@@ -2221,4 +2223,34 @@ class Solution:
             if len(ans) >= k:
                 return ans[:k]
         return ans
+```
+
+### 1.1.58. [948. Bag of Tokens](https://leetcode.com/problems/bag-of-tokens/)
+
+- 小さい方から取り続ける
+- 取れなくなったら最大のものでチャージ
+- 細かい条件に注意しつつ、繰り返す
+- 貪欲法
+
+```python
+class Solution:
+    def bagOfTokensScore(self, tokens: List[int], P: int) -> int:
+        if not tokens:
+            return 0
+
+        tokens.sort()
+        ans = 0
+
+        while len(tokens) > 0:
+            while tokens and P >= tokens[0]:
+                P -= tokens.pop(0)
+                ans += 1
+                if len(tokens) == 0:
+                    return ans
+
+            if len(tokens) > 1 and tokens[-1] > tokens[0] and ans > 0:
+                P += tokens.pop()
+                ans -= 1
+            else:
+                return ans
 ```
