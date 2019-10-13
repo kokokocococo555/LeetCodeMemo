@@ -162,9 +162,12 @@
     - [1.1.57. 373. Find K Pairs with Smallest Sums](#1157-373-find-k-pairs-with-smallest-sums)
 - [自力実装](#%e8%87%aa%e5%8a%9b%e5%ae%9f%e8%a3%85-36)
     - [1.1.58. 948. Bag of Tokens](#1158-948-bag-of-tokens)
-    - [1.1.59. 1105. Filling Bookcase Shelves](#1159-1105-filling-bookcase-shelves)
+    - [1.1.59. ▲1105. Filling Bookcase Shelves](#1159-%e2%96%b21105-filling-bookcase-shelves)
 - [Discussionを参考に実装](#discussion%e3%82%92%e5%8f%82%e8%80%83%e3%81%ab%e5%ae%9f%e8%a3%85-14)
 - [https://leetcode.com/problems/filling-bookcase-shelves/discuss/323415/simple-Python-DP-solution](#httpsleetcodecomproblemsfilling-bookcase-shelvesdiscuss323415simple-python-dp-solution)
+    - [1.1.60. ▲1191. K-Concatenation Maximum Sum](#1160-%e2%96%b21191-k-concatenation-maximum-sum)
+- [Disucssionを参考に実装](#disucssion%e3%82%92%e5%8f%82%e8%80%83%e3%81%ab%e5%ae%9f%e8%a3%85)
+- [https://leetcode.com/problems/k-concatenation-maximum-sum/discuss/382808/Python3-6-liner-Kadane](#httpsleetcodecomproblemsk-concatenation-maximum-sumdiscuss382808python3-6-liner-kadane)
 
 <!-- /TOC -->
 
@@ -2352,11 +2355,11 @@ class Solution:
                 return ans
 ```
 
-### 1.1.59. [1105. Filling Bookcase Shelves](https://leetcode.com/problems/filling-bookcase-shelves/)
+### 1.1.59. ▲[1105. Filling Bookcase Shelves](https://leetcode.com/problems/filling-bookcase-shelves/)
 
 - 実装方針が思いつかない
 - DiscussionではDPで解かれていた
-- DP配列が何を表しているのか、いまいちピンとこない…
+- ▲DP配列が何を表しているのか、いまいちピンとこない…
 
 ```python
 # Discussionを参考に実装
@@ -2376,4 +2379,33 @@ class Solution:
                 dp[i] = min(dp[i], dp[j] + maxh)
                 j -= 1
         return dp[n]
+```
+
+### 1.1.60. ▲[1191. K-Concatenation Maximum Sum](https://leetcode.com/problems/k-concatenation-maximum-sum/)
+
+- ▲Discussionを見ると`Kadane's Algorithm`というのを使用していた
+  - subarrayの合計の中で最大のものを得るアルゴリズム
+
+```python
+for num in arr:
+    cur = max(num, num + cur)
+    res = max(res, cur)
+```
+
+```python
+# Disucssionを参考に実装
+# https://leetcode.com/problems/k-concatenation-maximum-sum/discuss/382808/Python3-6-liner-Kadane
+class Solution:
+    def kConcatenationMaxSum(self, arr: List[int], k: int) -> int:
+        def Kadane(arr, res = 0, cur = 0):
+            for num in arr:
+                cur = max(num, num + cur)
+                res = max(res, cur)
+            return res
+        mod = 10 ** 9 + 7
+        if k > 1:
+            ans = ((k - 2) * max(sum(arr), 0) + Kadane(arr * 2)) % mod  # ここの証明が分からない
+        else:
+            ans = Kadane(arr) % mod
+        return ans
 ```
