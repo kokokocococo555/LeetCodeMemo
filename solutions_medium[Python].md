@@ -168,6 +168,8 @@
     - [1.1.60. ▲1191. K-Concatenation Maximum Sum](#1160-%e2%96%b21191-k-concatenation-maximum-sum)
 - [Disucssionを参考に実装](#disucssion%e3%82%92%e5%8f%82%e8%80%83%e3%81%ab%e5%ae%9f%e8%a3%85)
 - [https://leetcode.com/problems/k-concatenation-maximum-sum/discuss/382808/Python3-6-liner-Kadane](#httpsleetcodecomproblemsk-concatenation-maximum-sumdiscuss382808python3-6-liner-kadane)
+    - [1.1.61. 838. Push Dominoes](#1161-838-push-dominoes)
+- [自力実装](#%e8%87%aa%e5%8a%9b%e5%ae%9f%e8%a3%85-37)
 
 <!-- /TOC -->
 
@@ -2408,4 +2410,46 @@ class Solution:
         else:
             ans = Kadane(arr) % mod
         return ans
+```
+
+### 1.1.61. [838. Push Dominoes](https://leetcode.com/problems/push-dominoes/)
+
+- 前の状態（LかRか, インデックス）を保持しつつ前から順に確認
+- Solutionでは上のような方法の他に、左から順にRより右では+N, +(N-1),..., Lになると0, RではNに戻る、 右から順にLでは-N, -(N-1), ...とスコアをつけ、その合計が正ならR、負ならL、0なら.とする方法が紹介されていた。賢い。
+
+```python
+# 自力実装
+class Solution:
+    def pushDominoes(self, dominoes: str) -> str:
+        dominoes = "L" + dominoes + "R"
+        state = ("L", 0)
+        ans = ["." for _ in range(len(dominoes))]
+        for i in range(len(dominoes)):
+            if state[0] == "R":
+                if dominoes[i] == "R":
+                    for k in range(state[1], i + 1):
+                        ans[k] = "R"
+                    state = ("R", i)
+                elif dominoes[i] == "L":
+                    m = (i + state[1]) // 2
+                    if (i - state[1] + 1) % 2 == 0:
+                        for k in range(state[1], m + 1):
+                            ans[k] = "R"
+                        for k in range(m + 1, i + 1):
+                            ans[k] = "L"
+                    else:
+                        for k in range(state[1], m):
+                            ans[k] = "R"
+                        ans[m] = "."
+                        for k in range(m + 1, i + 1):
+                            ans[k] = "L"
+                    state = ("L", i)
+            elif state[0] == "L":
+                if dominoes[i] == "R":
+                    state = ("R", i)
+                elif dominoes[i] == "L":
+                    for k in range(state[1], i + 1):
+                        ans[k] = "L"
+                    state = ("L", i)
+        return "".join(ans[1:-1])
 ```
